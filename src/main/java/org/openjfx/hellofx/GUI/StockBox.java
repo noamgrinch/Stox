@@ -30,6 +30,10 @@ public class StockBox extends GridPane{
 	public StockBox(Stock stock) {
 		super();
 		this.stock=stock;
+		CornerRadii corn = new CornerRadii(5);
+		Separator sep = new Separator();
+		//sep.setBackground(new Background(new BackgroundFill(Color.BLACK, corn, Insets.EMPTY)));
+		sep.setPadding(new Insets(2,2,0,2));
 		slabel = new Label(stock.getLabel());
 		slabel.setPadding(new Insets(2,15,2,1));
 		slabel.setFont(new Font("Arial",15));
@@ -59,7 +63,6 @@ public class StockBox extends GridPane{
 			//sper.setStyle("-fx-background-color:linear-gradient(to right top, #ee0a0a, #f22213, #f7301b, #fb3c23, #ff462a); -fx-font-weight: bold");
 			col = Color.web("#FF0000"); //red
 		}
-		CornerRadii corn = new CornerRadii(5);
 		Background background = new Background(new BackgroundFill(col, corn, Insets.EMPTY));
 		sper.setBackground(background);
 		sper.setPadding(new Insets(2,1,2,15));
@@ -68,7 +71,7 @@ public class StockBox extends GridPane{
 		GridPane.setConstraints(sname,0,1);
 		GridPane.setConstraints(sprice,1,0);
 		GridPane.setConstraints(sper,1,1);
-		this.add(new Separator(), 0, 4, 2, 1);
+		this.add(sep, 0, 4, 2, 1);
 		GridPane.setHalignment(sper, HPos.RIGHT);
 		GridPane.setHalignment(sprice, HPos.RIGHT);
 		GridPane.setHalignment(sname, HPos.LEFT);

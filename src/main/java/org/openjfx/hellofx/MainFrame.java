@@ -34,7 +34,7 @@ public class MainFrame extends Application{
 		
 		stage.setTitle("Stox");	
 		stage.setResizable(false);
-		Stock[] ss = new Stock[5];
+		Stock[] ss = new Stock[10];
 
 		try {
 				//LoginFrame.display(); // dispay later on
@@ -46,6 +46,11 @@ public class MainFrame extends Application{
 				ss[2] = Stock.findStockName("AAPL");
 				ss[3] = Stock.findStockName("NVDA");
 				ss[4] = Stock.findStockName("INTL");
+				ss[5] = Stock.findStockName("AMZN");
+				ss[6] = Stock.findStockName("DLR");
+				ss[7] = Stock.findStockName("EURO");
+				ss[8] = Stock.findStockName("SHEK");
+				ss[9] = Stock.findStockName("TWTR");
 				
 				VBox main = new VBox();
 				main.setPadding(new Insets(3,3,3,3));

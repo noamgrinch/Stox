@@ -178,7 +178,26 @@ public class Stock {
 			
 			line = buf.readLine();		
 		}
-		volume = volume.replaceAll(",", "");
+		if(lastprice.equals("Not found") || volume.equals("Not found") || opengate.equals("Not found") || yesterdaygate.equals("Not found") || changedol.equals("Not found") || changeper.equals("Not found")) {
+			lastprice = "0";
+			volume = "0";
+			opengate = "0";
+			yesterdaygate = "0";
+			changedol = "0";
+			changeper = "0";
+		}
+		if(volume.contains(",")) {
+			volume = volume.replace(",", "");
+		}
+		if(lastprice.contains(",")) {
+			lastprice = lastprice.replace(",", "");
+		}
+		if(opengate.contains(",")) {
+			opengate = opengate.replace(",", "");
+		}
+		if(yesterdaygate.contains(",")) {
+			yesterdaygate = yesterdaygate.replace(",", "");
+		}
 		Stock tmp = new Stock(name,label,Double.parseDouble(lastprice));
 		tmp.setChangedollar(Double.parseDouble(changedol));
 		tmp.setChangepercent(Double.parseDouble(changeper));
