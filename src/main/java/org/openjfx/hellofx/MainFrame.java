@@ -33,18 +33,22 @@ public class MainFrame extends Application{
 	public void start(Stage stage) throws Exception {
 		
 		stage.setTitle("Stox");	
-		Stock[] ss = new Stock[4];
+		stage.setResizable(false);
+		Stock[] ss = new Stock[5];
 
 		try {
 				//LoginFrame.display(); // dispay later on
+			
+				Background background = new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY));
 				
 				ss[0] = Stock.findStockName("BABA");
 				ss[1] = Stock.findStockName("AWK");
 				ss[2] = Stock.findStockName("AAPL");
 				ss[3] = Stock.findStockName("NVDA");
+				ss[4] = Stock.findStockName("INTL");
 				
 				VBox main = new VBox();
-				main.setPadding(new Insets(5,5,5,5));
+				main.setPadding(new Insets(3,3,3,3));
 			
 				//Edit button
 				BorderPane br = new BorderPane();
@@ -53,6 +57,7 @@ public class MainFrame extends Application{
 				bottom.setPadding(new Insets(5,5,5,5));
 				bottom.getChildren().add(edit);
 				bottom.setAlignment(Pos.CENTER);
+				//bottom.setBackground(background);
 				
 				GridPane lay1 = new GridPane();
 				lay1.setVgap(2);
@@ -60,21 +65,25 @@ public class MainFrame extends Application{
 				ColumnConstraints column1 = new ColumnConstraints();
 				column1.setPercentWidth(100);
 				lay1.getColumnConstraints().add(column1);
+				
 				StockBox sb;
 				for(int i=0;i<ss.length;i++) {
 					sb = new StockBox(ss[i]);
 					lay1.getChildren().add(sb);
 					GridPane.setFillWidth(sb, true);
-					GridPane.setConstraints(sb, 0, i);			
+					GridPane.setConstraints(sb, 0, i);	
 				}
 				
 				//stocks
  
 				
 				/*CornerRadii corn = new CornerRadii(5);
-				Color col = Color.web("#000000");
+				Color col = Color.RED;/*Color.web(/*"#000000");
 				Background background = new Background(new BackgroundFill(col, corn, Insets.EMPTY));
 				lay1.setBackground(background);*/
+				main.setBackground(background);
+				//lay1.setBackground(background);
+				//lay1.setGridLinesVisible(true);
 				
 
 				

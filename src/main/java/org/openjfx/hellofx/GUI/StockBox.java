@@ -68,17 +68,24 @@ public class StockBox extends GridPane{
 		GridPane.setConstraints(sname,0,1);
 		GridPane.setConstraints(sprice,1,0);
 		GridPane.setConstraints(sper,1,1);
+		this.add(new Separator(), 0, 4, 2, 1);
 		GridPane.setHalignment(sper, HPos.RIGHT);
 		GridPane.setHalignment(sprice, HPos.RIGHT);
 		GridPane.setHalignment(sname, HPos.LEFT);
 		GridPane.setHalignment(slabel, HPos.LEFT);
 		ColumnConstraints column1 = new ColumnConstraints();
-		column1.setPercentWidth(70);
+		if(sprice.getText().length()==6) {
+			column1.setPercentWidth(74);
+		}
+		else {
+			column1.setPercentWidth(71);
+		}
 		this.getColumnConstraints().add(column1);
 		this.getChildren().addAll(slabel,sname,sprice,sper);
 		background = new Background(new BackgroundFill(Color.BLACK, corn, Insets.EMPTY));
 		this.setBackground(background);
-		//this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		//this.setGridLinesVisible(true);
+		//this.setBorder(new Border(new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		
 	}
