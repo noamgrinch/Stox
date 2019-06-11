@@ -1,5 +1,6 @@
 package org.openjfx.hellofx;
 
+import java.io.File;
 import java.util.logging.Level;
 
 import org.openjfx.hellofx.GUI.EditFrame;
@@ -84,7 +85,7 @@ public class MainFrame extends Application{
 				
 				//stocks
 				scroll.setContent(lay1);
-				scroll.setBackground(background);
+				//scroll.setBackground(background);
 				/*CornerRadii corn = new CornerRadii(5);
 				Color col = Color.RED;/*Color.web(/*"#000000");
 				Background background = new Background(new BackgroundFill(col, corn, Insets.EMPTY));
@@ -103,6 +104,8 @@ public class MainFrame extends Application{
 				br.setBottom(bottom);
 				BorderPane.setMargin(bottom, new Insets(5,5,5,5));
 		        Scene scene = new Scene (br, 295, 500);
+		        scene.getStylesheets().clear();
+		        scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		        stage.setScene(scene);
 		        stage.show();
 		} 

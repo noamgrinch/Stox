@@ -35,13 +35,13 @@ public class StockBox extends GridPane{
 		//sep.setBackground(new Background(new BackgroundFill(Color.BLACK, corn, Insets.EMPTY)));
 		sep.setPadding(new Insets(2,2,0,2));
 		slabel = new Label(stock.getLabel());
-		slabel.setPadding(new Insets(2,15,2,1));
+		slabel.setPadding(new Insets(2,0,2,1));
 		slabel.setFont(new Font("Arial",15));
 		slabel.setTextAlignment(TextAlignment.LEFT);
 		slabel.setStyle(labeltextcolor);
 		//slabel.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		sname = new Label(stock.getName());
-		sname.setPadding(new Insets(2,15,2,1));
+		sname.setPadding(new Insets(2,0,2,1));
 		sname.setTextAlignment(TextAlignment.LEFT);
 		sname.setStyle(labeltextcolor);
 		//sname.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
