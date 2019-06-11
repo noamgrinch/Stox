@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -48,8 +49,8 @@ public class MainFrame extends Application{
 				ss[4] = Stock.findStockName("INTL");
 				ss[5] = Stock.findStockName("AMZN");
 				ss[6] = Stock.findStockName("DLR");
-				ss[7] = Stock.findStockName("EURO");
-				ss[8] = Stock.findStockName("SHEK");
+				ss[7] = Stock.findStockName("TSLA");
+				ss[8] = Stock.findStockName("NOC");
 				ss[9] = Stock.findStockName("TWTR");
 				
 				VBox main = new VBox();
@@ -64,6 +65,8 @@ public class MainFrame extends Application{
 				bottom.setAlignment(Pos.CENTER);
 				//bottom.setBackground(background);
 				
+				ScrollPane scroll = new ScrollPane();
+				//scroll.setPrefSize(275, 490);
 				GridPane lay1 = new GridPane();
 				lay1.setVgap(2);
 				lay1.setAlignment(Pos.TOP_CENTER);
@@ -80,8 +83,8 @@ public class MainFrame extends Application{
 				}
 				
 				//stocks
- 
-				
+				scroll.setContent(lay1);
+				scroll.setBackground(background);
 				/*CornerRadii corn = new CornerRadii(5);
 				Color col = Color.RED;/*Color.web(/*"#000000");
 				Background background = new Background(new BackgroundFill(col, corn, Insets.EMPTY));
@@ -93,13 +96,13 @@ public class MainFrame extends Application{
 
 				
 				//general configuration
-				main.getChildren().add(lay1);
+				main.getChildren().add(scroll);
 				main.setFillWidth(true);
 				
 				br.setCenter(main);
 				br.setBottom(bottom);
 				BorderPane.setMargin(bottom, new Insets(5,5,5,5));
-		        Scene scene = new Scene (br, 250, 500);
+		        Scene scene = new Scene (br, 295, 500);
 		        stage.setScene(scene);
 		        stage.show();
 		} 

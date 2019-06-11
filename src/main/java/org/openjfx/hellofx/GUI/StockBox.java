@@ -77,12 +77,13 @@ public class StockBox extends GridPane{
 		GridPane.setHalignment(sname, HPos.LEFT);
 		GridPane.setHalignment(slabel, HPos.LEFT);
 		ColumnConstraints column1 = new ColumnConstraints();
-		if(sprice.getText().length()==6) {
-			column1.setPercentWidth(74);
+		/*if(sprice.getText().length()==6) {
+			column1.setPercentWidth(75);
 		}
 		else {
-			column1.setPercentWidth(71);
-		}
+			column1.setPercentWidth(72);
+		}*/
+		column1.setPercentWidth(95-sprice.getText().length()*3);
 		this.getColumnConstraints().add(column1);
 		this.getChildren().addAll(slabel,sname,sprice,sper);
 		background = new Background(new BackgroundFill(Color.BLACK, corn, Insets.EMPTY));
