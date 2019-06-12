@@ -44,7 +44,7 @@ public class MainFrame extends Application{
 
 		try {
 				//LoginFrame.display(); // dispay later on
-				
+
 				//for debugging
 				stocks[0] = Stock.findStockName("BABA");
 				stocks[1] = Stock.findStockName("AWK");
@@ -56,15 +56,13 @@ public class MainFrame extends Application{
 				//stocks[7] = Stock.findStockName("TSLA");
 				//stocks[8] = Stock.findStockName("NOC");
 				//stocks[9] = Stock.findStockName("TWTR");
-				
-				VBox main = new VBox();
-				main.setPadding(new Insets(1,1,1,1));
+			
 			
 				//Edit button
 				BorderPane br = new BorderPane();
 				Button edit = new Button("Edit");
 				HBox bottom = new HBox(10);
-				bottom.setPadding(new Insets(5,5,5,5));
+				//bottom.setPadding(new Insets(5,5,5,5));
 				bottom.getChildren().add(edit);
 				bottom.setAlignment(Pos.CENTER);
 				
@@ -75,6 +73,7 @@ public class MainFrame extends Application{
 				scroll.setFitToHeight(true);
 				scroll.setFitToWidth(true);
 				GridPane content = new GridPane();
+				content.setId("GridPane-content");
 				content.setAlignment(Pos.TOP_CENTER);
 				ColumnConstraints column1 = new ColumnConstraints();
 				column1.setPercentWidth(100);
@@ -96,15 +95,14 @@ public class MainFrame extends Application{
 				
 				//stocks
 				scroll.setContent(content);
-				
 				//general configuration
-				main.getChildren().add(scroll);
-				main.setFillWidth(true);
+				//main.getChildren().add(scroll);
+				//main.setFillWidth(true);
 				//content.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT))); //debugging
-				br.setCenter(main);
+				br.setCenter(scroll);
 				br.setBottom(bottom);
 				//BorderPane.setMargin(bottom, new Insets(5,5,5,5));
-		        Scene scene = new Scene (br, 297, 500);
+		        Scene scene = new Scene (br, 295, 500);
 		        scene.getStylesheets().clear();
 		        scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		        stage.setScene(scene);

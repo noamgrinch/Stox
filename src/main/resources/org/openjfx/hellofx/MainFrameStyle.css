@@ -8,14 +8,22 @@
 }
 
 #StockBox-mainback-cust{
-    -fx-background-color:linear-gradient(to bottom, #060606, #0a0a0c, #0c0e10, #0e1213, #101514, #131816, #151b18, #181e19, #1b221c, #1e271f, #222b22, #253025);
-    -fx-padding: 0 0 0 0;
+    -fx-background-color:linear-gradient(to bottom, #000000, #0a0a0a, #121212, #181818, #1e1e1e, #242424, #292929, #2f2f2f, #363636, #3e3e3e, #454545, #4d4d4d);
+    -fx-padding: 0px;
+    -fx-margin: 100px;
 }
 
 #StockBox-seprator{
-	 -fx-padding: 3 3 0 3;
+	 -fx-padding: 3 3 0 5;
 	 -fx-border-radius: 2 2 2 2;
 	 -fx-background-radius: 2 2 2 2; 
 	 -fx-background-color: #f0f0f5; 
 }
+
+
+#GridPane-content{
+	-fx-background-color: linear-gradient(to right top, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d);
+	-fx-margin: 100px;
+}
+
 

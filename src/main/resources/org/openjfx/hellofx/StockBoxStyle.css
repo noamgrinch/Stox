@@ -32,11 +32,11 @@
 	-fx-font-size:12pt;
 	-fx-font-weight: bold;
 	-fx-effect: innershadow( gaussian , grey , 2 , 0.1, 0.4, 0.4 );
-	-fx-padding: 2 0 2 1;
+	-fx-padding: 2 0 2 3;
 }
 
 #StockBox-name{
 	-fx-text-fill: #f0f0f5;
-	-fx-padding:2 0 2 1
+	-fx-padding: 2 0 2 3;
 }
 

@@ -12,6 +12,8 @@ public class Stock {
 	private double price;
 	private double changedollar,changepercent,opengate,yesterdaygate;
 	private int volume;
+	private static final long SKIP_STATS = 46100; 
+	private static final long SKIP_NAME=46000;
 	
 	public Stock(String name, String label, double price) {
 		this.name=name;
@@ -55,6 +57,7 @@ public class Stock {
 		InputStreamReader inStream = new InputStreamReader(urlConn.getInputStream());
 		BufferedReader buf = new BufferedReader(inStream);
 		String name = "Not found";
+		buf.skip(SKIP_NAME);
 		String line = buf.readLine();
 		name = line;
 		while(line!=null) {
@@ -100,10 +103,10 @@ public class Stock {
 		String opengate = "Not found";
 		String yesterdaygate = "Not found";
 		String volume = "Not found";
+		buf.skip(SKIP_STATS);
 		String line = buf.readLine();
 		int i=0;
 		while(line!=null) {
-			
 			if(line.contains("#c5c5c5")&&i<6) {
 				line = buf.readLine();
 				int end = line.indexOf("</div>");
