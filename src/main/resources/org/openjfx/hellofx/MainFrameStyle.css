@@ -12,3 +12,10 @@
     -fx-padding: 0 0 0 0;
 }
 
+#StockBox-seprator{
+	 -fx-padding: 3 3 0 3;
+	 -fx-border-radius: 2 2 2 2;
+	 -fx-background-radius: 2 2 2 2; 
+	 -fx-background-color: #f0f0f5; 
+}
+

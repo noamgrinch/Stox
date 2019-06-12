@@ -5,12 +5,8 @@ import org.openjfx.hellofx.MainFrame;
 import StockReader.Stock;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -34,23 +30,15 @@ public class StockBox extends GridPane{
 		this.stock=stock;
         this.getStylesheets().clear();
         this.getStylesheets().add(MainFrame.class.getResource("StockBoxStyle.css").toExternalForm());
-		Separator sep = new Separator();
 		//sep.setBackground(new Background(new BackgroundFill(Color.BLACK, corn, Insets.EMPTY)));
-		sep.setPadding(new Insets(2,2,0,2));
 		slabel = new Label(stock.getLabel());
-		slabel.setPadding(new Insets(2,0,2,1));
-		slabel.setTextAlignment(TextAlignment.LEFT);
 		slabel.setId("StockBox-label");
 		//slabel.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		sname = new Label(stock.getName());
-		sname.setPadding(new Insets(2,0,2,1));
-		sname.setTextAlignment(TextAlignment.LEFT);
 		sname.setId("StockBox-name");
 		//sname.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		sprice = new Label(Double.toString(stock.getPrice()) + "$");
-		sprice.setPadding(new Insets(2,1,2,15));
 		sprice.setFont(new Font("Arial",15));
-		sprice.setTextAlignment(TextAlignment.RIGHT);
 		sprice.setId("StockBox-price");
 		//sprice.setBorder(new Border(new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		sper = new Label(Double.toString(stock.getChangepercent()) + "%");
@@ -60,13 +48,11 @@ public class StockBox extends GridPane{
 		else {
 			sper.setId("StockBox-percentred-cust"); //red
 		}
-		sper.setPadding(new Insets(2,5,2,7));
 		//sper.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		GridPane.setConstraints(slabel,0,0);
 		GridPane.setConstraints(sname,0,1);
 		GridPane.setConstraints(sprice,1,0);
 		GridPane.setConstraints(sper,1,1);
-		this.add(sep, 0, 4, 2, 1);
 		GridPane.setHalignment(sper, HPos.RIGHT);
 		GridPane.setHalignment(sprice, HPos.RIGHT);
 		GridPane.setHalignment(sname, HPos.LEFT);

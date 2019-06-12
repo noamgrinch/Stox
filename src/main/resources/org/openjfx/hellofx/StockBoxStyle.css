@@ -7,19 +7,24 @@
     -fx-background-radius: 5 5 5 5; 
     -fx-font-weight: bold;
     -fx-effect: innershadow( gaussian , grey , 2 , 0.1, 0.4, 0.4 );
+    -fx-padding: 2 5 2 7;
 }
 
 #StockBox-percentred-cust{
 	-fx-text-fill: white;
-    -fx-background-color:linear-gradient(to right top, #f01010, #e20c16, #d50a1a, #c70a1d, #b90b1f, #b30b22, #ac0b24, #a60c26, #a50b29, #a50b2d, #a40b30, #a30c33);
+    -fx-background-color:linear-gradient(to bottom, #f01010, #e20c16, #d50a1a, #c70a1d, #b90b1f, #b30b22, #ac0b24, #a60c26, #a50b29, #a50b2d, #a40b30, #a30c33);
     -fx-border-radius: 5 5 5 5; 
     -fx-background-radius: 5 5 5 5; 
+    -fx-font-weight: bold;
+    -fx-effect: innershadow( gaussian , grey , 2 , 0.1, 0.4, 0.4 );
+    -fx-padding: 2 5 2 7;
 }
 
 #StockBox-price{
 	-fx-text-fill: white;
 	-fx-font-weight: bold;
 	-fx-effect: innershadow( gaussian , grey , 2 , 0.1, 0.4, 0.4 );
+	-fx-padding: 2 1 2 15;
 }
 
 #StockBox-label{
@@ -27,9 +32,11 @@
 	-fx-font-size:12pt;
 	-fx-font-weight: bold;
 	-fx-effect: innershadow( gaussian , grey , 2 , 0.1, 0.4, 0.4 );
+	-fx-padding: 2 0 2 1;
 }
 
 #StockBox-name{
 	-fx-text-fill: #f0f0f5;
+	-fx-padding:2 0 2 1
 }
 
