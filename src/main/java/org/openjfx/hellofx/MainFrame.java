@@ -27,7 +27,7 @@ import javafx.stage.StageStyle;
 import javafx.beans.binding.Bindings;
 
 
-public class MainFrame extends Application{
+public class MainFrame extends Application{ 
 	
 	
 	private Stock[] stocks;
@@ -62,13 +62,14 @@ public class MainFrame extends Application{
 				BorderPane br = new BorderPane();
 				Button edit = new Button("Edit");
 				HBox bottom = new HBox(10);
-				//bottom.setPadding(new Insets(5,5,5,5));
 				bottom.getChildren().add(edit);
+				bottom.setId("HBox-bottom");
 				bottom.setAlignment(Pos.CENTER);
 				
 				
 				// content panel
 				ScrollPane scroll = new ScrollPane();
+				scroll.getStyleClass ().add ("edge-to-edge");
 				scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 				scroll.setFitToHeight(true);
 				scroll.setFitToWidth(true);
@@ -100,7 +101,9 @@ public class MainFrame extends Application{
 				//main.setFillWidth(true);
 				//content.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT))); //debugging
 				br.setCenter(scroll);
+				BorderPane.setMargin(content, new Insets(-3,-3,-3,-3));
 				br.setBottom(bottom);
+				BorderPane.setMargin(bottom, new Insets(-3,-3,-3,-3));
 				//BorderPane.setMargin(bottom, new Insets(5,5,5,5));
 		        Scene scene = new Scene (br, 295, 500);
 		        scene.getStylesheets().clear();
