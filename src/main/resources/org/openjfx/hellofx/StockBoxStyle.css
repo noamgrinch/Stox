@@ -1,0 +1,35 @@
+
+
+#StockBox-percentgreen-cust{
+    -fx-background-color: linear-gradient(to bottom, #1ab713, #17af15, #14a716, #119f17, #0f9718, #0e9117, #0c8c15, #0b8614, #0a8110, #087c0d, #077809, #057305);
+    -fx-text-fill: white;
+    -fx-border-radius: 5 5 5 5; 
+    -fx-background-radius: 5 5 5 5; 
+    -fx-font-weight: bold;
+    -fx-effect: innershadow( gaussian , grey , 2 , 0.1, 0.4, 0.4 );
+}
+
+#StockBox-percentred-cust{
+	-fx-text-fill: white;
+    -fx-background-color:linear-gradient(to right top, #f01010, #e20c16, #d50a1a, #c70a1d, #b90b1f, #b30b22, #ac0b24, #a60c26, #a50b29, #a50b2d, #a40b30, #a30c33);
+    -fx-border-radius: 5 5 5 5; 
+    -fx-background-radius: 5 5 5 5; 
+}
+
+#StockBox-price{
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-effect: innershadow( gaussian , grey , 2 , 0.1, 0.4, 0.4 );
+}
+
+#StockBox-label{
+	-fx-text-fill: white;
+	-fx-font-size:12pt;
+	-fx-font-weight: bold;
+	-fx-effect: innershadow( gaussian , grey , 2 , 0.1, 0.4, 0.4 );
+}
+
+#StockBox-name{
+	-fx-text-fill: #f0f0f5;
+}
+

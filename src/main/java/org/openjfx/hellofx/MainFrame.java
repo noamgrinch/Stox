@@ -41,7 +41,7 @@ public class MainFrame extends Application{
 		try {
 				//LoginFrame.display(); // dispay later on
 			
-				Background background = new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY));
+
 				
 				ss[0] = Stock.findStockName("BABA");
 				ss[1] = Stock.findStockName("AWK");
@@ -64,37 +64,28 @@ public class MainFrame extends Application{
 				bottom.setPadding(new Insets(5,5,5,5));
 				bottom.getChildren().add(edit);
 				bottom.setAlignment(Pos.CENTER);
-				//bottom.setBackground(background);
 				
 				ScrollPane scroll = new ScrollPane();
-				//scroll.setPrefSize(275, 490);
-				GridPane lay1 = new GridPane();
-				lay1.setVgap(2);
-				lay1.setAlignment(Pos.TOP_CENTER);
+
+				GridPane content = new GridPane();
+				//lay1.setVgap(2);
+				content.setAlignment(Pos.TOP_CENTER);
 				ColumnConstraints column1 = new ColumnConstraints();
 				column1.setPercentWidth(100);
-				lay1.getColumnConstraints().add(column1);
+				content.getColumnConstraints().add(column1);
 				
 				StockBox sb;
 				for(int i=0;i<ss.length;i++) {
 					sb = new StockBox(ss[i]);
-					lay1.getChildren().add(sb);
+					content.getChildren().add(sb);
+					sb.setId("StockBox-mainback-cust");
 					GridPane.setFillWidth(sb, true);
 					GridPane.setConstraints(sb, 0, i);	
 				}
 				
 				//stocks
-				scroll.setContent(lay1);
-				//scroll.setBackground(background);
-				/*CornerRadii corn = new CornerRadii(5);
-				Color col = Color.RED;/*Color.web(/*"#000000");
-				Background background = new Background(new BackgroundFill(col, corn, Insets.EMPTY));
-				lay1.setBackground(background);*/
-				main.setBackground(background);
-				//lay1.setBackground(background);
-				//lay1.setGridLinesVisible(true);
+				scroll.setContent(content);
 				
-
 				
 				//general configuration
 				main.getChildren().add(scroll);
@@ -103,7 +94,7 @@ public class MainFrame extends Application{
 				br.setCenter(main);
 				br.setBottom(bottom);
 				BorderPane.setMargin(bottom, new Insets(5,5,5,5));
-		        Scene scene = new Scene (br, 295, 500);
+		        Scene scene = new Scene (br, 297, 500);
 		        scene.getStylesheets().clear();
 		        scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		        stage.setScene(scene);

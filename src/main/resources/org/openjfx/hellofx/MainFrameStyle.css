@@ -6,3 +6,9 @@
     -fx-border-radius: 5;
     -fx-padding: 3 6 6 6;
 }
+
+#StockBox-mainback-cust{
+    -fx-background-color:linear-gradient(to bottom, #060606, #0a0a0c, #0c0e10, #0e1213, #101514, #131816, #151b18, #181e19, #1b221c, #1e271f, #222b22, #253025);
+    -fx-padding: 0 0 0 0;
+}
+
