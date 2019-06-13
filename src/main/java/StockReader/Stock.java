@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.openjfx.hellofx.GUI.EditStockBox;
+import org.openjfx.hellofx.GUI.StockEditFrame;
+
 public class Stock {
 	
 	private String name,label;
@@ -124,7 +127,7 @@ public class Stock {
 						while(line.charAt(back) != '>') {
 							back--;
 						}
-						changedol = line.substring(back+2,end);
+						changedol = line.substring(back+1,end);
 						i++;
 					}
 					if( line.contains("#c5c5c5") && i==2) { //change in percentage
@@ -134,7 +137,8 @@ public class Stock {
 						while(line.charAt(back) != '>') {
 							back--;
 						}
-						changeper = line.substring(back+2,end-1);
+						
+						changeper = line.substring(back+1,end-1);
 						i++;
 					}
 					
@@ -202,8 +206,18 @@ public class Stock {
 			yesterdaygate = yesterdaygate.replace(",", "");
 		}
 		Stock tmp = new Stock(name,label,Double.parseDouble(lastprice));
-		tmp.setChangedollar(Double.parseDouble(changedol));
-		tmp.setChangepercent(Double.parseDouble(changeper));
+		if(changedol.charAt(0)=='+') {
+			tmp.setChangedollar(Double.parseDouble(changedol.substring(1, changedol.length())));
+		}
+		else {
+			tmp.setChangedollar(-(Double.parseDouble(changedol.substring(1, changedol.length()))));
+		}
+		if(changeper.charAt(0)=='+') {
+			tmp.setChangepercent(Double.parseDouble(changeper.substring(1, changeper.length())));
+		}
+		else {
+			tmp.setChangepercent(-(Double.parseDouble(changeper.substring(1, changeper.length()))));
+		}
 		tmp.setVolume(Integer.parseInt(volume));
 		tmp.setOpengate(Double.parseDouble(opengate));
 		tmp.setYesterdaygate(Double.parseDouble(yesterdaygate));
@@ -272,6 +286,10 @@ public class Stock {
 
 	public void setYesterdaygate(double yesterdaygate) {
 		this.yesterdaygate = yesterdaygate;
+	}
+	
+	public EditStockBox toEdit(int index,StockEditFrame p) {
+		return new EditStockBox(this,index,p);
 	}
 
 }

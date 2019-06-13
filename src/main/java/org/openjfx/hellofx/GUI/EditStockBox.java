@@ -3,10 +3,12 @@ package org.openjfx.hellofx.GUI;
 import org.openjfx.hellofx.MainFrame;
 
 import StockReader.Stock;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -14,22 +16,27 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 
-public class StockBox extends GridPane{
+public class EditStockBox extends GridPane implements EventHandler<ActionEvent>{
 	
 	private Stock stock;
-	private Label slabel,sname,sprice,sper;
-
+	private Label slabel,sname;
+	private Button delete;
+	private int index;
+	private StockEditFrame parent;
 	
 	
-	public StockBox(Stock stock) {
+	public EditStockBox(Stock stock,int index,StockEditFrame parent) {
 		super();
 		this.stock=stock;
+		this.setIndex(index);
+		this.parent=parent;
         this.getStylesheets().clear();
         this.getStylesheets().add(MainFrame.class.getResource("StockBoxStyle.css").toExternalForm());
+        this.setId("EditStockBox-cust");
 		//sep.setBackground(new Background(new BackgroundFill(Color.BLACK, corn, Insets.EMPTY)));
 		slabel = new Label(stock.getLabel());
 		slabel.setId("StockBox-label");
@@ -37,31 +44,26 @@ public class StockBox extends GridPane{
 		sname = new Label(stock.getName());
 		sname.setId("StockBox-name");
 		//sname.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		sprice = new Label(Double.toString(stock.getPrice()) + "$");
-		sprice.setFont(new Font("Arial",15));
-		sprice.setId("StockBox-price");
-		//sprice.setBorder(new Border(new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		sper = new Label(Double.toString(stock.getChangepercent()) + "%");
-		if(stock.getChangepercent()>0) {
-			sper.setId("StockBox-percentgreen-cust"); //green
-		} 
-		else {
-			sper.setId("StockBox-percentred-cust"); //red
-		}
-		//sper.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		GridPane.setConstraints(slabel,0,0);
-		GridPane.setConstraints(sname,0,1);
-		GridPane.setConstraints(sprice,1,0);
-		GridPane.setConstraints(sper,1,1);
-		GridPane.setHalignment(sper, HPos.RIGHT);
-		GridPane.setHalignment(sprice, HPos.RIGHT);
-		GridPane.setHalignment(sname, HPos.LEFT);
-		GridPane.setHalignment(slabel, HPos.LEFT);
+		delete = new Button("X");
+		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		delete.setId("Delete-button");
+		delete.setOnAction(this);
+		//delete.setPadding(new Insets(0,0,0,10));
+		GridPane.setConstraints(delete,0,0);
+		GridPane.setRowSpan(delete, 2);
+		GridPane.setConstraints(slabel,1,0);
+		GridPane.setConstraints(sname,1,1);
+		GridPane.setHalignment(delete, HPos.CENTER);
+		GridPane.setHalignment(sname, HPos.CENTER);
+		GridPane.setHalignment(slabel, HPos.CENTER);
 		ColumnConstraints column1 = new ColumnConstraints();
-		column1.setPercentWidth(95-sprice.getText().length()*3);
-		this.getColumnConstraints().add(column1);
-		this.getChildren().addAll(slabel,sname,sprice,sper);
+		column1.setHgrow(Priority.ALWAYS );
+		//column1.setPercentWidth(70-slabel.getText().length()*3);
+		//this.getColumnConstraints().add(column1);
+		this.getColumnConstraints().addAll( new ColumnConstraints( 25 ), column1);
+		this.getChildren().addAll(delete,slabel,sname);
 		//this.setBorder(new Border(new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		//this.setGridLinesVisible(true);
 
 		
 	}
@@ -73,6 +75,18 @@ public class StockBox extends GridPane{
 	public void setStock(Stock stock) {
 		this.stock = stock;
 	}
-	
 
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	@Override
+	public void handle(ActionEvent event) {
+		parent.deleteStock(index);
+	}
+	
 }
