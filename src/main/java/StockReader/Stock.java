@@ -186,12 +186,7 @@ public class Stock {
 			line = buf.readLine();		
 		}
 		if(lastprice.equals("Not found") || volume.equals("Not found") || opengate.equals("Not found") || yesterdaygate.equals("Not found") || changedol.equals("Not found") || changeper.equals("Not found")) {
-			lastprice = "0";
-			volume = "0";
-			opengate = "0";
-			yesterdaygate = "0";
-			changedol = "0";
-			changeper = "0";
+			return null;
 		}
 		if(volume.contains(",")) {
 			volume = volume.replace(",", "");
@@ -210,13 +205,23 @@ public class Stock {
 			tmp.setChangedollar(Double.parseDouble(changedol.substring(1, changedol.length())));
 		}
 		else {
-			tmp.setChangedollar(-(Double.parseDouble(changedol.substring(1, changedol.length()))));
+			if(changedol.equals("0")) {
+				tmp.setChangedollar(0);
+			}
+			else {
+				tmp.setChangedollar(-(Double.parseDouble(changedol.substring(1, changedol.length()))));
+			}
 		}
 		if(changeper.charAt(0)=='+') {
 			tmp.setChangepercent(Double.parseDouble(changeper.substring(1, changeper.length())));
 		}
 		else {
-			tmp.setChangepercent(-(Double.parseDouble(changeper.substring(1, changeper.length()))));
+			if(changeper.equals("0")) {
+				tmp.setChangedollar(0);
+			}
+			else {
+				tmp.setChangepercent(-(Double.parseDouble(changeper.substring(1, changeper.length()))));
+			}
 		}
 		tmp.setVolume(Integer.parseInt(volume));
 		tmp.setOpengate(Double.parseDouble(opengate));
@@ -289,7 +294,7 @@ public class Stock {
 	}
 	
 	public EditStockBox toEdit(int index,StockEditFrame p) {
-		return new EditStockBox(this,index,p);
+		return new EditStockBox(this,index,p,1);
 	}
 
 }

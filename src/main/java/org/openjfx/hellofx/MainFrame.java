@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import org.openjfx.hellofx.GUI.StockBox;
 import org.openjfx.hellofx.GUI.StockEditFrame;
 
+import CentralLogger.CentralLogger;
 import CentralLogger.SendLogThread;
 import StockReader.Stock;
 import javafx.application.Application;
@@ -27,6 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,12 +39,24 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	
 	private ArrayList<Stock> stocks;
 	private Stage stage;
+	private Thread centralogger;
 	@SuppressWarnings("exports")
-	@Override
-	
 
+	
+	public MainFrame(Thread centralogger) {
+		super();
+		this.centralogger=centralogger;
+	}
+	@Override
 	public void start(Stage stage) throws Exception {
 		this.stage=stage;
+		this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		    @SuppressWarnings("deprecation")
+			@Override public void handle(WindowEvent t) {
+		    	centralogger.stop();
+		    	stage.close();
+		    }
+		});
 		this.stage.setTitle("Stox");	
 		this.stage.setResizable(false);
 		stocks = new ArrayList<Stock>();
@@ -89,11 +103,9 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				Separator sep;
 				for(int i=0;i<stocks.size();i++) {
 					sb = new StockBox(stocks.get(i));
-					if(i<stocks.size()-1) {
-						sep = new Separator();
-						sep.setId("StockBox-seprator");
-						sb.add(sep, 0, 4, 2, 1);
-					}
+					sep = new Separator();
+					sep.setId("StockBox-seprator");
+					sb.add(sep, 0, 4, 2, 1);
 					content.getChildren().add(sb);
 					sb.setId("StockBox-mainback-cust");
 					GridPane.setFillWidth(sb, true);
@@ -161,11 +173,9 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		Separator sep;
 		for(int i=0;i<stocks.size();i++) {
 			sb = new StockBox(stocks.get(i));
-			if(i<stocks.size()-1) {
-				sep = new Separator();
-				sep.setId("StockBox-seprator");
-				sb.add(sep, 0, 4, 2, 1);
-			}
+			sep = new Separator();
+			sep.setId("StockBox-seprator");
+			sb.add(sep, 0, 4, 2, 1);
 			content.getChildren().add(sb);
 			sb.setId("StockBox-mainback-cust");
 			GridPane.setFillWidth(sb, true);

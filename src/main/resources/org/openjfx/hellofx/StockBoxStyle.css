@@ -10,6 +10,10 @@
     -fx-padding: 2 5 2 7;
 }
 
+#toolbar{
+	-fx-background-color: #ff1a1a;
+}
+
 #StockBox-percentred-cust{
 	-fx-text-fill: white;
     -fx-background-color:linear-gradient(to bottom, #f01010, #e20c16, #d50a1a, #c70a1d, #b90b1f, #b30b22, #ac0b24, #a60c26, #a50b29, #a50b2d, #a40b30, #a30c33);
@@ -52,7 +56,17 @@
     -fx-min-height: 20px;  
     -fx-max-width: 20px;  
     -fx-max-height: 20px;
-    -fx-padding: 0 0 0 0;
-	
+    -fx-padding: 0 0 0 0;	
+}
+
+#Add-button{
+	-fx-background-radius: 5em;  
+	-fx-background-color: GREEN;
+	-fx-text-fill: white;
+    -fx-min-width: 20px;  
+    -fx-min-height: 20px;  
+    -fx-max-width: 20px;  
+    -fx-max-height: 20px;
+    -fx-padding: 0 0 0 0;	
 }
 

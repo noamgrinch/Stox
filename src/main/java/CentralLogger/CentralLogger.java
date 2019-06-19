@@ -13,12 +13,11 @@ import java.util.logging.Logger;
 
 
 
-public class CentralLogger {
-	
+public class CentralLogger implements Runnable{ 
 
-	
-	public static void main(String[] args){
-	
+
+	@Override
+	public void run() {
 		final Logger LOGGER;
 		FileHandler handler=null;
 
@@ -45,10 +44,10 @@ public class CentralLogger {
 		
 		catch(Exception e){
 			LOGGER.severe(getExString(e));
-			
 		}
+		
+	}
 	
-	}//main
 	
 	public static String getExString(Exception e){
 		String sStackTrace=null;
@@ -67,15 +66,5 @@ public class CentralLogger {
 		
 		return sStackTrace;
 	}//getExString
-	
-	/*public void setDirectory(String dir) {
-		try {
-			FileHandler newhand = new FileHandler(dir + ".log");
-			newhand.setFormatter(new MyFormatter());
-
-		} catch (SecurityException | IOException e) {
-			e.printStackTrace();
-		}
-	}*/
 
 }
