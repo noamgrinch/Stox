@@ -13,7 +13,9 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
@@ -171,7 +173,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		this.stocks = stocks;
 	}
 	
-	public void presentsearched(Stock stock) {
+	public void presentsearched(Stock stock,String label) {
 		
    if(stock!=null) {
 		BorderPane br = new BorderPane();
@@ -224,6 +226,9 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		stage.setScene(scene);
 		stage.setAlwaysOnTop(true);
 		stage.show();
+   }
+   else {
+	   StockNotFoundAlert.display(label);
    }
 	}
 	
@@ -313,7 +318,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		if(search == event.getSource()) {
 			try {
 				Stock searched = Stock.findStockName(searchlabel.getText().toUpperCase());
-				presentsearched(searched);
+				presentsearched(searched,searchlabel.getText().toUpperCase());
 				searchlabel.setText("");
 			} catch (NumberFormatException | IOException e) {
 				new SendLogThread(Level.SEVERE,e).start();

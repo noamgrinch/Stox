@@ -1,0 +1,36 @@
+
+
+.button{
+    -fx-text-fill: rgb(49, 89, 23);
+    -fx-border-color: rgb(49, 89, 23);
+    -fx-border-radius: 5;
+    -fx-padding: 3 6 6 6;
+}
+
+#StockBox-mainback-cust{
+    -fx-background-color:linear-gradient(to bottom, #000000, #0a0a0a, #121212, #181818, #1e1e1e, #242424, #292929, #2f2f2f, #363636, #3e3e3e, #454545, #4d4d4d);
+    -fx-padding: 0px;
+    -fx-margin: 100px;
+}
+
+#StockBox-seprator{
+	 -fx-padding: 3 3 0 5;
+	 -fx-border-radius: 2 2 2 2;
+	 -fx-background-radius: 2 2 2 2; 
+	 -fx-background-color: #f0f0f5; 
+}
+
+
+#GridPane-content{
+	-fx-background-color: linear-gradient(to right top, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d);
+	-fx-margin: 100px;
+}
+
+#HBox-bottom{
+	-fx-background-color: linear-gradient(to right top, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d);
+}
+
+
+
+
+

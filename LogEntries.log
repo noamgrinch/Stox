@@ -143,3 +143,45 @@
 	at javafx.graphics/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:174)
 	at java.base/java.lang.Thread.run(Thread.java:835)
 </Message>
+<ThreadID>18</ThreadID>
+<ClassName>CentralLogger.LogThread</ClassName>
+<MethodName>run</MethodName>
+<Date>Wed Jun 19 05:19:27 IDT 2019</Date>
+<Severity>SEVERE</Severity<Message>java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.base/java.lang.StringLatin1.charAt(StringLatin1.java:47)
+	at java.base/java.lang.String.charAt(String.java:702)
+	at org.openjfx.hellofx/StockReader.Stock.findStock(Stock.java:127)
+	at org.openjfx.hellofx/StockReader.Stock.findStockName(Stock.java:92)
+	at org.openjfx.hellofx/org.openjfx.hellofx.MainFrame.start(MainFrame.java:74)
+	at org.openjfx.hellofx/org.openjfx.hellofx.Main.start(Main.java:15)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:846)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:455)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:428)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:389)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:427)
+	at javafx.graphics/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:96)
+	at javafx.graphics/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:174)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+</Message>
+<ThreadID>18</ThreadID>
+<ClassName>CentralLogger.LogThread</ClassName>
+<MethodName>run</MethodName>
+<Date>Wed Jun 19 05:19:34 IDT 2019</Date>
+<Severity>SEVERE</Severity<Message>java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.base/java.lang.StringLatin1.charAt(StringLatin1.java:47)
+	at java.base/java.lang.String.charAt(String.java:702)
+	at org.openjfx.hellofx/StockReader.Stock.findStock(Stock.java:127)
+	at org.openjfx.hellofx/StockReader.Stock.findStockName(Stock.java:92)
+	at org.openjfx.hellofx/org.openjfx.hellofx.MainFrame.start(MainFrame.java:74)
+	at org.openjfx.hellofx/org.openjfx.hellofx.Main.start(Main.java:15)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:846)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:455)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:428)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:389)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:427)
+	at javafx.graphics/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:96)
+	at javafx.graphics/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:174)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+</Message>
