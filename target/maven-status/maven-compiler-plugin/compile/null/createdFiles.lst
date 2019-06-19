@@ -11,6 +11,8 @@ org\openjfx\hellofx\GUI\StockEditFrame.class
 org\openjfx\hellofx\Main.class
 org\openjfx\hellofx\MainFrame.class
 StockReader\User.class
+org\openjfx\hellofx\MainFrame$2.class
 org\openjfx\hellofx\GUI\StockNotFoundAlert.class
 org\openjfx\hellofx\GUI\EditStockBox.class
 StockReader\Stock.class
+org\openjfx\hellofx\MainFrame$2$1.class

@@ -1,5 +1,6 @@
 package org.openjfx.hellofx;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import org.openjfx.hellofx.GUI.StockBox;
@@ -9,6 +10,7 @@ import CentralLogger.CentralLogger;
 import CentralLogger.SendLogThread;
 import StockReader.Stock;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -38,6 +40,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	
 	
 	private ArrayList<Stock> stocks;
+	private ArrayList<StockBox> stockboxes;
 	private Stage stage;
 	private Thread centralogger;
 	private BorderPane br;
@@ -66,6 +69,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		this.stage.setTitle("Stox");	
 		this.stage.setResizable(false);
 		stocks = new ArrayList<Stock>();
+		stockboxes = new ArrayList<StockBox>();
 
 		try {
 				//LoginFrame.display(); // dispay later on
@@ -76,7 +80,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				stocks.add(Stock.findStockName("AAPL"));
 				stocks.add(Stock.findStockName("NVDA"));
 				stocks.add(Stock.findStockName("INTL"));
-				stocks.add(Stock.findStockName("AMZN"));
+				//stocks.add(Stock.findStockName("AMZN"));
 				//stocks.add(Stock.findStockName("DLR"));
 				//stocks.add(Stock.findStockName("TSLA"));
 				//stocks.add(Stock.findStockName("NOC"));
@@ -109,7 +113,11 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				Separator sep;
 				for(int i=0;i<stocks.size();i++) {
 					sb = new StockBox(stocks.get(i));
+					stockboxes.add(sb);
 					sep = new Separator();
+					//Thread th = new Thread(sb);
+					//th.start();
+
 					sep.setId("StockBox-seprator");
 					sb.add(sep, 0, 4, 2, 1);
 					content.getChildren().add(sb);
@@ -118,6 +126,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 					GridPane.setConstraints(sb, 0, i);	
 				}
 				
+
 				//stocks
 				scroll.setContent(content);
 				//general configuration
@@ -134,6 +143,37 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		        scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		        this.stage.setScene(scene);
 		        this.stage.show();
+		        
+		        
+		        Thread thread = new Thread(new Runnable() {
+
+		            @Override
+		            public void run() {
+		                Runnable updater = new Runnable() {
+
+		                    @Override
+		                    public void run() {
+		                       try {
+								updateStockBoxes();
+							} catch (IOException e) {
+								new SendLogThread(Level.SEVERE,e).start();
+							}
+		                    }
+		                };
+
+		                while (true) {
+		                    try {
+		                        Thread.sleep(5000);
+		                    } catch (InterruptedException ex) {
+		                    	new SendLogThread(Level.SEVERE,ex).start();
+		                    }
+		                    Platform.runLater(updater);
+		                }
+		            }
+
+		        });
+		        thread.setDaemon(true);
+		        thread.start();      
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -141,7 +181,6 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		}
 		
         
-
 		
 	}
 
@@ -154,6 +193,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 
 	public void updateList(ArrayList<Stock> stocks2) {
 		stocks=stocks2;
+		stockboxes.clear();
 		br = new BorderPane();
 		edit = new Button("Edit");
 		edit.setOnAction(this);
@@ -179,6 +219,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		Separator sep;
 		for(int i=0;i<stocks.size();i++) {
 			sb = new StockBox(stocks.get(i));
+			stockboxes.add(sb);
 			sep = new Separator();
 			sep.setId("StockBox-seprator");
 			sb.add(sep, 0, 4, 2, 1);
@@ -191,6 +232,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		//stocks
 		scroll.setContent(content);
 		//general configuration
+		
 		//main.getChildren().add(scroll);
 		//main.setFillWidth(true);
 		//content.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT))); //debugging
@@ -206,6 +248,10 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
         this.stage.show();
 	}
 	
-
+	public void updateStockBoxes() throws IOException {
+		for(int i=0;i<stockboxes.size();i++) {
+			stockboxes.get(i).updateStockBox();
+		}
+	}
 
 }

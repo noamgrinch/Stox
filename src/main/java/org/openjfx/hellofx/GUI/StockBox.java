@@ -1,8 +1,13 @@
 package org.openjfx.hellofx.GUI;
 
+import java.io.IOException;
+import java.util.logging.Level;
+
 import org.openjfx.hellofx.MainFrame;
 
+import CentralLogger.SendLogThread;
 import StockReader.Stock;
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -62,8 +67,6 @@ public class StockBox extends GridPane{
 		this.getColumnConstraints().add(column1);
 		this.getChildren().addAll(slabel,sname,sprice,sper);
 		//this.setBorder(new Border(new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-
-		
 	}
 
 	public Stock getStock() {
@@ -72,6 +75,15 @@ public class StockBox extends GridPane{
 
 	public void setStock(Stock stock) {
 		this.stock = stock;
+	}
+
+
+
+	
+	public void updateStockBox() throws IOException {
+		this.stock.updateStats();
+		sprice.setText(Double.toString(stock.getPrice())+ "$");
+		sper.setText(Double.toString(stock.getChangepercent()) + "%");
 	}
 	
 

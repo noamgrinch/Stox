@@ -3,6 +3,7 @@ package StockReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -94,7 +95,7 @@ public class Stock {
 	}
 	
 	public static Stock findStock(String label,String name) throws IOException,NumberFormatException {
-		
+		boolean finished=false;
 		String ur = "http://wallstreet.bizportal.co.il/stock.php?id=" + label + "&story=abs";
 		URL url = new URL(ur);
 		URLConnection urlConn = url.openConnection();
@@ -175,6 +176,7 @@ public class Stock {
 						i++;
 					}
 					if(i==6) {
+						finished=true;
 						break;
 					}
 					line = buf.readLine();
@@ -182,7 +184,9 @@ public class Stock {
 				}
 				
 			}
-			
+			if(finished) {
+				break;
+			}
 			line = buf.readLine();		
 		}
 		if(lastprice.equals("Not found") || volume.equals("Not found") || opengate.equals("Not found") || yesterdaygate.equals("Not found") || changedol.equals("Not found") || changeper.equals("Not found")) {
@@ -227,6 +231,72 @@ public class Stock {
 		tmp.setOpengate(Double.parseDouble(opengate));
 		tmp.setYesterdaygate(Double.parseDouble(yesterdaygate));
 		return tmp;
+	}
+	
+	
+	public void updateStats() throws IOException {
+		boolean finished=false;
+		String ur = "http://wallstreet.bizportal.co.il/stock.php?id=" + label + "&story=abs";
+		URL url = new URL(ur);
+		URLConnection urlConn = url.openConnection();
+		InputStreamReader inStream = new InputStreamReader(urlConn.getInputStream());
+		BufferedReader buf = new BufferedReader(inStream);
+		String lastprice = "Not found";
+		String changeper = "Not found";
+		buf.skip(SKIP_STATS);
+		String line = buf.readLine();
+		while(line!=null) {
+			if(line.contains("#c5c5c5")) {
+				line = buf.readLine();
+				int end = line.indexOf("</div>");
+				int back = end;
+				while(line.charAt(back) != '>') {
+					back--;
+				}
+				lastprice = line.substring(back+1,end);
+				while(line!=null) {
+					if( line.contains("#c5c5c5")) { //change in percentage
+						line = buf.readLine();
+						end = line.indexOf("</span>");
+						back = end;
+						while(line.charAt(back) != '>') {
+							back--;
+						}						
+						changeper = line.substring(back+1,end-1);
+						finished=true;
+						break;
+					}
+					line = buf.readLine();
+					
+				}
+				
+			}
+			if(finished) {
+				break;
+			}
+			line = buf.readLine();
+		}
+
+		
+		
+
+
+		if(lastprice.contains(",")) {
+			lastprice = lastprice.replace(",", "");
+		}
+
+		if(changeper.charAt(0)=='+') {
+			this.setChangepercent(Double.parseDouble(changeper.substring(1, changeper.length())));
+		}
+		else {
+			if(changeper.equals("0")) {
+				this.setChangedollar(0);
+			}
+			else {
+				this.setChangepercent(-(Double.parseDouble(changeper.substring(1, changeper.length()))));
+			}
+		}
+
 	}
 	
 	public String toString() {
