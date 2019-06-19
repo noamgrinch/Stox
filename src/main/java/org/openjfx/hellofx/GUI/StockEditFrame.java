@@ -43,7 +43,6 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		
 		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		
-		
 		ScrollPane scroll = new ScrollPane();
 		scroll.getStylesheets().clear();
 		scroll.getStylesheets().add(MainFrame.class.getResource("StockBoxStyle.css").toExternalForm());
@@ -54,6 +53,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		
 		toolbar = new ToolBar();
 		searchlabel = new TextField("");
+		searchlabel.setPromptText("Search by label");
 		toolbar.getItems().add(searchlabel);
 		search = new Button("Search");
 		search.setOnAction(this);
@@ -193,6 +193,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		
 		toolbar = new ToolBar();
 		searchlabel = new TextField("");
+		searchlabel.setPromptText("Search by label");
 		toolbar.getItems().add(searchlabel);
 		search = new Button("Search");
 		search.setOnAction(this);
@@ -263,11 +264,9 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 			//delete = new Button("X");
 			//delete.setId("Delete-button");
 			sb = stocks.get(i).toEdit(i,this);
-			if(i<stocks.size()-1) {
-				sep = new Separator();
-				sep.setId("StockBox-seprator");
-				sb.add(sep, 0, 4, 2, 1);
-			}
+			sep = new Separator();
+			sep.setId("StockBox-seprator");
+			sb.add(sep, 0, 4, 2, 1);
 			content.getChildren().addAll(/*delete,*/sb);
 			GridPane.setFillWidth(sb, true);
 			//GridPane.setFillWidth(delete, true);

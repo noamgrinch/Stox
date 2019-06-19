@@ -40,6 +40,12 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	private ArrayList<Stock> stocks;
 	private Stage stage;
 	private Thread centralogger;
+	private BorderPane br;
+	private Button edit;
+	private HBox bottom;
+	private ScrollPane scroll;
+	private GridPane content;
+	private ColumnConstraints column1;
 	@SuppressWarnings("exports")
 
 	
@@ -78,25 +84,25 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 			
 			
 				//Edit button
-				BorderPane br = new BorderPane();
-				Button edit = new Button("Edit");
+				br = new BorderPane();
+				edit = new Button("Edit");
 				edit.setOnAction(this);
-				HBox bottom = new HBox(10);
+				bottom = new HBox(10);
 				bottom.getChildren().add(edit);
 				bottom.setId("HBox-bottom");
 				bottom.setAlignment(Pos.CENTER);
 				
 				
 				// content panel
-				ScrollPane scroll = new ScrollPane();
+				scroll = new ScrollPane();
 				scroll.getStyleClass ().add ("edge-to-edge");
 				scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 				scroll.setFitToHeight(true);
 				scroll.setFitToWidth(true);
-				GridPane content = new GridPane();
+				content = new GridPane();
 				content.setId("GridPane-content");
 				content.setAlignment(Pos.TOP_CENTER);
-				ColumnConstraints column1 = new ColumnConstraints();
+				column1 = new ColumnConstraints();
 				column1.setPercentWidth(100);
 				content.getColumnConstraints().add(column1);
 				StockBox sb;
@@ -148,25 +154,25 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 
 	public void updateList(ArrayList<Stock> stocks2) {
 		stocks=stocks2;
-		BorderPane br = new BorderPane();
-		Button edit = new Button("Edit");
+		br = new BorderPane();
+		edit = new Button("Edit");
 		edit.setOnAction(this);
-		HBox bottom = new HBox(10);
+		bottom = new HBox(10);
 		bottom.getChildren().add(edit);
 		bottom.setId("HBox-bottom");
 		bottom.setAlignment(Pos.CENTER);
 		
 		
 		// content panel
-		ScrollPane scroll = new ScrollPane();
+		scroll = new ScrollPane();
 		scroll.getStyleClass ().add ("edge-to-edge");
 		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 		scroll.setFitToHeight(true);
 		scroll.setFitToWidth(true);
-		GridPane content = new GridPane();
+		content = new GridPane();
 		content.setId("GridPane-content");
 		content.setAlignment(Pos.TOP_CENTER);
-		ColumnConstraints column1 = new ColumnConstraints();
+		column1 = new ColumnConstraints();
 		column1.setPercentWidth(100);
 		content.getColumnConstraints().add(column1);
 		StockBox sb;
