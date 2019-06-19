@@ -78,7 +78,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				stocks.add(Stock.findStockName("BABA"));
 				stocks.add(Stock.findStockName("AWK"));
 				stocks.add(Stock.findStockName("AAPL"));
-				stocks.add(Stock.findStockName("NVDA"));
+				stocks.add(Stock.findStockName("BYND"));
 				stocks.add(Stock.findStockName("INTL"));
 				//stocks.add(Stock.findStockName("AMZN"));
 				//stocks.add(Stock.findStockName("DLR"));

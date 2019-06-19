@@ -47,7 +47,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		
 		ScrollPane scroll = new ScrollPane();
 		scroll.getStylesheets().clear();
-		scroll.getStylesheets().add(MainFrame.class.getResource("StockBoxStyle.css").toExternalForm());
+		scroll.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		scroll.getStyleClass ().add ("edge-to-edge");
 		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 		scroll.setFitToHeight(true);
@@ -75,11 +75,9 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 			//delete = new Button("X");
 			//delete.setId("Delete-button");
 			sb = stocks.get(i).toEdit(i,this);
-			if(i<stocks.size()-1) {
-				sep = new Separator();
-				sep.setId("StockBox-seprator");
-				sb.add(sep, 0, 4, 2, 1);
-			}
+			sep = new Separator();
+			sep.setId("StockBox-seprator");
+			sb.add(sep, 0, 4, 2, 1);
 			content.getChildren().addAll(/*delete,*/sb);
 			GridPane.setFillWidth(sb, true);
 			//GridPane.setFillWidth(delete, true);
@@ -89,12 +87,14 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		}
 		
 		HBox bottom = new HBox();
+		bottom.setId("HBox-bottom");
 		done = new Button("Done");
 		done.setOnAction(this);
 		bottom.getChildren().add(done);
 		bottom.setAlignment(Pos.CENTER);
 		br.setBottom(bottom);
 		scroll.setContent(content);
+		content.setId("GridPane-content");
 		br.setTop(toolbar);
 		br.setCenter(scroll);
 		stage = new Stage();
@@ -113,7 +113,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		
 		ScrollPane scroll = new ScrollPane();
 		scroll.getStylesheets().clear();
-		scroll.getStylesheets().add(MainFrame.class.getResource("StockBoxStyle.css").toExternalForm());
+		scroll.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		scroll.getStyleClass ().add ("edge-to-edge");
 		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 		scroll.setFitToHeight(true);
@@ -151,8 +151,10 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 			GridPane.setConstraints(sb, /*1*/0, i);
 		}
 		HBox bottom = new HBox();
+		bottom.setId("HBox-bottom");
 		done = new Button("Done");
 		done.setOnAction(this);
+		content.setId("GridPane-content");
 		bottom.getChildren().add(done);
 		bottom.setAlignment(Pos.CENTER);
 		br.setBottom(bottom);
@@ -180,7 +182,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		ScrollPane scroll = new ScrollPane();
 		scroll.getStylesheets().clear();
-		scroll.getStylesheets().add(MainFrame.class.getResource("StockBoxStyle.css").toExternalForm());
+		scroll.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		scroll.getStyleClass ().add ("edge-to-edge");
 		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 		scroll.setFitToHeight(true);
@@ -214,6 +216,8 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 			GridPane.setConstraints(sb, /*1*/0, i);
 		}
 		HBox bottom = new HBox();
+		bottom.setId("HBox-bottom");
+		content.setId("GridPane-content");
 		done = new Button("Done");
 		done.setOnAction(this);
 		bottom.getChildren().add(done);
@@ -242,7 +246,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		
 		ScrollPane scroll = new ScrollPane();
 		scroll.getStylesheets().clear();
-		scroll.getStylesheets().add(MainFrame.class.getResource("StockBoxStyle.css").toExternalForm());
+		scroll.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		scroll.getStyleClass ().add ("edge-to-edge");
 		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 		scroll.setFitToHeight(true);
@@ -281,11 +285,13 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		}
 		
 		HBox bottom = new HBox();
+		bottom.setId("HBox-bottom");
 		done = new Button("Done");
 		done.setOnAction(this);
 		bottom.getChildren().add(done);
 		bottom.setAlignment(Pos.CENTER);
 		br.setBottom(bottom);
+		content.setId("GridPane-content");
 		scroll.setContent(content);
 		br.setTop(toolbar);
 		br.setCenter(scroll);
