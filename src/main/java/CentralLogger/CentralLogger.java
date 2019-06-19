@@ -24,12 +24,12 @@ public class CentralLogger implements Runnable{
 		LOGGER = Logger.getLogger(CentralLogger.class.getName());
 		try {
 			handler = new FileHandler("LogEntries.log", true);
-			handler.setFormatter(new MyFormatter());
+			//handler.setFormatter(new MyFormatter());
 		} catch (SecurityException | IOException e) {
 			e.printStackTrace();
 		}
 		if(handler!=null){
-			LOGGER.addHandler(handler);
+			//LOGGER.addHandler(handler);
 		}
 		
 		ServerSocket ss;
