@@ -68,9 +68,7 @@ public class EditStockBox extends GridPane implements EventHandler<ActionEvent>{
 			this.getChildren().addAll(add,slabel,sname);
 		}
 		//this.setBorder(new Border(new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		//this.setGridLinesVisible(true);
-
-		
+		//this.setGridLinesVisible(true);	
 	}
 
 	public Stock getStock() {

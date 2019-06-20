@@ -16,7 +16,7 @@ public class Main extends Application{
 			CentralLogger cl = new CentralLogger();
 			Thread centrallogger = new Thread(cl);
 			centrallogger.start();
-			new MainFrame(centrallogger).start(primaryStage);
+			new MainFrame(cl).start(primaryStage);
 		}
 		catch(Exception e) {
 			new SendLogThread(Level.SEVERE,e).start();

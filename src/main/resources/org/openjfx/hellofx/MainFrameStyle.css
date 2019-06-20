@@ -20,6 +20,7 @@
 	 -fx-border-radius: 2 2 2 2;
 	 -fx-background-radius: 2 2 2 2; 
 	 -fx-background-color: #f0f0f5; 
+	 -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 2, 0.0 , 0 , 2);
 }
 
 
@@ -49,7 +50,7 @@
 }
 
 #Search-label{
-	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 2, 0.0 , 0 , 2);
 }
 
 #BorderPane-main{
@@ -75,7 +76,7 @@
 #Exit-button{
 	-fx-background-radius: 5em;  
 	-fx-background-color: radial-gradient( center 50% 50% , radius 95% , #F80020, #F60000);
-	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 2, 0.0 , 0 , 2);
 	-fx-text-fill: white;
     -fx-min-width: 20px;  
     -fx-min-height: 20px;  
@@ -86,8 +87,8 @@
 
 #Minimize-button{
 	-fx-background-radius: 5em;  
-	-fx-background-color: radial-gradient( center 50% 50% , radius 95% , #37F90E, #16DE0D);
-	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+	-fx-background-color: radial-gradient( center 50% 50% , radius 95% , #06D321, #10960A);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 2, 0.0 , 0 , 2);
 	-fx-text-fill: white;
     -fx-min-width: 20px;  
     -fx-min-height: 20px;  

@@ -63,6 +63,7 @@ public class Stock {
 		buf.skip(SKIP_NAME);
 		String line = buf.readLine();
 		name = line;
+		boolean finished = false;
 		while(line!=null) {
 			if(line.contains("ìà ðîöà")) {
 				name = "Not found";
@@ -79,7 +80,10 @@ public class Stock {
 					beg--;
 				}
 				name = name.substring(beg+1,td);
-				System.out.println(name);
+				finished = true;
+				break;
+			}
+			if(finished) {
 				break;
 			}
 			line = buf.readLine();
@@ -280,20 +284,19 @@ public class Stock {
 			line = buf.readLine();
 		}
 
-		
-		
-
 
 		if(lastprice.contains(",")) {
-			lastprice = lastprice.replace(",", "");
+			lastprice = lastprice.replace(",", ".");
 		}
-
+		
+		this.setPrice(Double.parseDouble(lastprice));
+		
 		if(changeper.charAt(0)=='+') {
 			this.setChangepercent(Double.parseDouble(changeper.substring(1, changeper.length())));
 		}
 		else {
 			if(changeper.equals("0")) {
-				this.setChangedollar(0);
+				this.setChangepercent(0);
 			}
 			else {
 				this.setChangepercent(-(Double.parseDouble(changeper.substring(1, changeper.length()))));

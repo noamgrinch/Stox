@@ -4,6 +4,7 @@ import java.io.IOException;
 import org.openjfx.hellofx.MainFrame;
 import StockReader.Stock;
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -73,7 +74,8 @@ public class StockBox extends GridPane{
 	public void updateStockBox() throws IOException {
 		try {
 			this.stock.updateStats();
-			sprice.setText(Double.toString(stock.getPrice())+ "$");
+			String newprice = Double.toString(stock.getPrice());
+			sprice.setText(newprice + "$");
 			if(stock.getChangepercent()>0) {
 				sper.setId("StockBox-percentgreen-cust"); //green
 				sper.setText("+" + Double.toString(stock.getChangepercent())+ "%");
@@ -86,6 +88,9 @@ public class StockBox extends GridPane{
 		catch(NumberFormatException e) {
 			//parsing error. Happens sometimes due to timing with HTML updating.
 		}
+		this.getColumnConstraints().get(0).setPercentWidth(95-sprice.getText().length()*3);
+		sper.setAlignment(Pos.CENTER);
+		
 	}
 	
 

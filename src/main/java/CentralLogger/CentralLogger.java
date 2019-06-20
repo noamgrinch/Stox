@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 
 public class CentralLogger implements Runnable{ 
 
+	private volatile  boolean running = true;
 
 	@Override
 	public void run() {
@@ -29,25 +30,28 @@ public class CentralLogger implements Runnable{
 			e.printStackTrace();
 		}
 		if(handler!=null){
-			//LOGGER.addHandler(handler);
+			LOGGER.addHandler(handler);
 		}
 		
 		ServerSocket ss;
 		
-		boolean cont = true;
 		try {
 			ss = new ServerSocket(7777);
-			while(cont){
+			while(running){
 				new LogThread(ss.accept()).run();
 			}
 		}
 		
 		catch(Exception e){
 			LOGGER.severe(getExString(e));
+			running=false;
 		}
 		
 	}
 	
+	public void terminate() {
+		running=false;
+	}
 	
 	public static String getExString(Exception e){
 		String sStackTrace=null;

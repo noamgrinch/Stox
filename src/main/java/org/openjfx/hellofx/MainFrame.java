@@ -2,39 +2,31 @@ package org.openjfx.hellofx;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.logging.Level;
-
 import org.openjfx.hellofx.GUI.MoveableScene;
 import org.openjfx.hellofx.GUI.StockBox;
 import org.openjfx.hellofx.GUI.StockEditFrame;
+import CentralLogger.CentralLogger;
 import CentralLogger.SendLogThread;
 import StockReader.Stock;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -45,7 +37,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	private ArrayList<Stock> stocks;
 	private ArrayList<StockBox> stockboxes;
 	private Stage stage;
-	private Thread centralogger;
+	private CentralLogger centralogger;
 	private BorderPane br;
 	private Button edit;
 	private HBox bottom;
@@ -58,7 +50,8 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	private HBox top;
 
 	
-	public MainFrame(Thread centralogger) {
+	@SuppressWarnings("exports")
+	public MainFrame(CentralLogger centralogger) {
 		super();
 		this.centralogger=centralogger;
 	}
@@ -66,25 +59,8 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	@SuppressWarnings({ "exports" })
 	@Override
 	public void start(Stage stage) throws Exception {
+		
 		this.stage=stage;
-		
-		this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override public void handle(WindowEvent t) {
-				try {
-					PrintWriter writer = new PrintWriter("myStocks.txt", "UTF-8");
-					for(int i=0;i<stocks.size();i++) {
-						writer.write(stocks.get(i).getLabel() + "\n");
-					}
-					writer.close();
-				} catch (Exception e) {
-					new SendLogThread(Level.SEVERE,e).start();
-				} 
-		    	centralogger.interrupt();
-		    	stage.close();
-		    	Platform.exit();
-		    }
-		});
-		
 		this.stage.setTitle("Stox");	
 		this.stage.setResizable(false);
 		stocks = new ArrayList<Stock>();
@@ -178,7 +154,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		        this.stage.show();
 		        
 		        
-		        Thread thread = new Thread(new Runnable() { //Updating the stocks every 5 seconds.
+		        Thread thread = new Thread(new Runnable() { //Updating the stocks every 8 seconds.
 
 		            @Override
 		            public void run() {
@@ -196,7 +172,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 
 		                while (true) {
 		                    try {
-		                        Thread.sleep(5000);
+		                        Thread.sleep(8000);
 		                    } catch (InterruptedException ex) {
 		                    	new SendLogThread(Level.SEVERE,ex).start();
 		                    }
@@ -228,10 +204,11 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 					writer.write(stocks.get(i).getLabel() + "\n");
 				}
 				writer.close();
+				new SendLogThread(Level.INFO,new Exception("Application closed successfuly.")).start();
 			} catch (Exception e) {
 				new SendLogThread(Level.SEVERE,e).start();
 			} 
-	    	centralogger.interrupt();
+			centralogger.terminate();
 	    	stage.close();
 	    	Platform.exit();
 	    
