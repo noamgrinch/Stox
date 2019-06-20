@@ -46,11 +46,13 @@
 
 #EditStockBox-cust{
 	-fx-background-color: linear-gradient(to bottom, #000000, #0a0a0a, #121212, #181818, #1e1e1e, #242424, #292929, #2f2f2f, #363636, #3e3e3e, #454545, #4d4d4d);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
 }
 
 #Delete-button{
 	-fx-background-radius: 5em;  
-	-fx-background-color: #ff1a1a;
+	-fx-background-color: radial-gradient( center 50% 50% , radius 95% , #E51919, #1F0505);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
 	-fx-text-fill: white;
     -fx-min-width: 20px;  
     -fx-min-height: 20px;  
@@ -61,7 +63,9 @@
 
 #Add-button{
 	-fx-background-radius: 5em;  
-	-fx-background-color: GREEN;
+	-fx-background-color: radial-gradient( center 50% 50% , radius 95% , #048024, #053610);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+	-fx-font-size:15;
 	-fx-text-fill: white;
     -fx-min-width: 20px;  
     -fx-min-height: 20px;  

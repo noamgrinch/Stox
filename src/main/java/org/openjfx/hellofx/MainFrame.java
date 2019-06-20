@@ -15,10 +15,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.event.ActionEvent;
@@ -38,6 +41,8 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	private ScrollPane scroll;
 	private GridPane content;
 	private ColumnConstraints column1;
+	private Image image3;
+	private Scene mainscene;
 	
 	public MainFrame(Thread centralogger) {
 		super();
@@ -49,10 +54,10 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	public void start(Stage stage) throws Exception {
 		this.stage=stage;
 		this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-		    @SuppressWarnings("deprecation")
 			@Override public void handle(WindowEvent t) {
-		    	centralogger.stop();
+		    	centralogger.interrupt();
 		    	stage.close();
+		    	Platform.exit();
 		    }
 		});
 		this.stage.setTitle("Stox");	
@@ -61,7 +66,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		stockboxes = new ArrayList<StockBox>();
 
 		try {
-				//LoginFrame.display(); // dispay later on
+				//LoginFrame.display(); // display later on
 
 				//for debugging
 				stocks.add(Stock.findStockName("BABA"));
@@ -69,12 +74,6 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				stocks.add(Stock.findStockName("AAPL"));
 				stocks.add(Stock.findStockName("BYND"));
 				stocks.add(Stock.findStockName("INTL"));
-				//stocks.add(Stock.findStockName("AMZN"));
-				//stocks.add(Stock.findStockName("DLR"));
-				//stocks.add(Stock.findStockName("TSLA"));
-				//stocks.add(Stock.findStockName("NOC"));
-				//stocks.add(Stock.findStockName("TWTR"));
-			
 			
 				//Edit button
 				br = new BorderPane();
@@ -105,9 +104,6 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 					sb = new StockBox(stocks.get(i));
 					stockboxes.add(sb);
 					sep = new Separator();
-					//Thread th = new Thread(sb);
-					//th.start();
-
 					sep.setId("StockBox-seprator");
 					sb.add(sep, 0, 4, 2, 1);
 					content.getChildren().add(sb);
@@ -120,18 +116,18 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				//stocks
 				scroll.setContent(content);
 				//general configuration
-				//main.getChildren().add(scroll);
-				//main.setFillWidth(true);
 				//content.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT))); //debugging
 				br.setCenter(scroll);
 				BorderPane.setMargin(content, new Insets(-3,-3,-3,-3));
 				br.setBottom(bottom);
 				BorderPane.setMargin(bottom, new Insets(-3,-3,-3,-3));
 				//BorderPane.setMargin(bottom, new Insets(5,5,5,5));
-		        Scene scene = new Scene (br, 295, 500);
-		        scene.getStylesheets().clear();
-		        scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
-		        this.stage.setScene(scene);
+				mainscene = new Scene (br, 295, 500);
+				mainscene.getStylesheets().clear();
+				mainscene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
+		        image3 = new Image(MainFrame.class.getResource("thumbnail.jpg").toExternalForm(), 100, 0, false, false);
+		        stage.getIcons().add(image3);
+		        this.stage.setScene(mainscene);
 		        this.stage.show();
 		        
 		        
@@ -178,7 +174,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	@SuppressWarnings("exports")
 	@Override
 	public void handle(ActionEvent event) {
-		new StockEditFrame(stocks,this);
+		new StockEditFrame(stocks,this,stage);
 	}
 
 
@@ -213,18 +209,16 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		scroll.setContent(content);
 		//general configuration
 		
-		//main.getChildren().add(scroll);
-		//main.setFillWidth(true);
 		//content.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT))); //debugging
 		br.setCenter(scroll);
 		BorderPane.setMargin(content, new Insets(-3,-3,-3,-3));
 		br.setBottom(bottom);
 		BorderPane.setMargin(bottom, new Insets(-3,-3,-3,-3));
 		//BorderPane.setMargin(bottom, new Insets(5,5,5,5));
-        Scene scene = new Scene (br, 295, 500);
-        scene.getStylesheets().clear();
-        scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
-        this.stage.setScene(scene);
+		mainscene = new Scene (br, 295, 500);
+		mainscene.getStylesheets().clear();
+		mainscene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
+        this.stage.setScene(mainscene);
         this.stage.show();
 	}
 	
@@ -233,5 +227,6 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 			stockboxes.get(i).updateStockBox();
 		}
 	}
+	
 
 }

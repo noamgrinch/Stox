@@ -1,9 +1,12 @@
 
 
 .button{
-    -fx-text-fill: rgb(49, 89, 23);
+    -fx-text-fill: white;
+    -fx-font-family: Helvetica;
+    -fx-font-weight: bold;
     -fx-border-radius: 5;
     -fx-padding: 3 6 6 6;
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
 }
 
 #StockBox-mainback-cust{
@@ -22,23 +25,31 @@
 
 #GridPane-content{
 	-fx-background-color: linear-gradient(to right top, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
 	-fx-margin: 100px;
 }
 
 #HBox-bottom{
 	-fx-background-color: linear-gradient(to right top, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
 }
 
 #Button{
 	-fx-background-radius: 1em;  
 	-fx-background-color: radial-gradient( center 50% 50% , radius 80% , #4D4D4D, #000000);
-	-fx-text-fill: white;
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
 }
 
 #Toolbar{
 	-fx-background-color: linear-gradient(to right top, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d);
 	-fx-padding: 5 5 5 5;
 }
+
+#Search-label{
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+}
+
+
 
 
 

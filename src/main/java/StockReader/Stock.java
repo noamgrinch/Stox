@@ -3,7 +3,6 @@ package StockReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -53,7 +52,7 @@ public class Stock {
 		return new Stock(name,label,price);
 	}
 	
-	public static Stock findStockName(String label) throws IOException,NumberFormatException {
+	public static Stock findStockName(String label) throws IOException,NumberFormatException,StringIndexOutOfBoundsException {
 		
 		String ur = "http://wallstreet.bizportal.co.il/stock.php?id=" + label;
 		URL url = new URL(ur);
@@ -93,7 +92,7 @@ public class Stock {
 		}
 	}
 	
-	public static Stock findStock(String label,String name) throws IOException,NumberFormatException {
+	public static Stock findStock(String label,String name) throws IOException,NumberFormatException,StringIndexOutOfBoundsException {
 		boolean finished=false;
 		String ur = "http://wallstreet.bizportal.co.il/stock.php?id=" + label + "&story=abs";
 		URL url = new URL(ur);

@@ -20,6 +20,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -41,12 +42,13 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 	private HBox bottom;
 	private BorderPane br;
 	private Scene scene;
+	private Image image3;
 	
-	public StockEditFrame(ArrayList<Stock> stocks,MainFrame parent) {
+	public StockEditFrame(ArrayList<Stock> stocks,MainFrame parent,Stage stage) {
 		
 		this.setStocks(stocks);
 		this.setParent(parent);
-		
+		this.stage=stage;
 		br = new BorderPane();
 		
 		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -61,6 +63,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		toolbar.setAlignment(Pos.CENTER);
 		searchlabel = new TextField("");
 		searchlabel.setPromptText("Search by label");
+		searchlabel.setId("Search-label");
 		toolbar.getChildren().add(searchlabel);
 		search = new Button("Search");
 		search.setId("Button");;
@@ -104,10 +107,13 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		content.setId("GridPane-content");
 		br.setTop(toolbar);
 		br.setCenter(scroll);
-		stage = new Stage();
-		scene = new Scene(br,250,450);
+		//stage = new Stage();
+		stage.setTitle("Edit");
+		scene = new Scene(br,295,500);
 		scene.getStylesheets().clear();
 		scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
+        image3 = new Image(MainFrame.class.getResource("thumbnail.jpg").toExternalForm(), 100, 0, false, false);
+        stage.getIcons().add(image3);
 		stage.setScene(scene);
 		stage.setAlwaysOnTop(true);
 		stage.show();
@@ -155,8 +161,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		scene.getStylesheets().clear();
 		scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		stage.setScene(scene);
-		stage.setAlwaysOnTop(true);
-		stage.show();
+
 	}
 
 	public ArrayList<Stock> getStocks() {
@@ -203,8 +208,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 			scene.getStylesheets().clear();
 			scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 			stage.setScene(scene);
-			stage.setAlwaysOnTop(true);
-			stage.show();
+
 		}
 		else {
 			StockNotFoundAlert.display(label);
@@ -255,8 +259,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		scene.getStylesheets().clear();
 		scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		stage.setScene(scene);
-		stage.setAlwaysOnTop(true);
-		stage.show();
+
 		
 		
 	}
@@ -290,7 +293,6 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		}
 		else {
 			parent.updateList(stocks);
-			stage.close();
 		}
 	}
 	
