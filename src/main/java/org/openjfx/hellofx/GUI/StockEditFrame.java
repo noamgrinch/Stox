@@ -35,17 +35,21 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 	private MainFrame parent;
 	private ToolBar toolbar;
 	private TextField searchlabel;
+	private ScrollPane scroll;
+	private GridPane content;
+	private HBox bottom;
+	private BorderPane br;
 	
 	public StockEditFrame(ArrayList<Stock> stocks,MainFrame parent) {
 		
 		this.setStocks(stocks);
 		this.setParent(parent);
 		
-		BorderPane br = new BorderPane();
+		br = new BorderPane();
 		
 		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		
-		ScrollPane scroll = new ScrollPane();
+		scroll = new ScrollPane();
 		scroll.getStylesheets().clear();
 		scroll.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		scroll.getStyleClass ().add ("edge-to-edge");
@@ -62,7 +66,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		toolbar.getItems().add(search);
 		toolbar.setId("toolbar");
 		
-		GridPane content = new GridPane();
+		content = new GridPane();
 		content.setGridLinesVisible(true);
 		content.setAlignment(Pos.TOP_CENTER);
 		ColumnConstraints column1 = new ColumnConstraints();
@@ -86,7 +90,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 			GridPane.setConstraints(sb, /*1*/0, i);
 		}
 		
-		HBox bottom = new HBox();
+		bottom = new HBox();
 		bottom.setId("HBox-bottom");
 		done = new Button("Done");
 		done.setOnAction(this);
@@ -106,33 +110,19 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 	}
 	
 	public void refresh() {
-		BorderPane br = new BorderPane();
+		
+		
+		br = new BorderPane();
 		
 		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-		
-		ScrollPane scroll = new ScrollPane();
-		scroll.getStylesheets().clear();
-		scroll.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
-		scroll.getStyleClass ().add ("edge-to-edge");
-		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-		scroll.setFitToHeight(true);
-		scroll.setFitToWidth(true);
-		
-		GridPane content = new GridPane();
+		content = new GridPane();
 		content.setGridLinesVisible(true);
 		content.setAlignment(Pos.TOP_CENTER);
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setHgrow(Priority.ALWAYS );
 		content.getColumnConstraints().addAll(/*new ColumnConstraints(25),*/column1);
-		
-		toolbar = new ToolBar();
-		searchlabel = new TextField("");
-		toolbar.getItems().add(searchlabel);
-		search = new Button("Search");
-		search.setOnAction(this);
-		toolbar.getItems().add(search);
-		toolbar.setId("toolbar");
+
 		
 		EditStockBox sb;
 		Separator sep;
@@ -150,13 +140,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 			//GridPane.setConstraints(delete, 0,i);
 			GridPane.setConstraints(sb, /*1*/0, i);
 		}
-		HBox bottom = new HBox();
-		bottom.setId("HBox-bottom");
-		done = new Button("Done");
-		done.setOnAction(this);
-		content.setId("GridPane-content");
-		bottom.getChildren().add(done);
-		bottom.setAlignment(Pos.CENTER);
+
 		br.setBottom(bottom);
 		scroll.setContent(content);
 		br.setTop(toolbar);
@@ -177,95 +161,61 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 	
 	public void presentsearched(Stock stock,String label) {
 		
-   if(stock!=null) {
-		BorderPane br = new BorderPane();
-		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		ScrollPane scroll = new ScrollPane();
-		scroll.getStylesheets().clear();
-		scroll.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
-		scroll.getStyleClass ().add ("edge-to-edge");
-		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-		scroll.setFitToHeight(true);
-		scroll.setFitToWidth(true);
+		if(stock!=null) {
+	   
+			br = new BorderPane();
+			//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
 		
-		GridPane content = new GridPane();
-		content.setGridLinesVisible(true);
-		content.setAlignment(Pos.TOP_CENTER);
-		ColumnConstraints column1 = new ColumnConstraints();
-		column1.setHgrow(Priority.ALWAYS );
-		content.getColumnConstraints().addAll(/*new ColumnConstraints(25),*/column1);
+			content = new GridPane();
+			content.setGridLinesVisible(true);
+			content.setAlignment(Pos.TOP_CENTER);
+			ColumnConstraints column1 = new ColumnConstraints();
+			column1.setHgrow(Priority.ALWAYS );
+			content.getColumnConstraints().addAll(/*new ColumnConstraints(25),*/column1);
 		
-		toolbar = new ToolBar();
-		searchlabel = new TextField("");
-		searchlabel.setPromptText("Search by label");
-		toolbar.getItems().add(searchlabel);
-		search = new Button("Search");
-		search.setOnAction(this);
-		toolbar.getItems().add(search);
-		toolbar.setId("toolbar");
-		
-		EditStockBox sb;
-		Separator sep;
-		for(int i=0;i<1;i++) {
-			sb = new EditStockBox(stock,0,this,2);
-			sep = new Separator();
-			sep.setId("StockBox-seprator");
-			sb.add(sep, 0, 4, 2, 1);
-			content.getChildren().addAll(/*delete,*/sb);
-			GridPane.setFillWidth(sb, true);
-			GridPane.setConstraints(sb, /*1*/0, i);
+			EditStockBox sb;
+			Separator sep;
+			for(int i=0;i<1;i++) {
+				sb = new EditStockBox(stock,0,this,2);
+				sep = new Separator();
+				sep.setId("StockBox-seprator");
+				sb.add(sep, 0, 4, 2, 1);
+				content.getChildren().addAll(/*delete,*/sb);
+				GridPane.setFillWidth(sb, true);
+				GridPane.setConstraints(sb, /*1*/0, i);
+			}
+
+			br.setBottom(bottom);
+			scroll.setContent(content);
+			br.setTop(toolbar);
+			br.setCenter(scroll);
+			Scene scene = new Scene(br,250,450);
+			stage.setScene(scene);
+			stage.setAlwaysOnTop(true);
+			stage.show();
 		}
-		HBox bottom = new HBox();
-		bottom.setId("HBox-bottom");
-		content.setId("GridPane-content");
-		done = new Button("Done");
-		done.setOnAction(this);
-		bottom.getChildren().add(done);
-		bottom.setAlignment(Pos.CENTER);
-		br.setBottom(bottom);
-		scroll.setContent(content);
-		br.setTop(toolbar);
-		br.setCenter(scroll);
-		Scene scene = new Scene(br,250,450);
-		stage.setScene(scene);
-		stage.setAlwaysOnTop(true);
-		stage.show();
-   }
-   else {
-	   StockNotFoundAlert.display(label);
-   }
+		else {
+			StockNotFoundAlert.display(label);
+		}
 	}
 	
 	public void deleteStock(int index) {
 		stocks.remove(index);
 		
-		BorderPane br = new BorderPane();
+
+		br = new BorderPane();
 		
 		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		
-		ScrollPane scroll = new ScrollPane();
-		scroll.getStylesheets().clear();
-		scroll.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
-		scroll.getStyleClass ().add ("edge-to-edge");
-		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-		scroll.setFitToHeight(true);
-		scroll.setFitToWidth(true);
-		
-		GridPane content = new GridPane();
+		content = new GridPane();
 		content.setGridLinesVisible(true);
 		content.setAlignment(Pos.TOP_CENTER);
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setHgrow(Priority.ALWAYS );
 		content.getColumnConstraints().addAll(/*new ColumnConstraints(25),*/column1);
-		
-		toolbar = new ToolBar();
-		searchlabel = new TextField("");
-		toolbar.getItems().add(searchlabel);
-		search = new Button("Search");
-		search.setOnAction(this);
-		toolbar.getItems().add(search);
-		toolbar.setId("toolbar");
+	
 		
 		EditStockBox sb;
 		Separator sep;
@@ -284,12 +234,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 			GridPane.setConstraints(sb, /*1*/0, i);
 		}
 		
-		HBox bottom = new HBox();
-		bottom.setId("HBox-bottom");
-		done = new Button("Done");
-		done.setOnAction(this);
-		bottom.getChildren().add(done);
-		bottom.setAlignment(Pos.CENTER);
+
 		br.setBottom(bottom);
 		content.setId("GridPane-content");
 		scroll.setContent(content);
