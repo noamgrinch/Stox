@@ -1,8 +1,18 @@
 package org.openjfx.hellofx;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.logging.Level;
+
+import org.openjfx.hellofx.GUI.MoveableScene;
 import org.openjfx.hellofx.GUI.StockBox;
 import org.openjfx.hellofx.GUI.StockEditFrame;
 import CentralLogger.SendLogThread;
@@ -16,13 +26,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -42,24 +53,38 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	private GridPane content;
 	private ColumnConstraints column1;
 	private Image image3;
-	private Scene mainscene;
+	private MoveableScene mainscene;
+	private Button exit,minimize;
+	private HBox top;
+
 	
 	public MainFrame(Thread centralogger) {
 		super();
 		this.centralogger=centralogger;
 	}
 	
-	@SuppressWarnings("exports")
+	@SuppressWarnings({ "exports" })
 	@Override
 	public void start(Stage stage) throws Exception {
 		this.stage=stage;
+		
 		this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override public void handle(WindowEvent t) {
+				try {
+					PrintWriter writer = new PrintWriter("myStocks.txt", "UTF-8");
+					for(int i=0;i<stocks.size();i++) {
+						writer.write(stocks.get(i).getLabel() + "\n");
+					}
+					writer.close();
+				} catch (Exception e) {
+					new SendLogThread(Level.SEVERE,e).start();
+				} 
 		    	centralogger.interrupt();
 		    	stage.close();
 		    	Platform.exit();
 		    }
 		});
+		
 		this.stage.setTitle("Stox");	
 		this.stage.setResizable(false);
 		stocks = new ArrayList<Stock>();
@@ -67,16 +92,24 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 
 		try {
 				//LoginFrame.display(); // display later on
+			
+				//PrintWriter writer = new PrintWriter("myStocks.txt", "UTF-8");
+				File file = new File("myStocks.txt");
+				if(file.canRead()) {
+					BufferedReader br = new BufferedReader(new FileReader(file)); 
+					String sto;
+					while((sto=br.readLine())!=null) {
+						stocks.add(Stock.findStockName(sto));
+					}
+					br.close();
+				}
 
 				//for debugging
-				stocks.add(Stock.findStockName("BABA"));
-				stocks.add(Stock.findStockName("AWK"));
-				stocks.add(Stock.findStockName("AAPL"));
-				stocks.add(Stock.findStockName("BYND"));
-				stocks.add(Stock.findStockName("INTL"));
+
 			
 				//Edit button
 				br = new BorderPane();
+				br.setId("BorderPane-main");
 				edit = new Button("Edit");
 				edit.setPrefSize(45, 30);
 				edit.setId("Button");
@@ -87,9 +120,22 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				bottom.setAlignment(Pos.CENTER);
 				
 				
+				top = new HBox(4);
+				top.setAlignment(Pos.CENTER_RIGHT);
+				top.setId("HBox-top");
+				exit = new Button("X");
+				exit.setId("Exit-button");
+				exit.setOnAction(this);
+				minimize = new Button("_");
+				minimize.setId("Minimize-button");
+				minimize.setOnAction(e -> ((Stage)((Button)e.getSource()).getScene().getWindow()).setIconified(true));
+				top.getChildren().addAll(minimize,exit);
+				
+				
 				// content panel
 				scroll = new ScrollPane();
-				scroll.getStyleClass ().add ("edge-to-edge");
+				scroll.setId("Scroll-main");
+				scroll.getStyleClass().add ("edge-to-edge");
 				scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 				scroll.setFitToHeight(true);
 				scroll.setFitToWidth(true);
@@ -121,16 +167,18 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				br.setCenter(scroll);
 				BorderPane.setMargin(content, new Insets(-3,-3,-3,-3));
 				br.setBottom(bottom);
-				mainscene = new Scene (br, 295, 500);
+				br.setTop(top);
+				mainscene = new MoveableScene (this.stage,br, 295, 500);
 				mainscene.getStylesheets().clear();
 				mainscene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		        image3 = new Image(MainFrame.class.getResource("thumbnail.jpg").toExternalForm(), 100, 0, false, false);
 		        stage.getIcons().add(image3);
 		        this.stage.setScene(mainscene);
+		        this.stage.initStyle(StageStyle.TRANSPARENT);
 		        this.stage.show();
 		        
 		        
-		        Thread thread = new Thread(new Runnable() {
+		        Thread thread = new Thread(new Runnable() { //Updating the stocks every 5 seconds.
 
 		            @Override
 		            public void run() {
@@ -173,7 +221,24 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	@SuppressWarnings("exports")
 	@Override
 	public void handle(ActionEvent event) {
-		new StockEditFrame(stocks,this,stage);
+		if(event.getSource()==exit) {
+			try {
+				PrintWriter writer = new PrintWriter("myStocks.txt", "UTF-8");
+				for(int i=0;i<stocks.size();i++) {
+					writer.write(stocks.get(i).getLabel() + "\n");
+				}
+				writer.close();
+			} catch (Exception e) {
+				new SendLogThread(Level.SEVERE,e).start();
+			} 
+	    	centralogger.interrupt();
+	    	stage.close();
+	    	Platform.exit();
+	    
+		}
+		else {
+			new StockEditFrame(stocks,this,stage);
+		}
 	}
 
 
@@ -183,7 +248,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		stocks=stocks2;
 		stockboxes.clear();
 		br = new BorderPane();
-
+		br.setId("BorderPane-main");
 		content = new GridPane();
 		content.setId("GridPane-content");
 		content.setAlignment(Pos.TOP_CENTER);
@@ -212,7 +277,8 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		br.setCenter(scroll);
 		BorderPane.setMargin(content, new Insets(-3,-3,-3,-3));
 		br.setBottom(bottom);
-		mainscene = new Scene (br, 295, 500);
+		br.setTop(top);
+		mainscene = new MoveableScene (this.stage,br, 295, 500);
 		mainscene.getStylesheets().clear();
 		mainscene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
         this.stage.setScene(mainscene);

@@ -1,27 +1,14 @@
 package org.openjfx.hellofx.GUI;
 
 import java.io.IOException;
-import java.util.logging.Level;
-
 import org.openjfx.hellofx.MainFrame;
-
-import CentralLogger.SendLogThread;
 import StockReader.Stock;
-import javafx.application.Platform;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
+
 
 public class StockBox extends GridPane{
 	
@@ -47,6 +34,7 @@ public class StockBox extends GridPane{
 		sprice.setId("StockBox-price");
 		//sprice.setBorder(new Border(new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		sper = new Label();
+		sper.setPrefSize(55, 20);
 		if(stock.getChangepercent()>0) {
 			sper.setId("StockBox-percentgreen-cust"); //green
 			sper.setText(("+" + Double.toString(stock.getChangepercent()) + "%"));
@@ -88,11 +76,11 @@ public class StockBox extends GridPane{
 			sprice.setText(Double.toString(stock.getPrice())+ "$");
 			if(stock.getChangepercent()>0) {
 				sper.setId("StockBox-percentgreen-cust"); //green
-				sper.setText("+" + Double.toString(stock.getChangepercent())+ "$");
+				sper.setText("+" + Double.toString(stock.getChangepercent())+ "%");
 			} 
 			else {
 				sper.setId("StockBox-percentred-cust"); //red
-				sper.setText(Double.toString(stock.getChangepercent())+ "$");
+				sper.setText(Double.toString(stock.getChangepercent())+ "%");
 			}
 		}
 		catch(NumberFormatException e) {

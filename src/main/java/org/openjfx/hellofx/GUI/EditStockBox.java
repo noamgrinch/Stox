@@ -6,19 +6,12 @@ import StockReader.Stock;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
+
 
 public class EditStockBox extends GridPane implements EventHandler<ActionEvent>{
 	
@@ -61,15 +54,12 @@ public class EditStockBox extends GridPane implements EventHandler<ActionEvent>{
 			GridPane.setHalignment(add, HPos.CENTER);
 		}
 		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		//delete.setPadding(new Insets(0,0,0,10));
 		GridPane.setConstraints(slabel,1,0);
 		GridPane.setConstraints(sname,1,1);
 		GridPane.setHalignment(sname, HPos.CENTER);
 		GridPane.setHalignment(slabel, HPos.CENTER);
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setHgrow(Priority.ALWAYS );
-		//column1.setPercentWidth(70-slabel.getText().length()*3);
-		//this.getColumnConstraints().add(column1);
 		this.getColumnConstraints().addAll( new ColumnConstraints( 25 ), column1);
 		if(addordelete==1) {
 			this.getChildren().addAll(delete,slabel,sname);

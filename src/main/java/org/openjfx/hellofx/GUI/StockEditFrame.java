@@ -3,30 +3,22 @@ package org.openjfx.hellofx.GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
-
 import org.openjfx.hellofx.MainFrame;
-
 import CentralLogger.SendLogThread;
 import StockReader.Stock;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class StockEditFrame implements EventHandler<ActionEvent> {
@@ -41,7 +33,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 	private GridPane content;
 	private HBox bottom;
 	private BorderPane br;
-	private Scene scene;
+	private MoveableScene scene;
 	private Image image3;
 	
 	public StockEditFrame(ArrayList<Stock> stocks,MainFrame parent,Stage stage) {
@@ -50,7 +42,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		this.setParent(parent);
 		this.stage=stage;
 		br = new BorderPane();
-		
+		br.setId("BorderPane-main");
 		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		
 		scroll = new ScrollPane();
@@ -76,23 +68,18 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		content.setAlignment(Pos.TOP_CENTER);
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setHgrow(Priority.ALWAYS );
-		content.getColumnConstraints().addAll(/*new ColumnConstraints(25),*/column1);
+		content.getColumnConstraints().addAll(column1);
 		
 		EditStockBox sb;
 		Separator sep;
 		for(int i=0;i<stocks.size();i++) {
-			//delete = new Button("X");
-			//delete.setId("Delete-button");
 			sb = stocks.get(i).toEdit(i,this);
 			sep = new Separator();
 			sep.setId("StockBox-seprator");
 			sb.add(sep, 0, 4, 2, 1);
-			content.getChildren().addAll(/*delete,*/sb);
+			content.getChildren().addAll(sb);
 			GridPane.setFillWidth(sb, true);
-			//GridPane.setFillWidth(delete, true);
-			//GridPane.setHalignment(delete, HPos.CENTER);
-			//GridPane.setConstraints(delete, 0,i);
-			GridPane.setConstraints(sb, /*1*/0, i);
+			GridPane.setConstraints(sb, 0, i);
 		}
 		
 		bottom = new HBox();
@@ -108,9 +95,8 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		content.setId("GridPane-content");
 		br.setTop(toolbar);
 		br.setCenter(scroll);
-		//stage = new Stage();
 		stage.setTitle("Edit");
-		scene = new Scene(br,295,500);
+		scene = new MoveableScene (this.stage,br,295,500);
 		scene.getStylesheets().clear();
 		scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
         image3 = new Image(MainFrame.class.getResource("thumbnail.jpg").toExternalForm(), 100, 0, false, false);
@@ -125,7 +111,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		
 		
 		br = new BorderPane();
-		
+		br.setId("BorderPane-main");
 		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		content = new GridPane();
@@ -133,24 +119,19 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		content.setAlignment(Pos.TOP_CENTER);
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setHgrow(Priority.ALWAYS );
-		content.getColumnConstraints().addAll(/*new ColumnConstraints(25),*/column1);
+		content.getColumnConstraints().addAll(column1);
 
 		
 		EditStockBox sb;
 		Separator sep;
 		for(int i=0;i<stocks.size();i++) {
-			//delete = new Button("X");
-			//delete.setId("Delete-button");
 			sb = stocks.get(i).toEdit(i,this);
 			sep = new Separator();
 			sep.setId("StockBox-seprator");
 			sb.add(sep, 0, 4, 2, 1);
-			content.getChildren().addAll(/*delete,*/sb);
+			content.getChildren().addAll(sb);
 			GridPane.setFillWidth(sb, true);
-			//GridPane.setFillWidth(delete, true);
-			//GridPane.setHalignment(delete, HPos.CENTER);
-			//GridPane.setConstraints(delete, 0,i);
-			GridPane.setConstraints(sb, /*1*/0, i);
+			GridPane.setConstraints(sb, 0, i);
 		}
 
 		br.setBottom(bottom);
@@ -178,15 +159,15 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		if(stock!=null) {
 	   
 			br = new BorderPane();
+			br.setId("BorderPane-main");
 			//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-		
 			content = new GridPane();
 			content.setGridLinesVisible(true);
 			content.setAlignment(Pos.TOP_CENTER);
 			ColumnConstraints column1 = new ColumnConstraints();
 			column1.setHgrow(Priority.ALWAYS );
-			content.getColumnConstraints().addAll(/*new ColumnConstraints(25),*/column1);
+			content.getColumnConstraints().addAll(column1);
 		
 			EditStockBox sb;
 			Separator sep;
@@ -195,9 +176,9 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 				sep = new Separator();
 				sep.setId("StockBox-seprator");
 				sb.add(sep, 0, 4, 2, 1);
-				content.getChildren().addAll(/*delete,*/sb);
+				content.getChildren().addAll(sb);
 				GridPane.setFillWidth(sb, true);
-				GridPane.setConstraints(sb, /*1*/0, i);
+				GridPane.setConstraints(sb, 0, i);
 			}
 
 			br.setBottom(bottom);
@@ -221,7 +202,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		
 
 		br = new BorderPane();
-		
+		br.setId("BorderPane-main");
 		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		
@@ -236,21 +217,15 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		EditStockBox sb;
 		Separator sep;
 		for(int i=0;i<stocks.size();i++) {
-			//delete = new Button("X");
-			//delete.setId("Delete-button");
 			sb = stocks.get(i).toEdit(i,this);
 			sep = new Separator();
 			sep.setId("StockBox-seprator");
 			sb.add(sep, 0, 4, 2, 1);
-			content.getChildren().addAll(/*delete,*/sb);
+			content.getChildren().addAll(sb);
 			GridPane.setFillWidth(sb, true);
-			//GridPane.setFillWidth(delete, true);
-			//GridPane.setHalignment(delete, HPos.CENTER);
-			//GridPane.setConstraints(delete, 0,i);
-			GridPane.setConstraints(sb, /*1*/0, i);
+			GridPane.setConstraints(sb, 0, i);
 		}
 		
-
 		br.setBottom(bottom);
 		content.setId("GridPane-content");
 		scroll.setContent(content);

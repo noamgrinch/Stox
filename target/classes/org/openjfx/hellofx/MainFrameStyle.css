@@ -33,6 +33,7 @@
 	-fx-background-color: linear-gradient(to right top, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d);
 	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
 	-fx-padding: 5 5 5 5;
+	-fx-background-radius: 0 0 29 29;
 }
 
 #Button{
@@ -44,10 +45,55 @@
 #Toolbar{
 	-fx-background-color: linear-gradient(to right top, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d);
 	-fx-padding: 5 5 5 5;
+	-fx-background-radius: 29 29 0 0;
 }
 
 #Search-label{
 	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+}
+
+#BorderPane-main{
+    -fx-background-radius: 29;
+    -fx-border-radius: 29;
+    -fx-border-width:2;
+	-fx-border-color:blue;
+}
+
+#Scroll-main{
+	-fx-background-radius: 29 29 0 0;
+	-fx-unit-increment: 20 ;
+	-fx-block-increment: 20 ;
+}
+
+#HBox-top{
+	-fx-background-color: linear-gradient(to right top, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d);
+	-fx-background-radius: 29 29 0 0;
+	-fx-padding: 9 10 7 5;
+	-fx-allingment:right;
+}
+
+#Exit-button{
+	-fx-background-radius: 5em;  
+	-fx-background-color: radial-gradient( center 50% 50% , radius 95% , #F80020, #F60000);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+	-fx-text-fill: white;
+    -fx-min-width: 20px;  
+    -fx-min-height: 20px;  
+    -fx-max-width: 20px;  
+    -fx-max-height: 20px;
+    -fx-padding: 0 0 0 0;	
+}
+
+#Minimize-button{
+	-fx-background-radius: 5em;  
+	-fx-background-color: radial-gradient( center 50% 50% , radius 95% , #37F90E, #16DE0D);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+	-fx-text-fill: white;
+    -fx-min-width: 20px;  
+    -fx-min-height: 20px;  
+    -fx-max-width: 20px;  
+    -fx-max-height: 20px;
+    -fx-padding: 0 0 0 0;	
 }
 
 

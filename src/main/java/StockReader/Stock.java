@@ -243,6 +243,7 @@ public class Stock {
 		String changeper = "Not found";
 		buf.skip(SKIP_STATS);
 		String line = buf.readLine();
+		int i=0;
 		while(line!=null) {
 			if(line.contains("#c5c5c5")) {
 				line = buf.readLine();
@@ -252,8 +253,9 @@ public class Stock {
 					back--;
 				}
 				lastprice = line.substring(back+1,end);
+				i++;
 				while(line!=null) {
-					if( line.contains("#c5c5c5")) { //change in percentage
+					if( line.contains("#c5c5c5")&&i==2) { //change in percentage
 						line = buf.readLine();
 						end = line.indexOf("</span>");
 						back = end;
@@ -263,6 +265,9 @@ public class Stock {
 						changeper = line.substring(back+1,end-1);
 						finished=true;
 						break;
+					}
+					if(line.contains("#c5c5c5")) {
+						i++;
 					}
 					line = buf.readLine();
 					
