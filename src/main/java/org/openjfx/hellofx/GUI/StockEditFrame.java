@@ -98,6 +98,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		bottom = new HBox();
 		bottom.setId("HBox-bottom");
 		done = new Button("Done");
+		done.setPrefSize(45, 30);
 		done.setId("Button");
 		done.setOnAction(this);
 		bottom.getChildren().add(done);

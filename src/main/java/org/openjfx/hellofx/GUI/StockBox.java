@@ -46,12 +46,14 @@ public class StockBox extends GridPane{
 		sprice.setFont(new Font("Arial",15));
 		sprice.setId("StockBox-price");
 		//sprice.setBorder(new Border(new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		sper = new Label(Double.toString(stock.getChangepercent()) + "%");
+		sper = new Label();
 		if(stock.getChangepercent()>0) {
 			sper.setId("StockBox-percentgreen-cust"); //green
+			sper.setText(("+" + Double.toString(stock.getChangepercent()) + "%"));
 		} 
 		else {
 			sper.setId("StockBox-percentred-cust"); //red
+			sper.setText((Double.toString(stock.getChangepercent()) + "%"));
 		}
 		//sper.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		GridPane.setConstraints(slabel,0,0);
@@ -84,12 +86,13 @@ public class StockBox extends GridPane{
 		try {
 			this.stock.updateStats();
 			sprice.setText(Double.toString(stock.getPrice())+ "$");
-			sper.setText(Double.toString(stock.getChangepercent()) + "%");
 			if(stock.getChangepercent()>0) {
 				sper.setId("StockBox-percentgreen-cust"); //green
+				sper.setText("+" + Double.toString(stock.getChangepercent())+ "$");
 			} 
 			else {
 				sper.setId("StockBox-percentred-cust"); //red
+				sper.setText(Double.toString(stock.getChangepercent())+ "$");
 			}
 		}
 		catch(NumberFormatException e) {

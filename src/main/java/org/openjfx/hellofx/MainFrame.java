@@ -78,6 +78,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				//Edit button
 				br = new BorderPane();
 				edit = new Button("Edit");
+				edit.setPrefSize(45, 30);
 				edit.setId("Button");
 				edit.setOnAction(this);
 				bottom = new HBox(10);
@@ -120,8 +121,6 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				br.setCenter(scroll);
 				BorderPane.setMargin(content, new Insets(-3,-3,-3,-3));
 				br.setBottom(bottom);
-				BorderPane.setMargin(bottom, new Insets(-3,-3,-3,-3));
-				//BorderPane.setMargin(bottom, new Insets(5,5,5,5));
 				mainscene = new Scene (br, 295, 500);
 				mainscene.getStylesheets().clear();
 				mainscene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
@@ -213,8 +212,6 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		br.setCenter(scroll);
 		BorderPane.setMargin(content, new Insets(-3,-3,-3,-3));
 		br.setBottom(bottom);
-		BorderPane.setMargin(bottom, new Insets(-3,-3,-3,-3));
-		//BorderPane.setMargin(bottom, new Insets(5,5,5,5));
 		mainscene = new Scene (br, 295, 500);
 		mainscene.getStylesheets().clear();
 		mainscene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
