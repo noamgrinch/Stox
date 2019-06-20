@@ -25,6 +25,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class StockEditFrame implements EventHandler<ActionEvent> {
@@ -33,12 +34,13 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 	private Button delete,done,search;
 	private Stage stage;
 	private MainFrame parent;
-	private ToolBar toolbar;
+	private HBox toolbar;
 	private TextField searchlabel;
 	private ScrollPane scroll;
 	private GridPane content;
 	private HBox bottom;
 	private BorderPane br;
+	private Scene scene;
 	
 	public StockEditFrame(ArrayList<Stock> stocks,MainFrame parent) {
 		
@@ -50,21 +52,21 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		
 		scroll = new ScrollPane();
-		scroll.getStylesheets().clear();
-		scroll.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		scroll.getStyleClass ().add ("edge-to-edge");
 		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 		scroll.setFitToHeight(true);
 		scroll.setFitToWidth(true);
 		
-		toolbar = new ToolBar();
+		toolbar = new HBox(10);
+		toolbar.setAlignment(Pos.CENTER);
 		searchlabel = new TextField("");
 		searchlabel.setPromptText("Search by label");
-		toolbar.getItems().add(searchlabel);
+		toolbar.getChildren().add(searchlabel);
 		search = new Button("Search");
+		search.setId("Button");;
 		search.setOnAction(this);
-		toolbar.getItems().add(search);
-		toolbar.setId("toolbar");
+		toolbar.getChildren().add(search);
+		toolbar.setId("Toolbar");
 		
 		content = new GridPane();
 		content.setGridLinesVisible(true);
@@ -93,6 +95,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		bottom = new HBox();
 		bottom.setId("HBox-bottom");
 		done = new Button("Done");
+		done.setId("Button");
 		done.setOnAction(this);
 		bottom.getChildren().add(done);
 		bottom.setAlignment(Pos.CENTER);
@@ -102,7 +105,9 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		br.setTop(toolbar);
 		br.setCenter(scroll);
 		stage = new Stage();
-		Scene scene = new Scene(br,250,450);
+		scene = new Scene(br,250,450);
+		scene.getStylesheets().clear();
+		scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		stage.setScene(scene);
 		stage.setAlwaysOnTop(true);
 		stage.show();
@@ -142,10 +147,13 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		}
 
 		br.setBottom(bottom);
+		content.setId("GridPane-content");
 		scroll.setContent(content);
 		br.setTop(toolbar);
 		br.setCenter(scroll);
-		Scene scene = new Scene(br,250,450);
+		scene.setRoot(br);
+		scene.getStylesheets().clear();
+		scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		stage.setScene(scene);
 		stage.setAlwaysOnTop(true);
 		stage.show();
@@ -187,10 +195,13 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 			}
 
 			br.setBottom(bottom);
+			content.setId("GridPane-content");
 			scroll.setContent(content);
 			br.setTop(toolbar);
 			br.setCenter(scroll);
-			Scene scene = new Scene(br,250,450);
+			scene.setRoot(br);
+			scene.getStylesheets().clear();
+			scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 			stage.setScene(scene);
 			stage.setAlwaysOnTop(true);
 			stage.show();
@@ -240,7 +251,9 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		scroll.setContent(content);
 		br.setTop(toolbar);
 		br.setCenter(scroll);
-		Scene scene = new Scene(br,250,450);
+		scene.setRoot(br);
+		scene.getStylesheets().clear();
+		scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		stage.setScene(scene);
 		stage.setAlwaysOnTop(true);
 		stage.show();

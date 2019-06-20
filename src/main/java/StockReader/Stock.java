@@ -85,8 +85,7 @@ public class Stock {
 			}
 			line = buf.readLine();
 		}
-		if(name.equals("Not found")) {
-			System.out.println("Stock was not found");
+		if(name==null || name.equals("Not found")) {
 			return null;
 		}
 		else {

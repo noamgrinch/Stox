@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import org.openjfx.hellofx.GUI.StockBox;
 import org.openjfx.hellofx.GUI.StockEditFrame;
-
-import CentralLogger.CentralLogger;
 import CentralLogger.SendLogThread;
 import StockReader.Stock;
 import javafx.application.Application;
@@ -17,21 +15,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -49,13 +38,13 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	private ScrollPane scroll;
 	private GridPane content;
 	private ColumnConstraints column1;
-	@SuppressWarnings("exports")
-
 	
 	public MainFrame(Thread centralogger) {
 		super();
 		this.centralogger=centralogger;
 	}
+	
+	@SuppressWarnings("exports")
 	@Override
 	public void start(Stage stage) throws Exception {
 		this.stage=stage;
@@ -90,6 +79,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				//Edit button
 				br = new BorderPane();
 				edit = new Button("Edit");
+				edit.setId("Button");
 				edit.setOnAction(this);
 				bottom = new HBox(10);
 				bottom.getChildren().add(edit);
@@ -185,30 +175,20 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	}
 
 
+	@SuppressWarnings("exports")
 	@Override
 	public void handle(ActionEvent event) {
 		new StockEditFrame(stocks,this);
 	}
 
 
+	@SuppressWarnings("exports")
 	public void updateList(ArrayList<Stock> stocks2) {
+		
 		stocks=stocks2;
 		stockboxes.clear();
 		br = new BorderPane();
-		edit = new Button("Edit");
-		edit.setOnAction(this);
-		bottom = new HBox(10);
-		bottom.getChildren().add(edit);
-		bottom.setId("HBox-bottom");
-		bottom.setAlignment(Pos.CENTER);
-		
-		
-		// content panel
-		scroll = new ScrollPane();
-		scroll.getStyleClass ().add ("edge-to-edge");
-		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-		scroll.setFitToHeight(true);
-		scroll.setFitToWidth(true);
+
 		content = new GridPane();
 		content.setId("GridPane-content");
 		content.setAlignment(Pos.TOP_CENTER);

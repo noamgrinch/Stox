@@ -29,6 +29,17 @@
 	-fx-background-color: linear-gradient(to right top, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d);
 }
 
+#Button{
+	-fx-background-radius: 1em;  
+	-fx-background-color: radial-gradient( center 50% 50% , radius 80% , #4D4D4D, #000000);
+	-fx-text-fill: white;
+}
+
+#Toolbar{
+	-fx-background-color: linear-gradient(to right top, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d, #4d4d4d);
+	-fx-padding: 5 5 5 5;
+}
+
 
 
 

@@ -81,14 +81,19 @@ public class StockBox extends GridPane{
 
 	
 	public void updateStockBox() throws IOException {
-		this.stock.updateStats();
-		sprice.setText(Double.toString(stock.getPrice())+ "$");
-		sper.setText(Double.toString(stock.getChangepercent()) + "%");
-		if(stock.getChangepercent()>0) {
-			sper.setId("StockBox-percentgreen-cust"); //green
-		} 
-		else {
-			sper.setId("StockBox-percentred-cust"); //red
+		try {
+			this.stock.updateStats();
+			sprice.setText(Double.toString(stock.getPrice())+ "$");
+			sper.setText(Double.toString(stock.getChangepercent()) + "%");
+			if(stock.getChangepercent()>0) {
+				sper.setId("StockBox-percentgreen-cust"); //green
+			} 
+			else {
+				sper.setId("StockBox-percentred-cust"); //red
+			}
+		}
+		catch(NumberFormatException e) {
+			//parsing error. Happens sometimes due to timing with HTML updating.
 		}
 	}
 	
