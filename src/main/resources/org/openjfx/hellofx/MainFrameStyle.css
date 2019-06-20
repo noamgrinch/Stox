@@ -19,7 +19,6 @@
 	 -fx-padding: 3 3 0 5;
 	 -fx-border-radius: 2 2 2 2;
 	 -fx-background-radius: 2 2 2 2; 
-	 -fx-background-color: #f0f0f5; 
 	 -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 2, 0.0 , 0 , 2);
 }
 
@@ -57,13 +56,14 @@
     -fx-background-radius: 29;
     -fx-border-radius: 29;
     -fx-border-width:2;
-	-fx-border-color:blue;
+	
 }
 
 #Scroll-main{
 	-fx-background-radius: 29 29 0 0;
 	-fx-unit-increment: 20 ;
 	-fx-block-increment: 20 ;
+	
 }
 
 #HBox-top{
