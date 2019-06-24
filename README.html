@@ -2,12 +2,35 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="readmeStyle.css">
 <title>Stox</title>
 </head>
-<body>
+<body><div class="wrapper">
+
+<h1>BUILDING FAILURE DUE TO MAVEN PLUGIN IS NOT SYNCED YET WITH JDK12</h1>
 
 <h2>General</h2>
-<p>This application keeps track of your chosen stocks</p>
+<p>This application keeps track of your chosen stocks.<br>
+Inspired by Apple's application(The one you get with the phone straight away).</p>
 
+<p>The app configures a file in its working directory for loading latest changed about the stocks being edited.<br>
+If there is no file or the file is empty, the stocks list will be empty.<br> </p>
+
+<h2>Main</h2>
+
+<p>Main window: You can see your tracked stocks and their live statistics. The blue square shows the stocks live statistics. The pink square shows its name and ticker and the yellow circle
+navigates to the edit window.</p>
+
+<img src="stats.jpg" width="450" height="600">
+
+<h2>Edit</h2>
+
+<p>Edit window: This is the window you can edit which stocks you want to follow. The blue circle show your the search bar, the pink circle is the button to remove the stock from your list 
+and the yellow square is to save the changes and go back to the main window. When you search for a stock, it's box will show a green button with "+" in it instead of the red "X" button.</p>
+
+<img src="edit.jpg" width="300" height="500">
+
+<p>As mentioned in the title, I am facing difficulties on running a successful build to export this application to a jar file because there is no javaFX Maven plug-in for JDK12 yet.
+</div>
 </body>
 </html>
