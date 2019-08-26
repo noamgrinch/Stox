@@ -2,21 +2,28 @@ package StockReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URL;
-import java.net.URLConnection;
-
+import java.nio.charset.Charset;
+import java.util.logging.Level;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.openjfx.hellofx.GUI.EditStockBox;
 import org.openjfx.hellofx.GUI.StockEditFrame;
+import CentralLogger.SendLogThread;
+
 
 public class Stock {
-	
+
+	static String statsUrl = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="; //  API link for current statistics.
+	static String symbolUrl = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="; // API link for general knowledge
+	private static final String APIKEY = "&apikey=TJQA3XTGE2BLYKP4";
 	private String name,label;
 	private double price;
 	private double changedollar,changepercent,opengate,yesterdaygate;
 	private int volume;
-	private static final long SKIP_STATS = 46100; 
-	private static final long SKIP_NAME=46000;
 	
 	public Stock(String name, String label, double price) {
 		this.name=name;
@@ -52,257 +59,84 @@ public class Stock {
 		return new Stock(name,label,price);
 	}
 	
+	private static String readAll(Reader rd) throws IOException { //Helps parsing the JSON file.
+		    StringBuilder sb = new StringBuilder();
+		    int cp;
+		    while ((cp = rd.read()) != -1) {
+		      sb.append((char) cp);
+		    }
+		    return sb.toString();
+		  }
+	
 	public static Stock findStockName(String label) throws IOException,NumberFormatException,StringIndexOutOfBoundsException {
-		
-		String ur = "http://wallstreet.bizportal.co.il/stock.php?id=" + label;
-		URL url = new URL(ur);
-		URLConnection urlConn = url.openConnection();
-		InputStreamReader inStream = new InputStreamReader(urlConn.getInputStream());
-		BufferedReader buf = new BufferedReader(inStream);
-		String name = "Not found";
-		buf.skip(SKIP_NAME);
-		String line = buf.readLine();
-		name = line;
-		boolean finished = false;
-		while(line!=null) {
-			if(line.contains("ìà ðîöà")) {
-				name = "Not found";
-				break;
-			}
-			/*Extracts name*/
-			if(line.contains("TR1") && line.contains("</tr>")) {
-				name = line;
-				name = buf.readLine();
-				name = buf.readLine();
-				int td = name.indexOf("</td>");
-				int beg = td;
-				while(name.charAt(beg) != '>') {
-					beg--;
-				}
-				name = name.substring(beg+1,td);
-				finished = true;
-				break;
-			}
-			if(finished) {
-				break;
-			}
-			line = buf.readLine();
-		}
-		if(name==null || name.equals("Not found")) {
-			return null;
-		}
-		else {
-			return findStock(label,name);
-		}
+	    InputStream istats = new URL(statsUrl + label + APIKEY).openStream();
+	    InputStream isymbol = new URL(symbolUrl + label + APIKEY).openStream();
+	    try {
+	    	
+	      //Search for Stock
+	      BufferedReader symbolsearch = new BufferedReader(new InputStreamReader(isymbol, Charset.forName("UTF-8")));
+	      String jsonTextSymbol = readAll(symbolsearch);
+	      JSONObject jsonsy = new JSONObject(jsonTextSymbol);
+	      JSONArray bestMatches = (JSONArray)jsonsy.get("bestMatches");
+	      JSONObject jsonobject = bestMatches.getJSONObject(0);
+	      String name = jsonobject.getString("2. name"); //Gets name.
+
+	      
+	      
+	      //STATS Gathering
+	      BufferedReader stats = new BufferedReader(new InputStreamReader(istats, Charset.forName("UTF-8")));
+	      String jsonTextStats = readAll(stats);
+	      JSONObject jsonst = new JSONObject(jsonTextStats);
+	      JSONObject GlobalQuote = (JSONObject)jsonst.get("Global Quote");
+	      label = (String)GlobalQuote.get("01. symbol"); 
+	      String priceString = (String)GlobalQuote.get("05. price");
+	      Double price = Double.parseDouble(priceString);
+	      String change = (String)GlobalQuote.get("09. change");
+	      String changeP = (String)GlobalQuote.get("10. change percent");
+	      changeP = changeP.substring(0, changeP.length()-1);
+	      Stock tmp = new Stock(name,label,price);
+	      tmp.setChangedollar(Double.parseDouble(change));
+	      tmp.setChangepercent(Double.parseDouble(changeP));
+	      new SendLogThread(Level.INFO,new Exception("Stock " + name + " was successfuly created")).start();
+	      return tmp;
+	    } 
+	    catch(Exception e) {
+	    	new SendLogThread(Level.SEVERE,e).start();
+	    }
+	    finally {
+	    	istats.close();
+	    	isymbol.close();
+	    }
+	    return null;
 	}
 	
-	public static Stock findStock(String label,String name) throws IOException,NumberFormatException,StringIndexOutOfBoundsException {
-		boolean finished=false;
-		String ur = "http://wallstreet.bizportal.co.il/stock.php?id=" + label + "&story=abs";
-		URL url = new URL(ur);
-		URLConnection urlConn = url.openConnection();
-		InputStreamReader inStream = new InputStreamReader(urlConn.getInputStream());
-		BufferedReader buf = new BufferedReader(inStream);
-		String lastprice = "Not found";
-		String changedol = "Not found";
-		String changeper = "Not found";
-		String opengate = "Not found";
-		String yesterdaygate = "Not found";
-		String volume = "Not found";
-		buf.skip(SKIP_STATS);
-		String line = buf.readLine();
-		int i=0;
-		while(line!=null) {
-			if(line.contains("#c5c5c5")&&i<6) {
-				line = buf.readLine();
-				int end = line.indexOf("</div>");
-				int back = end;
-				while(line.charAt(back) != '>') {
-					back--;
-				}
-				lastprice = line.substring(back+1,end);
-				i++;
-				while(i<6&&line!=null) {
-					if(line.contains("#c5c5c5") && i==1) { //change in dollars
-						line = buf.readLine();
-						end = line.indexOf("</span>");
-						back = end;
-						while(line.charAt(back) != '>') {
-							back--;
-						}
-						changedol = line.substring(back+1,end);
-						i++;
-					}
-					if( line.contains("#c5c5c5") && i==2) { //change in percentage
-						line = buf.readLine();
-						end = line.indexOf("</span>");
-						back = end;
-						while(line.charAt(back) != '>') {
-							back--;
-						}
-						
-						changeper = line.substring(back+1,end-1);
-						i++;
-					}
-					
-					if( line.contains("#c5c5c5") && i==3) { //volume
-						line = buf.readLine();
-						end = line.indexOf("</div>");
-						back = end;
-						while(line.charAt(back) != '>') {
-							back--;
-						}
-						volume = line.substring(back+1,end);
-						i++;
-					}
-					
-					if( line.contains("#c5c5c5") && i==4) { //Opening gate
-						line = buf.readLine();
-						end = line.indexOf("</div>");
-						back = end;
-						while(line.charAt(back) != '>') {
-							back--;
-						}
-						opengate = line.substring(back+1,end);
-						i++;
-					}
-					
-					if( line.contains("#c5c5c5") && i==5) { //yesterday's closing gate.
-						line = buf.readLine();
-						end = line.indexOf("</div>");
-						back = end;
-						while(line.charAt(back) != '>') {
-							back--;
-						}
-						yesterdaygate = line.substring(back+1,end);
-						i++;
-					}
-					if(i==6) {
-						finished=true;
-						break;
-					}
-					line = buf.readLine();
-					
-				}
-				
-			}
-			if(finished) {
-				break;
-			}
-			line = buf.readLine();		
-		}
-		if(lastprice.equals("Not found") || volume.equals("Not found") || opengate.equals("Not found") || yesterdaygate.equals("Not found") || changedol.equals("Not found") || changeper.equals("Not found")) {
-			return null;
-		}
-		if(volume.contains(",")) {
-			volume = volume.replace(",", "");
-		}
-		if(lastprice.contains(",")) {
-			lastprice = lastprice.replace(",", "");
-		}
-		if(opengate.contains(",")) {
-			opengate = opengate.replace(",", "");
-		}
-		if(yesterdaygate.contains(",")) {
-			yesterdaygate = yesterdaygate.replace(",", "");
-		}
-		Stock tmp = new Stock(name,label,Double.parseDouble(lastprice));
-		if(changedol.charAt(0)=='+') {
-			tmp.setChangedollar(Double.parseDouble(changedol.substring(1, changedol.length())));
-		}
-		else {
-			if(changedol.equals("0")) {
-				tmp.setChangedollar(0);
-			}
-			else {
-				tmp.setChangedollar(-(Double.parseDouble(changedol.substring(1, changedol.length()))));
-			}
-		}
-		if(changeper.charAt(0)=='+') {
-			tmp.setChangepercent(Double.parseDouble(changeper.substring(1, changeper.length())));
-		}
-		else {
-			if(changeper.equals("0")) {
-				tmp.setChangedollar(0);
-			}
-			else {
-				tmp.setChangepercent(-(Double.parseDouble(changeper.substring(1, changeper.length()))));
-			}
-		}
-		tmp.setVolume(Integer.parseInt(volume));
-		tmp.setOpengate(Double.parseDouble(opengate));
-		tmp.setYesterdaygate(Double.parseDouble(yesterdaygate));
-		return tmp;
-	}
 	
 	
 	public void updateStats() throws IOException {
-		boolean finished=false;
-		String ur = "http://wallstreet.bizportal.co.il/stock.php?id=" + label + "&story=abs";
-		URL url = new URL(ur);
-		URLConnection urlConn = url.openConnection();
-		InputStreamReader inStream = new InputStreamReader(urlConn.getInputStream());
-		BufferedReader buf = new BufferedReader(inStream);
-		String lastprice = "Not found";
-		String changeper = "Not found";
-		buf.skip(SKIP_STATS);
-		String line = buf.readLine();
-		int i=0;
-		while(line!=null) {
-			if(line.contains("#c5c5c5")) {
-				line = buf.readLine();
-				int end = line.indexOf("</div>");
-				int back = end;
-				while(line.charAt(back) != '>') {
-					back--;
-				}
-				lastprice = line.substring(back+1,end);
-				i++;
-				while(line!=null) {
-					if( line.contains("#c5c5c5")&&i==2) { //change in percentage
-						line = buf.readLine();
-						end = line.indexOf("</span>");
-						back = end;
-						while(line.charAt(back) != '>') {
-							back--;
-						}						
-						changeper = line.substring(back+1,end-1);
-						finished=true;
-						break;
-					}
-					if(line.contains("#c5c5c5")) {
-						i++;
-					}
-					line = buf.readLine();
-					
-				}
-				
-			}
-			if(finished) {
-				break;
-			}
-			line = buf.readLine();
-		}
-
-
-		if(lastprice.contains(",")) {
-			lastprice = lastprice.replace(",", ".");
-		}
-		
-		this.setPrice(Double.parseDouble(lastprice));
-		
-		if(changeper.charAt(0)=='+') {
-			this.setChangepercent(Double.parseDouble(changeper.substring(1, changeper.length())));
-		}
-		else {
-			if(changeper.equals("0")) {
-				this.setChangepercent(0);
-			}
-			else {
-				this.setChangepercent(-(Double.parseDouble(changeper.substring(1, changeper.length()))));
-			}
-		}
-
+	    InputStream istats = new URL(statsUrl + this.getLabel() + APIKEY).openStream();
+	    try {
+         
+	      //STATS Gathering
+	      BufferedReader stats = new BufferedReader(new InputStreamReader(istats, Charset.forName("UTF-8")));
+	      String jsonTextStats = readAll(stats);
+	      JSONObject jsonst = new JSONObject(jsonTextStats);
+	      JSONObject GlobalQuote = (JSONObject)jsonst.get("Global Quote");
+	      String priceString = (String)GlobalQuote.get("05. price");
+	      Double price = Double.parseDouble(priceString);
+	      String change = (String)GlobalQuote.get("09. change");
+	      String changeP = (String)GlobalQuote.get("10. change percent");
+	      changeP = changeP.substring(0, changeP.length()-1);
+	      this.setChangedollar(Double.parseDouble(change));
+	      this.setChangepercent(Double.parseDouble(changeP));
+	      this.setPrice(price);
+	      new SendLogThread(Level.INFO,new Exception("Stock " + name + " was successfuly updated")).start();
+	    } 
+	    catch(Exception e) {
+	    	new SendLogThread(Level.SEVERE,e).start();
+	    }
+	    finally {
+	    	istats.close();
+	    }
 	}
 	
 	public String toString() {

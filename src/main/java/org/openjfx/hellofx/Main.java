@@ -16,7 +16,9 @@ public class Main extends Application{
 			CentralLogger cl = new CentralLogger();
 			Thread centrallogger = new Thread(cl);
 			centrallogger.start();
+			new SendLogThread(Level.INFO,new Exception("Central logger has started running")).start();
 			new MainFrame(cl).start(primaryStage);
+			new SendLogThread(Level.INFO,new Exception("Stox successfuly booted up")).start();
 		}
 		catch(Exception e) {
 			new SendLogThread(Level.SEVERE,e).start();
@@ -26,6 +28,7 @@ public class Main extends Application{
 	
 	public static void main(String[] args) {
 		launch(args);
+
 	}
 
 }

@@ -4,6 +4,9 @@ module org.openjfx.hellofx {
 	requires java.logging;
 	requires javafx.graphics;
 	requires javafx.base;
+	requires java.sql;
+	requires java.xml;
+	requires org.json;
 
     opens org.openjfx.hellofx to javafx.fxml;
     exports org.openjfx.hellofx;

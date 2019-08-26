@@ -3,39 +3,39 @@ package CentralLogger;
  * @author Noam Greenshtain
  * Writes a log to the file.
  */
-import java.io.IOException;
+
 import java.io.ObjectInputStream;
 import java.net.Socket;
+
 import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
 
 public class LogThread extends Thread{
 	
 	private Socket s;
-	private Logger LOGGER;
 	private Exception e;
 	private ObjectInputStream in;
+
+	private CentralLogger _cl;
 	
-	public LogThread(Socket s){
+	public LogThread(Socket s,CentralLogger cl){
 		this.s=s;
-		LOGGER = Logger.getLogger(CentralLogger.class.getName());
+		_cl=cl;
 
 	}
 	
 	public void run(){
-		String msg = null;
 		Level level=null;
 		try{
 			in = new ObjectInputStream(s.getInputStream());
 			level = (Level)in.readObject();
 			e = (Exception)in.readObject();
-			msg=CentralLogger.getExString(e);
-			in.close();
+			_cl.LogProcedure(e,level);
 		}
-		catch(IOException | ClassNotFoundException e){
-			e.printStackTrace();
+		catch(Exception e) {
+			// Find a solution
 		}
-	    LOGGER.log(level,msg);
-	}
 
+	}
 }
