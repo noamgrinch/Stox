@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import org.openjfx.hellofx.GUI.MoveableScene;
 import org.openjfx.hellofx.GUI.StockBox;
@@ -48,6 +49,8 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	private MoveableScene mainscene;
 	private Button exit,minimize;
 	private HBox top;
+	private Thread thread;
+	private Date current;
 
 	
 	@SuppressWarnings("exports")
@@ -154,31 +157,45 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		        this.stage.show();
 		        
 		        
-		        Thread thread = new Thread(new Runnable() { //Updating the stocks every 8 seconds.
-
+		        thread = new Thread(new Runnable() { //Updating the stocks every 8 seconds.
+		        	
+		        	boolean active = true;
 		            @Override
 		            public void run() {
 		                Runnable updater = new Runnable() {
+		                	
+		                	
 
-		                    @Override
+		                   // @SuppressWarnings("deprecation")
+							@Override
 		                    public void run() {
 		                       try {
-								updateStockBoxes();
+		               
+		                 		updateStockBoxes();
+		                    	
 							} catch (IOException e) {
 								new SendLogThread(Level.SEVERE,e).start();
 							}
 		                    }
 		                };
+		                
+		                current = new Date();
 
-		                while (true) {
+		                while (active) {
 		                    try {
 		                        Thread.sleep(8000);
 		                    } catch (InterruptedException ex) {
 		                    	new SendLogThread(Level.SEVERE,ex).start();
 		                    }
-		                    Platform.runLater(updater);
+		                    //if(rushHour(current)) {  
+		                    	Platform.runLater(updater);
+		                    //}
+		                   // else {
+		                    //	active=false;
+		                   // }
 		                }
 		            }
+		            
 
 		        });
 		        thread.setDaemon(true);
@@ -193,6 +210,22 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		
 	}
 
+	
+	
+	
+
+	@SuppressWarnings("deprecation")
+	private boolean rushHour(Date date) {
+		int day = date.getDay();
+		int hour = date.getHours();
+		int minutes = date.getMinutes();
+		if(day==0 || day==7)
+		if((hour==16&&minutes>=47) || ((hour>16)&&(hour<22)) || (hour==22&&minutes<=47)) {
+			return true;
+		}
+
+		return false;
+	}
 
 	@SuppressWarnings("exports")
 	@Override
@@ -204,11 +237,13 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 					writer.write(stocks.get(i).getLabel() + "\n");
 				}
 				writer.close();
-				new SendLogThread(Level.INFO,new Exception("Application closed successfuly.")).start();
+				Exception e = new Exception("Application closed successfuly.");
+				centralogger.setEnable(false);
+				new SendLogThread(Level.INFO,e).start();
 			} catch (Exception e) {
 				new SendLogThread(Level.SEVERE,e).start();
 			} 
-			centralogger.terminate();
+			//centralogger.terminate();
 	    	stage.close();
 	    	Platform.exit();
 	    

@@ -11,11 +11,11 @@ public class MoveableScene extends Scene{
 	
 	private double xOffset = 0; 
 	private double yOffset = 0;
-	private Stage stage;
+	private Stage _stage;
 
 	public MoveableScene(Stage stage,Parent root, double width, double height) {
 		super(root, width, height);
-		this.stage=stage;
+		this._stage=stage;
 		this.setFill(Color.TRANSPARENT);
         this.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -27,8 +27,8 @@ public class MoveableScene extends Scene{
         this.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                stage.setX(event.getScreenX() - xOffset);
-                stage.setY(event.getScreenY() - yOffset);
+            	_stage.setX(event.getScreenX() - xOffset);
+            	_stage.setY(event.getScreenY() - yOffset);
             }
         });
 	}

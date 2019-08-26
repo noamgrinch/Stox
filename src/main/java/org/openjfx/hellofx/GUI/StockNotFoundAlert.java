@@ -1,5 +1,8 @@
 package org.openjfx.hellofx.GUI;
 
+import java.util.logging.Level;
+
+import CentralLogger.SendLogThread;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,6 +23,7 @@ public class StockNotFoundAlert {
 		
 		Label message = new Label();
 		message.setText("The stock: "  + label + " was not found.");
+		new SendLogThread(Level.WARNING,new Exception("Stock: " + label + " was not found.")).start();
 		Button close = new Button("Close");
 		close.setOnAction(e -> stage.close());
 		

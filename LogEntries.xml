@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<logfile>
+<log>
+<ThreadID>22</ThreadID>
+<Level>INFO</Level>
+<ClassName>org.openjfx.hellofx.Main</ClassName>
+<MethodName>start</MethodName>
+<Date>2019-08-26 14:40:29.484</Date>
+<Severity>INFO</Severity>
+<Message>Central logger has started running</Message>
+</log>
+<log>
+<ThreadID>27</ThreadID>
+<Level>INFO</Level>
+<ClassName>StockReader.Stock</ClassName>
+<MethodName>findStockName</MethodName>
+<Date>2019-08-26 14:40:31.13</Date>
+<Severity>INFO</Severity>
+<Message>Stock Microsoft Corporation was successfuly created</Message>
+</log>
+<log>
+<ThreadID>29</ThreadID>
+<Level>INFO</Level>
+<ClassName>StockReader.Stock</ClassName>
+<MethodName>findStockName</MethodName>
+<Date>2019-08-26 14:40:31.776</Date>
+<Severity>INFO</Severity>
+<Message>Stock Alibaba Group Holding Limited was successfuly created</Message>
+</log>
+<log>
+<ThreadID>31</ThreadID>
+<Level>INFO</Level>
+<ClassName>StockReader.Stock</ClassName>
+<MethodName>findStockName</MethodName>
+<Date>2019-08-26 14:40:32.249</Date>
+<Severity>INFO</Severity>
+<Message>Stock Global Payments Inc. was successfuly created</Message>
+</log>
+<log>
+<ThreadID>35</ThreadID>
+<Level>INFO</Level>
+<ClassName>org.openjfx.hellofx.Main</ClassName>
+<MethodName>start</MethodName>
+<Date>2019-08-26 14:40:32.791</Date>
+<Severity>INFO</Severity>
+<Message>Stox successfuly booted up</Message>
+</log>
+<log>
+<ThreadID>38</ThreadID>
+<Level>INFO</Level>
+<ClassName>org.openjfx.hellofx.MainFrame</ClassName>
+<MethodName>handle</MethodName>
+<Date>2019-08-26 14:40:34.464</Date>
+<Severity>INFO</Severity>
+<Message>Application closed successfuly.</Message>
+</log>
