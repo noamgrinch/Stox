@@ -107,7 +107,6 @@ public class Stock {
 	    	istats.close();
 	    	isymbol.close();
 	    }
-	    new SendLogThread(Level.WARNING,new Exception("Could not find stock")).start();
 	    return null;
 	}
 	
@@ -122,7 +121,6 @@ public class Stock {
 	      String jsonTextStats = readAll(stats);
 	      JSONObject jsonst = new JSONObject(jsonTextStats);
 	      JSONObject GlobalQuote = (JSONObject)jsonst.get("Global Quote");
-	      label = (String)GlobalQuote.get("01. symbol"); 
 	      String priceString = (String)GlobalQuote.get("05. price");
 	      Double price = Double.parseDouble(priceString);
 	      String change = (String)GlobalQuote.get("09. change");
