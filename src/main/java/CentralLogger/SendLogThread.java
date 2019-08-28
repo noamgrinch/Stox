@@ -32,6 +32,7 @@ public class SendLogThread extends Thread{
 		}
 		finally{
 			try {
+				Logsoc.close();
 				outob.close();
 			} catch (IOException e) {
 				e.printStackTrace();

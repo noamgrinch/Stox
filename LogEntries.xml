@@ -1,47 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <logfile>
 <log>
-<ThreadID>22</ThreadID>
+<ThreadID>28</ThreadID>
 <Level>INFO</Level>
-<ClassName>org.openjfx.hellofx.Main</ClassName>
-<MethodName>start</MethodName>
-<Date>2019-08-28 21:11:03.483</Date>
+<ClassName>DB.DBHandler</ClassName>
+<MethodName>getConnection</MethodName>
+<Date>2019-08-28 23:14:45.723</Date>
 <Severity>INFO</Severity>
-<Message>Central logger has started running</Message>
-</log>
-<log>
-<ThreadID>27</ThreadID>
-<Level>INFO</Level>
-<ClassName>StockReader.Stock</ClassName>
-<MethodName>findStockName</MethodName>
-<Date>2019-08-28 21:11:05.789</Date>
-<Severity>INFO</Severity>
-<Message>Stock Alibaba Group Holding Limited was successfuly created</Message>
+<Message>DBHandler has connected to the database.</Message>
 </log>
 <log>
 <ThreadID>29</ThreadID>
 <Level>INFO</Level>
-<ClassName>StockReader.Stock</ClassName>
-<MethodName>findStockName</MethodName>
-<Date>2019-08-28 21:11:06.717</Date>
-<Severity>INFO</Severity>
-<Message>Stock Global Payments Inc. was successfuly created</Message>
-</log>
-<log>
-<ThreadID>34</ThreadID>
-<Level>INFO</Level>
 <ClassName>org.openjfx.hellofx.Main</ClassName>
 <MethodName>start</MethodName>
-<Date>2019-08-28 21:11:07.397</Date>
+<Date>2019-08-28 23:14:45.972</Date>
 <Severity>INFO</Severity>
 <Message>Stox successfuly booted up</Message>
 </log>
 <log>
-<ThreadID>36</ThreadID>
+<ThreadID>31</ThreadID>
 <Level>INFO</Level>
 <ClassName>org.openjfx.hellofx.MainFrame</ClassName>
 <MethodName>handle</MethodName>
-<Date>2019-08-28 21:11:15.362</Date>
+<Date>2019-08-28 23:14:51.017</Date>
 <Severity>INFO</Severity>
 <Message>Application closed successfuly.</Message>
 </log>
