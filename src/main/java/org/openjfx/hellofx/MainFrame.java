@@ -147,7 +147,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				BorderPane.setMargin(content, new Insets(-3,-3,-3,-3));
 				br.setBottom(bottom);
 				br.setTop(top);
-				mainscene = new MoveableScene (this.stage,br, 295, 500);
+				mainscene = new MoveableScene (this.stage,br, 295, 700);
 				mainscene.getStylesheets().clear();
 				mainscene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		        image3 = new Image(MainFrame.class.getResource("thumbnail.jpg").toExternalForm(), 100, 0, false, false);
@@ -290,7 +290,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		BorderPane.setMargin(content, new Insets(-3,-3,-3,-3));
 		br.setBottom(bottom);
 		br.setTop(top);
-		mainscene = new MoveableScene (this.stage,br, 295, 500);
+		mainscene = new MoveableScene (this.stage,br, 295, 700);
 		mainscene.getStylesheets().clear();
 		mainscene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
         this.stage.setScene(mainscene);

@@ -93,7 +93,7 @@ public class Stock {
 	      Double price = Double.parseDouble(priceString);
 	      String change = (String)GlobalQuote.get("09. change");
 	      String changeP = (String)GlobalQuote.get("10. change percent");
-	      changeP = changeP.substring(0, changeP.length()-1);
+	      changeP = changeP.substring(0, changeP.length()-3);
 	      Stock tmp = new Stock(name,label,price);
 	      tmp.setChangedollar(Double.parseDouble(change));
 	      tmp.setChangepercent(Double.parseDouble(changeP));
@@ -125,7 +125,7 @@ public class Stock {
 	      Double price = Double.parseDouble(priceString);
 	      String change = (String)GlobalQuote.get("09. change");
 	      String changeP = (String)GlobalQuote.get("10. change percent");
-	      changeP = changeP.substring(0, changeP.length()-1);
+	      changeP = changeP.substring(0, changeP.length()-3);
 	      this.setChangedollar(Double.parseDouble(change));
 	      this.setChangepercent(Double.parseDouble(changeP));
 	      this.setPrice(price);

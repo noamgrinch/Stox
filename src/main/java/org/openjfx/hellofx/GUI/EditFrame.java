@@ -16,7 +16,7 @@ public class EditFrame {
 		VBox v = new VBox(20);
 		Button b = new Button("what");
 		v.getChildren().add(b);
-		Scene scene = new Scene(v,300,300);
+		Scene scene = new Scene(v,300,700);
 		frame.setScene(scene);
 		frame.show();
 	}

@@ -96,7 +96,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		br.setTop(toolbar);
 		br.setCenter(scroll);
 		stage.setTitle("Edit");
-		scene = new MoveableScene (this.stage,br,295,500);
+		scene = new MoveableScene (this.stage,br,295,700);
 		scene.getStylesheets().clear();
 		scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
         image3 = new Image(MainFrame.class.getResource("thumbnail.jpg").toExternalForm(), 100, 0, false, false);
