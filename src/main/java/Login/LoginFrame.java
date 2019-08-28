@@ -4,6 +4,7 @@ package Login;
 import java.awt.Frame;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -26,55 +27,26 @@ import javafx.stage.Stage;
 
 public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functions to buttons.
 	
-	private Button login,cancel;
+	private Button login,cancel,register,submit;
 	private Socket soc;
 	private TextField userinput,passinput;
 	private ObjectOutputStream out;
 	private final int LOGINFLOW = 0;
 	private Stage frame;
+	private ObjectInputStream in;
+	private Label username,password;
+	private BorderPane LoginBr,regBr;
+	private Scene LoginScene,RegisScene;
+	private GridPane loginGr,regGr;
+	private HBox hb;
 	
 	public void display() throws Exception {
 		frame = new Stage();
 		frame.initModality(Modality.APPLICATION_MODAL);
 		frame.setTitle("Login");
 		frame.setResizable(false);
-		GridPane gr = new GridPane();
-		gr.setPadding(new Insets(5,5,5,5));
-		gr.setVgap(8);
-		gr.setHgap(10);
-		
-		BorderPane br = new BorderPane();
-		
-		Label username = new Label("Username: ");
-		GridPane.setConstraints(username, 0, 0);
-		
-		userinput = new TextField();
-		userinput.setPromptText("Username");
-		GridPane.setConstraints(userinput, 1, 0);
-		
-		Label password = new Label("Password: ");
-		GridPane.setConstraints(password, 0, 1);
-		
-		passinput = new TextField();
-		passinput.setPromptText("Password");
-		GridPane.setConstraints(passinput, 1, 1);
-		
-		//buttons
-		login = new Button("Login");
-		login.setOnAction(this);
-		cancel = new Button("Cancel");
-		cancel.setOnAction(this);
-		HBox hb = new HBox(20);
-		hb.setPadding(new Insets(5,5,5,5));
-		hb.getChildren().addAll(login,cancel);
-		hb.setAlignment(Pos.CENTER);
-		
-		gr.getChildren().addAll(username,userinput,password,passinput);
-		br.setCenter(gr);
-		br.setBottom(hb);
-		Scene scene = new Scene(br,250,110);
-		
-		frame.setScene(scene);
+		initLogin();
+		frame.setScene(LoginScene);
 		frame.show();
 		
 	}
@@ -82,6 +54,7 @@ public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functio
 
 	@Override
 	public void handle(ActionEvent event) {
+	  try {	
 		if(event.getSource()==login) {
 			try {
 				soc = new Socket("Localhost",8080);
@@ -89,6 +62,13 @@ public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functio
 				out.writeObject(LOGINFLOW);
 				out.writeObject(userinput.getText());
 				out.writeObject(passinput.getText());
+				userinput.setText("");
+				passinput.setText("");
+				in = new ObjectInputStream(soc.getInputStream());
+				boolean result = (boolean)in.readObject();
+				if(result) { //success
+					frame.close();
+				}
 			} 
 			catch (Exception e) {
 				new SendLogThread(Level.SEVERE,e).start();
@@ -108,8 +88,97 @@ public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functio
 			if(event.getSource() == cancel) {
 				frame.close();
 			}
+			else if(event.getSource() == register){
+				frame.setTitle("Register");
+				initRegister();
+				frame.setScene(RegisScene);
+			}
+			else {
+				frame.setTitle("Login");
+				initLogin();
+				frame.setScene(LoginScene);
+			}
 		}
+	  }
+	  catch(Exception e) {
+		  new SendLogThread(Level.SEVERE,e).start();
+	  }
 		
 	}
+	
+	protected void initLogin() {
+		loginGr = new GridPane();
+		loginGr.setPadding(new Insets(5,5,5,5));
+		loginGr.setVgap(8);
+		loginGr.setHgap(10);
+		
+		LoginBr = new BorderPane();
+		
+		username = new Label("Username: ");
+		GridPane.setConstraints(username, 0, 0);
+		
+		userinput = new TextField();
+		userinput.setPromptText("Username");
+		GridPane.setConstraints(userinput, 1, 0);
+		
+		password = new Label("Password: ");
+		GridPane.setConstraints(password, 0, 1);
+		
+		passinput = new TextField();
+		passinput.setPromptText("Password");
+		GridPane.setConstraints(passinput, 1, 1);
+		
+		//buttons
+		login = new Button("Login");
+		login.setOnAction(this);
+		cancel = new Button("Cancel");
+		cancel.setOnAction(this);
+		register = new Button("Register");
+		register.setOnAction(this);
+		hb = new HBox(20);
+		hb.setPadding(new Insets(5,5,5,5));
+		hb.getChildren().addAll(login,register,cancel);
+		hb.setAlignment(Pos.CENTER);
+		
+		loginGr.getChildren().addAll(username,userinput,password,passinput);
+		LoginBr.setCenter(loginGr);
+		LoginBr.setBottom(hb);
+		LoginScene = new Scene(LoginBr,250,110);
+	}
+	
+	protected void initRegister() {
+		regGr = new GridPane();
+		regGr.setPadding(new Insets(5,5,5,5));
+		regGr.setVgap(8);
+		regGr.setHgap(10);
+		
+		regBr = new BorderPane();
+		
+
+		GridPane.setConstraints(username, 0, 0);
+		
+
+		GridPane.setConstraints(userinput, 1, 0);
+		
+
+		GridPane.setConstraints(password, 0, 1);
+		
+
+		GridPane.setConstraints(passinput, 1, 1);
+		
+		//buttons
+		submit = new Button("Submit");
+		submit.setOnAction(this);
+		hb = new HBox(20);
+		hb.setPadding(new Insets(5,5,5,5));
+		hb.getChildren().addAll(submit,cancel);
+		hb.setAlignment(Pos.CENTER);
+		
+		regGr.getChildren().addAll(username,userinput,password,passinput);
+		regBr.setCenter(regGr);
+		regBr.setBottom(hb);
+		RegisScene = new Scene(regBr,250,110);
+	}
+	
 
 }

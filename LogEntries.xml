@@ -5,7 +5,7 @@
 <Level>INFO</Level>
 <ClassName>DB.DBHandler</ClassName>
 <MethodName>getConnection</MethodName>
-<Date>2019-08-28 23:14:45.723</Date>
+<Date>2019-08-28 23:43:49.539</Date>
 <Severity>INFO</Severity>
 <Message>DBHandler has connected to the database.</Message>
 </log>
@@ -14,7 +14,7 @@
 <Level>INFO</Level>
 <ClassName>org.openjfx.hellofx.Main</ClassName>
 <MethodName>start</MethodName>
-<Date>2019-08-28 23:14:45.972</Date>
+<Date>2019-08-28 23:43:49.736</Date>
 <Severity>INFO</Severity>
 <Message>Stox successfuly booted up</Message>
 </log>
@@ -23,7 +23,7 @@
 <Level>INFO</Level>
 <ClassName>org.openjfx.hellofx.MainFrame</ClassName>
 <MethodName>handle</MethodName>
-<Date>2019-08-28 23:14:51.017</Date>
+<Date>2019-08-28 23:43:54.928</Date>
 <Severity>INFO</Severity>
 <Message>Application closed successfuly.</Message>
 </log>

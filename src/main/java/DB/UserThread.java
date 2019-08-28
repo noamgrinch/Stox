@@ -2,6 +2,7 @@ package DB;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +18,7 @@ public class UserThread extends Thread{
 	private Socket s;
 	private ObjectInputStream in;
 	private Connection con;
+	private ObjectOutputStream out;
 	
 	public UserThread(Socket s,Connection con) {
 		this.s=s;
@@ -54,7 +56,7 @@ public class UserThread extends Thread{
 			proc.setString(2, password);
 			
 			ResultSet rs = proc.executeQuery();
-			
+			out = new ObjectOutputStream(s.getOutputStream());
 		    if(rs.next()) {  //success
 		    	proc = con.prepareStatement("UPDATE users SET LastLoginDate = ? WHERE username=? and password=?"); // Search procedure.
 		    	proc.setString(1, new java.sql.Timestamp(new java.util.Date().getTime()).toString());
@@ -62,14 +64,17 @@ public class UserThread extends Thread{
 				proc.setString(3, password);
 		    	int result = proc.executeUpdate();
 		    	if(result!=-1) {
-		    		new SendLogThread(Level.INFO,new Exception("User " + username + "has logged in successfuly")).start();
+		    		new SendLogThread(Level.INFO,new Exception("User " + username + " has logged in successfuly")).start();
+		    		out.writeObject(true);
 		    	}
 		    	else {
 		    		new SendLogThread(Level.SEVERE,new Exception("There was a problem logging " + username + " into the system.")).start();
+		    		out.writeObject(false);
 		    	}
 		    	
 		    } else { //failure
-		    	new SendLogThread(Level.WARNING,new Exception("User " + username + "hasn't logged in successfuly")).start();
+		    	new SendLogThread(Level.WARNING,new Exception("User " + username + " hasn't logged in successfuly")).start();
+		    	out.writeObject(false);
 		    }
 		} 
 		catch (Exception e) {
@@ -78,6 +83,7 @@ public class UserThread extends Thread{
 		finally {
 			try {
 				in.close();
+				out.close();
 			} catch (IOException e) {
 				new SendLogThread(Level.SEVERE,e).start();
 			}
