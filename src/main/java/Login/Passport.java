@@ -1,15 +1,11 @@
 package Login;
 
 
-import java.awt.Frame;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.logging.Level;
-
 import CentralLogger.SendLogThread;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,13 +21,14 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functions to buttons.
+public class Passport implements EventHandler<ActionEvent>{ //TODO add functions to buttons.
 	
 	private Button login,cancel,register,submit;
 	private Socket soc;
 	private TextField userinput,passinput,emailinput;
 	private ObjectOutputStream out;
 	private final int LOGINFLOW = 0;
+	private final int REGFLOW = 1;
 	private Stage frame;
 	private ObjectInputStream in;
 	private Label username,password,email;
@@ -39,6 +36,16 @@ public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functio
 	private Scene LoginScene,RegisScene;
 	private GridPane loginGr,regGr;
 	private HBox hb;
+	private int PORT = 8080;
+	private String SERVER = "Localhost";
+	
+	public void setServer(String SER) {
+		SERVER=SER;
+	}
+	
+	public void setPort(int port) {
+		PORT=port;
+	}
 	
 	public void display() throws Exception {
 		frame = new Stage();
@@ -57,7 +64,7 @@ public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functio
 	  try {	
 		if(event.getSource()==login) {
 			try {
-				soc = new Socket("Localhost",8080);
+				soc = new Socket(SERVER,PORT);
 				out = new ObjectOutputStream(soc.getOutputStream());
 				out.writeObject(LOGINFLOW);
 				out.writeObject(userinput.getText());
@@ -94,9 +101,36 @@ public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functio
 				frame.setScene(RegisScene);
 			}
 			else {
-				frame.setTitle("Login");
-				initLogin();
-				frame.setScene(LoginScene);
+				try {
+					soc = new Socket(SERVER,PORT);
+					out = new ObjectOutputStream(soc.getOutputStream());
+					out.writeObject(REGFLOW);
+					out.writeObject(userinput.getText());
+					out.writeObject(passinput.getText());
+					out.writeObject(emailinput.getText());
+					userinput.setText("");
+					passinput.setText("");
+					emailinput.setText("");
+					in = new ObjectInputStream(soc.getInputStream());
+					boolean result = (boolean)in.readObject();
+					if(result) { //success
+						frame.setTitle("Login");
+						initLogin();
+						frame.setScene(LoginScene);
+					}
+				} 
+				catch (Exception e) {
+					new SendLogThread(Level.SEVERE,e).start();
+				}
+				finally {
+					try {
+						soc.close();
+						out.close();
+					} catch (IOException e) {
+						new SendLogThread(Level.SEVERE,e).start();
+					}
+					
+				}
 			}
 		}
 	  }
@@ -189,3 +223,6 @@ public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functio
 	
 
 }
+
+
+

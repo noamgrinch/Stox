@@ -4,6 +4,8 @@ import java.net.ServerSocket;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import CentralLogger.LogThread;
 import CentralLogger.SendLogThread;
@@ -15,6 +17,7 @@ public class DBHandler implements Runnable{
 	private Connection _con;
 	private boolean cont = true;
 	private ServerSocket ss;
+	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 	
 	public DBHandler() {
 		PORT=8080;
@@ -30,8 +33,6 @@ public class DBHandler implements Runnable{
 
 	@Override
 	public void run() {
-
-		
 
 			try {
 				_con = getConnection(url);
@@ -51,8 +52,7 @@ public class DBHandler implements Runnable{
 				new SendLogThread(Level.SEVERE,e).start();
 			}
 			
-		
-		
+			
 	}
 	
 	public Connection getConnection(String conString) throws Exception{
@@ -76,6 +76,11 @@ public class DBHandler implements Runnable{
 	public void setEnable(boolean bool) {
 		cont=bool;
 	}
+	
+	public static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+}
 	
 	
 

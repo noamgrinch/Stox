@@ -1,38 +1,146 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <logfile>
 <log>
-<ThreadID>28</ThreadID>
+<ThreadID>25</ThreadID>
 <Level>INFO</Level>
 <ClassName>DB.DBHandler</ClassName>
 <MethodName>getConnection</MethodName>
-<Date>2019-08-29 16:49:08.934</Date>
+<Date>2019-08-29 18:47:17.315</Date>
 <Severity>INFO</Severity>
 <Message>DBHandler has connected to the database.</Message>
 </log>
 <log>
-<ThreadID>29</ThreadID>
+<ThreadID>26</ThreadID>
 <Level>INFO</Level>
 <ClassName>org.openjfx.hellofx.Main</ClassName>
 <MethodName>start</MethodName>
-<Date>2019-08-29 16:49:09.082</Date>
+<Date>2019-08-29 18:47:17.559</Date>
 <Severity>INFO</Severity>
 <Message>Central logger has started running</Message>
 </log>
 <log>
-<ThreadID>30</ThreadID>
+<ThreadID>31</ThreadID>
+<Level>INFO</Level>
+<ClassName>StockReader.Stock</ClassName>
+<MethodName>findStockName</MethodName>
+<Date>2019-08-29 18:47:19.351</Date>
+<Severity>INFO</Severity>
+<Message>Stock Alibaba Group Holding Limited was successfuly created</Message>
+</log>
+<log>
+<ThreadID>34</ThreadID>
 <Level>INFO</Level>
 <ClassName>org.openjfx.hellofx.Main</ClassName>
 <MethodName>start</MethodName>
-<Date>2019-08-29 16:49:09.252</Date>
+<Date>2019-08-29 18:47:19.552</Date>
 <Severity>INFO</Severity>
 <Message>Stox successfuly booted up</Message>
 </log>
 <log>
-<ThreadID>32</ThreadID>
+<ThreadID>38</ThreadID>
+<Level>WARNING</Level>
+<ClassName>DB.UserThread</ClassName>
+<MethodName>registerFlow</MethodName>
+<Date>2019-08-29 18:47:25.197</Date>
+<Severity>WARNING</Severity>
+<Message>Missing input.</Message>
+</log>
+<log>
+<ThreadID>41</ThreadID>
+<Level>INFO</Level>
+<ClassName>StockReader.Stock</ClassName>
+<MethodName>updateStats</MethodName>
+<Date>2019-08-29 18:47:28.64</Date>
+<Severity>INFO</Severity>
+<Message>Stock Alibaba Group Holding Limited was successfuly updated</Message>
+</log>
+<log>
+<ThreadID>44</ThreadID>
+<Level>WARNING</Level>
+<ClassName>DB.UserThread</ClassName>
+<MethodName>registerFlow</MethodName>
+<Date>2019-08-29 18:47:32.154</Date>
+<Severity>WARNING</Severity>
+<Message>Missing input.</Message>
+</log>
+<log>
+<ThreadID>48</ThreadID>
+<Level>INFO</Level>
+<ClassName>StockReader.Stock</ClassName>
+<MethodName>updateStats</MethodName>
+<Date>2019-08-29 18:47:36.617</Date>
+<Severity>INFO</Severity>
+<Message>Stock Alibaba Group Holding Limited was successfuly updated</Message>
+</log>
+<log>
+<ThreadID>51</ThreadID>
+<Level>WARNING</Level>
+<ClassName>DB.UserThread</ClassName>
+<MethodName>registerFlow</MethodName>
+<Date>2019-08-29 18:47:41.974</Date>
+<Severity>WARNING</Severity>
+<Message>Email qwd is not valid</Message>
+</log>
+<log>
+<ThreadID>55</ThreadID>
+<Level>INFO</Level>
+<ClassName>StockReader.Stock</ClassName>
+<MethodName>updateStats</MethodName>
+<Date>2019-08-29 18:47:44.644</Date>
+<Severity>INFO</Severity>
+<Message>Stock Alibaba Group Holding Limited was successfuly updated</Message>
+</log>
+<log>
+<ThreadID>58</ThreadID>
+<Level>SEVERE</Level>
+<ClassName>org.json.JSONObject</ClassName>
+<MethodName>get</MethodName>
+<Date>2019-08-29 18:47:52.212</Date>
+<Severity>SEVERE</Severity>
+<Message>JSONObject["Global Quote"] not found.</Message>
+</log>
+<log>
+<ThreadID>61</ThreadID>
+<Level>INFO</Level>
+<ClassName>DB.UserThread</ClassName>
+<MethodName>registerFlow</MethodName>
+<Date>2019-08-29 18:47:57.892</Date>
+<Severity>INFO</Severity>
+<Message>User test registered successfuly</Message>
+</log>
+<log>
+<ThreadID>65</ThreadID>
+<Level>INFO</Level>
+<ClassName>StockReader.Stock</ClassName>
+<MethodName>updateStats</MethodName>
+<Date>2019-08-29 18:48:00.682</Date>
+<Severity>INFO</Severity>
+<Message>Stock Alibaba Group Holding Limited was successfuly updated</Message>
+</log>
+<log>
+<ThreadID>68</ThreadID>
+<Level>INFO</Level>
+<ClassName>DB.UserThread</ClassName>
+<MethodName>loginFlow</MethodName>
+<Date>2019-08-29 18:48:03.738</Date>
+<Severity>INFO</Severity>
+<Message>User test has logged in successfuly</Message>
+</log>
+<log>
+<ThreadID>72</ThreadID>
+<Level>INFO</Level>
+<ClassName>StockReader.Stock</ClassName>
+<MethodName>updateStats</MethodName>
+<Date>2019-08-29 18:48:08.658</Date>
+<Severity>INFO</Severity>
+<Message>Stock Alibaba Group Holding Limited was successfuly updated</Message>
+</log>
+<log>
+<ThreadID>74</ThreadID>
 <Level>INFO</Level>
 <ClassName>org.openjfx.hellofx.MainFrame</ClassName>
 <MethodName>handle</MethodName>
-<Date>2019-08-29 16:49:17.97</Date>
+<Date>2019-08-29 18:48:08.692</Date>
 <Severity>INFO</Severity>
 <Message>Application closed successfuly.</Message>
 </log>

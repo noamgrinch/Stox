@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 
@@ -19,6 +20,7 @@ public class UserThread extends Thread{
 	private ObjectInputStream in;
 	private Connection con;
 	private ObjectOutputStream out;
+	private PreparedStatement proc;
 	
 	public UserThread(Socket s,Connection con) {
 		this.s=s;
@@ -51,13 +53,8 @@ public class UserThread extends Thread{
 			String username = (String)in.readObject();
 			String password = (String)in.readObject();
 			
-			PreparedStatement proc = con.prepareStatement("SELECT * FROM users where UserName = ? and Password = ?"); // Search procedure.
-			proc.setString(1, username);
-			proc.setString(2, password);
-			
-			ResultSet rs = proc.executeQuery();
 			out = new ObjectOutputStream(s.getOutputStream());
-		    if(rs.next()) {  //success
+		    if(!userNameExsits(username)) {  //success
 		    	proc = con.prepareStatement("UPDATE users SET LastLoginDate = ? WHERE username=? and password=?"); // Search procedure.
 		    	proc.setString(1, new java.sql.Timestamp(new java.util.Date().getTime()).toString());
 				proc.setString(2, username);
@@ -73,7 +70,7 @@ public class UserThread extends Thread{
 		    	}
 		    	
 		    } else { //failure
-		    	new SendLogThread(Level.WARNING,new Exception("User " + username + " hasn't logged in successfuly")).start();
+		    	new SendLogThread(Level.WARNING,new Exception("User " + username + " does not exsits.")).start();
 		    	out.writeObject(false);
 		    }
 		} 
@@ -91,6 +88,57 @@ public class UserThread extends Thread{
 	}
 	
 	public void registerFlow() {
-		
+		try {
+			String username = (String)in.readObject();
+			String password = (String)in.readObject();
+			String email = (String)in.readObject();
+			out = new ObjectOutputStream(s.getOutputStream());
+			if((username.equals(""))||(password.equals(""))||(password.equals(""))) { //validation of input
+				new SendLogThread(Level.WARNING,new Exception("Missing input.")).start();
+				out.writeObject(false);
+			}
+			else{
+				if(userNameExsits(username)) {
+			
+					if(!DBHandler.validate(email)) { //validation of email
+						new SendLogThread(Level.WARNING,new Exception("Email " + email + " is not valid")).start();
+						out.writeObject(false);
+					}
+					else {
+						proc = con.prepareStatement("INSERT into users (UserName,Password,Email,RegistrationDate) values (?,?,?,?)"); // Search procedure.
+			
+						proc.setString(1, username);
+						proc.setString(2, password);
+						proc.setString(3, email);
+						proc.setString(4, new java.sql.Timestamp(new java.util.Date().getTime()).toString());
+			
+						int rs = proc.executeUpdate();
+						if(rs>0) {
+							new SendLogThread(Level.INFO,new Exception("User " + username + " registered successfuly")).start();
+							out.writeObject(true);
+						}
+					}
+		    	
+					} 
+				else { //failure
+					new SendLogThread(Level.WARNING,new Exception("User " + username + " is already exsits")).start();
+					out.writeObject(false);
+				}
+			}
+		}
+		catch(Exception e) {
+			new SendLogThread(Level.SEVERE,e).start();
+		}
+	}
+	
+	
+	private boolean userNameExsits(String userName) throws SQLException {
+		proc = con.prepareStatement("SELECT * FROM users where UserName = ?"); // Search procedure.
+		proc.setString(1, userName);
+		ResultSet rs = proc.executeQuery();
+		if(rs.next()) {
+			return false;
+		}
+		return true;
 	}
 }

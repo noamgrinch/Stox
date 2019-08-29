@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import CentralLogger.CentralLogger;
 import CentralLogger.SendLogThread;
 import DB.DBHandler;
-import Login.LoginFrame;
+import Login.Passport;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -22,7 +22,7 @@ public class Main extends Application{
 			Thread dbt = new Thread(db);
 			dbt.start();
 			new SendLogThread(Level.INFO,new Exception("Central logger has started running")).start();
-			new LoginFrame().display();
+			new Passport().display();
 			new MainFrame(cl).start(primaryStage);
 			new SendLogThread(Level.INFO,new Exception("Stox successfuly booted up")).start();
 		}
