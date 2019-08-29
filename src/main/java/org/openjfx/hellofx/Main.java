@@ -5,7 +5,6 @@ import java.util.logging.Level;
 import CentralLogger.CentralLogger;
 import CentralLogger.SendLogThread;
 import DB.DBHandler;
-import Login.Passport;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

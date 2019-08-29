@@ -8,8 +8,10 @@ import java.net.Socket;
 import java.util.logging.Level;
 
 import org.openjfx.hellofx.MainFrame;
+import org.openjfx.hellofx.GUI.Alert;
 
 import CentralLogger.SendLogThread;
+import DB.Flows;
 import User.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,14 +27,12 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class Passport implements EventHandler<ActionEvent>{ //TODO add functions to buttons.
+public class Passport implements EventHandler<ActionEvent>{ 
 	
 	private Button login,cancel,register,submit;
 	private Socket soc;
 	private TextField userinput,passinput,emailinput;
 	private ObjectOutputStream out;
-	private final int LOGINFLOW = 0;
-	private final int REGFLOW = 1;
 	private Stage frame;
 	private ObjectInputStream in;
 	private Label username,password,email;
@@ -66,7 +66,7 @@ public class Passport implements EventHandler<ActionEvent>{ //TODO add functions
 			try {
 				soc = new Socket(main.getSERVER(),main.getPORT());
 				out = new ObjectOutputStream(soc.getOutputStream());
-				out.writeObject(LOGINFLOW);
+				out.writeObject(Flows.LOGINFLOW);
 				out.writeObject(userinput.getText());
 				out.writeObject(passinput.getText());
 				userinput.setText("");
@@ -78,6 +78,9 @@ public class Passport implements EventHandler<ActionEvent>{ //TODO add functions
 					main.updateList(user.getStocks());
 					frame.close();
 					main.setEnabled(true);
+				}
+				else {
+					new Alert().display("Invalid User name or password");
 				}
 			} 
 			catch (Exception e) {
@@ -107,7 +110,7 @@ public class Passport implements EventHandler<ActionEvent>{ //TODO add functions
 				try {
 					soc = new Socket(main.getSERVER(),main.getPORT());
 					out = new ObjectOutputStream(soc.getOutputStream());
-					out.writeObject(REGFLOW);
+					out.writeObject(Flows.REGFLOW);
 					out.writeObject(userinput.getText());
 					out.writeObject(passinput.getText());
 					out.writeObject(emailinput.getText());
@@ -120,6 +123,9 @@ public class Passport implements EventHandler<ActionEvent>{ //TODO add functions
 						frame.setTitle("Login");
 						initLogin();
 						frame.setScene(LoginScene);
+					}
+					else {
+						new Alert().display("Invalid credentials.");
 					}
 				} 
 				catch (Exception e) {

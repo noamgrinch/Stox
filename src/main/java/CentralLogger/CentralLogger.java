@@ -163,7 +163,6 @@ public class CentralLogger implements Runnable{
 			NodeList children = doc.getElementsByTagName("Level");
 			Element record = (Element) children.item(index);
 			String level = record.getTextContent();
-			System.out.println(level);
 			children = doc.getElementsByTagName("ClassName");
 			record = (Element) children.item(index);
 			String Class = record.getTextContent();

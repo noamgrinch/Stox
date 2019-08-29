@@ -3,13 +3,9 @@ package DB;
 import java.net.ServerSocket;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import CentralLogger.LogThread;
 import CentralLogger.SendLogThread;
 
 public class DBHandler implements Runnable{

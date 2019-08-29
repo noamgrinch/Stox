@@ -11,26 +11,26 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class StockNotFoundAlert {
-	
-	public static void display(String label) {
+public class Alert {
+
+	public void display(String message) {
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Stock was not found!");
 		stage.setMinWidth(200);
 		stage.setResizable(false);
-		Label message = new Label();
-		message.setText("The stock: "  + label + " was not found.");
-		new SendLogThread(Level.WARNING,new Exception("Stock: " + label + " was not found.")).start();
+		Label messageL = new Label();
+		messageL.setText(message);
+		new SendLogThread(Level.WARNING,new Exception(message)).start();
 		Button close = new Button("Close");
 		close.setOnAction(e -> stage.close());
 		VBox layout = new VBox(10);
-		layout.getChildren().addAll(message,close);
+		layout.getChildren().addAll(messageL,close);
 		layout.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(layout,200,100);
 		stage.setScene(scene);
 		stage.setAlwaysOnTop(true);
 		stage.showAndWait();
 	}
-
+	
 }

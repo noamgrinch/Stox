@@ -3,117 +3,45 @@
 <log>
 <ThreadID>28</ThreadID>
 <Level>INFO</Level>
-<ClassName>DB.DBHandler</ClassName>
-<MethodName>getConnection</MethodName>
-<Date>2019-08-29 21:17:02.445</Date>
+<ClassName>org.openjfx.hellofx.Main</ClassName>
+<MethodName>start</MethodName>
+<Date>2019-08-29 21:47:43.23</Date>
 <Severity>INFO</Severity>
-<Message>DBHandler has connected to the database.</Message>
+<Message>Central logger has started running</Message>
 </log>
 <log>
 <ThreadID>29</ThreadID>
 <Level>INFO</Level>
 <ClassName>org.openjfx.hellofx.Main</ClassName>
 <MethodName>start</MethodName>
-<Date>2019-08-29 21:17:02.624</Date>
-<Severity>INFO</Severity>
-<Message>Central logger has started running</Message>
-</log>
-<log>
-<ThreadID>30</ThreadID>
-<Level>INFO</Level>
-<ClassName>org.openjfx.hellofx.Main</ClassName>
-<MethodName>start</MethodName>
-<Date>2019-08-29 21:17:02.702</Date>
+<Date>2019-08-29 21:47:43.299</Date>
 <Severity>INFO</Severity>
 <Message>Stox successfuly booted up</Message>
 </log>
 <log>
+<ThreadID>30</ThreadID>
+<Level>INFO</Level>
+<ClassName>DB.DBHandler</ClassName>
+<MethodName>getConnection</MethodName>
+<Date>2019-08-29 21:47:43.459</Date>
+<Severity>INFO</Severity>
+<Message>DBHandler has connected to the database.</Message>
+</log>
+<log>
 <ThreadID>33</ThreadID>
-<Level>INFO</Level>
-<ClassName>DB.UserThread</ClassName>
-<MethodName>loginFlow</MethodName>
-<Date>2019-08-29 21:17:03.707</Date>
-<Severity>INFO</Severity>
-<Message>User a has logged in successfuly</Message>
-</log>
-<log>
-<ThreadID>38</ThreadID>
-<Level>INFO</Level>
-<ClassName>StockReader.Stock</ClassName>
-<MethodName>findStockName</MethodName>
-<Date>2019-08-29 21:17:06.534</Date>
-<Severity>INFO</Severity>
-<Message>Stock Global Payments Inc. was successfuly created</Message>
-</log>
-<log>
-<ThreadID>40</ThreadID>
-<Level>INFO</Level>
-<ClassName>StockReader.Stock</ClassName>
-<MethodName>findStockName</MethodName>
-<Date>2019-08-29 21:17:08.239</Date>
-<Severity>INFO</Severity>
-<Message>Stock Alibaba Group Holding Limited was successfuly created</Message>
-</log>
-<log>
-<ThreadID>42</ThreadID>
-<Level>INFO</Level>
-<ClassName>StockReader.Stock</ClassName>
-<MethodName>updateStats</MethodName>
-<Date>2019-08-29 21:17:11.692</Date>
-<Severity>INFO</Severity>
-<Message>Stock Global Payments Inc. was successfuly updated</Message>
-</log>
-<log>
-<ThreadID>44</ThreadID>
-<Level>SEVERE</Level>
-<ClassName>org.json.JSONObject</ClassName>
-<MethodName>get</MethodName>
-<Date>2019-08-29 21:17:11.856</Date>
-<Severity>SEVERE</Severity>
-<Message>JSONObject["Global Quote"] not found.</Message>
-</log>
-<log>
-<ThreadID>48</ThreadID>
-<Level>SEVERE</Level>
-<ClassName>org.json.JSONObject</ClassName>
-<MethodName>get</MethodName>
-<Date>2019-08-29 21:17:16.545</Date>
-<Severity>SEVERE</Severity>
-<Message>JSONObject["Global Quote"] not found.</Message>
-</log>
-<log>
-<ThreadID>50</ThreadID>
 <Level>WARNING</Level>
-<ClassName>org.openjfx.hellofx.GUI.StockNotFoundAlert</ClassName>
-<MethodName>display</MethodName>
-<Date>2019-08-29 21:17:16.579</Date>
+<ClassName>DB.UserThread</ClassName>
+<MethodName>registerFlow</MethodName>
+<Date>2019-08-29 21:47:45.36</Date>
 <Severity>WARNING</Severity>
-<Message>Stock: BYND was not found.</Message>
+<Message>Email qw is not valid</Message>
 </log>
 <log>
-<ThreadID>52</ThreadID>
-<Level>SEVERE</Level>
-<ClassName>org.json.JSONObject</ClassName>
-<MethodName>get</MethodName>
-<Date>2019-08-29 21:17:18.674</Date>
-<Severity>SEVERE</Severity>
-<Message>JSONObject["Global Quote"] not found.</Message>
-</log>
-<log>
-<ThreadID>54</ThreadID>
-<Level>SEVERE</Level>
-<ClassName>org.json.JSONObject</ClassName>
-<MethodName>get</MethodName>
-<Date>2019-08-29 21:17:19.035</Date>
-<Severity>SEVERE</Severity>
-<Message>JSONObject["Global Quote"] not found.</Message>
-</log>
-<log>
-<ThreadID>58</ThreadID>
-<Level>INFO</Level>
-<ClassName>org.openjfx.hellofx.MainFrame</ClassName>
-<MethodName>updateStocksDB</MethodName>
-<Date>2019-08-29 21:17:24.736</Date>
-<Severity>INFO</Severity>
-<Message>Started upadting stocks in DB.</Message>
+<ThreadID>35</ThreadID>
+<Level>WARNING</Level>
+<ClassName>org.openjfx.hellofx.GUI.Alert</ClassName>
+<MethodName>display</MethodName>
+<Date>2019-08-29 21:47:45.399</Date>
+<Severity>WARNING</Severity>
+<Message>Invalid credentials: either user name is already taken, or that one of the fields are not in the valid formant.</Message>
 </log>

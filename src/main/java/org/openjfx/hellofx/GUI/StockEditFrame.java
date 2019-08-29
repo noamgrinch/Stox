@@ -37,20 +37,16 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 	private Image image3;
 	
 	public StockEditFrame(ArrayList<Stock> stocks,MainFrame parent,Stage stage) {
-		
 		this.setStocks(stocks);
 		this.setParent(parent);
 		this.stage=stage;
 		br = new BorderPane();
-		br.setId("BorderPane-main");
-		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		
+		br.setId("BorderPane-main");	
 		scroll = new ScrollPane();
 		scroll.getStyleClass ().add ("edge-to-edge");
 		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 		scroll.setFitToHeight(true);
 		scroll.setFitToWidth(true);
-		
 		toolbar = new HBox(10);
 		toolbar.setAlignment(Pos.CENTER);
 		searchlabel = new TextField("");
@@ -62,14 +58,12 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		search.setOnAction(this);
 		toolbar.getChildren().add(search);
 		toolbar.setId("Toolbar");
-		
 		content = new GridPane();
 		content.setGridLinesVisible(true);
 		content.setAlignment(Pos.TOP_CENTER);
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setHgrow(Priority.ALWAYS );
 		content.getColumnConstraints().addAll(column1);
-		
 		EditStockBox sb;
 		Separator sep;
 		for(int i=0;i<stocks.size();i++) {
@@ -108,20 +102,14 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 	}
 	
 	public void refresh() {
-		
-		
 		br = new BorderPane();
 		br.setId("BorderPane-main");
-		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-
 		content = new GridPane();
 		content.setGridLinesVisible(true);
 		content.setAlignment(Pos.TOP_CENTER);
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setHgrow(Priority.ALWAYS );
 		content.getColumnConstraints().addAll(column1);
-
-		
 		EditStockBox sb;
 		Separator sep;
 		for(int i=0;i<stocks.size();i++) {
@@ -133,7 +121,6 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 			GridPane.setFillWidth(sb, true);
 			GridPane.setConstraints(sb, 0, i);
 		}
-
 		br.setBottom(bottom);
 		content.setId("GridPane-content");
 		scroll.setContent(content);
@@ -155,13 +142,9 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 	}
 	
 	public void presentsearched(Stock stock,String label) {
-		
 		if(stock!=null) {
-	   
 			br = new BorderPane();
 			br.setId("BorderPane-main");
-			//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-
 			content = new GridPane();
 			content.setGridLinesVisible(true);
 			content.setAlignment(Pos.TOP_CENTER);
@@ -199,21 +182,14 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 	
 	public void deleteStock(int index) {
 		stocks.remove(index);
-		
-
 		br = new BorderPane();
-		br.setId("BorderPane-main");
-		//delete.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-
-		
+		br.setId("BorderPane-main");	
 		content = new GridPane();
 		content.setGridLinesVisible(true);
 		content.setAlignment(Pos.TOP_CENTER);
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setHgrow(Priority.ALWAYS );
-		content.getColumnConstraints().addAll(/*new ColumnConstraints(25),*/column1);
-	
-		
+		content.getColumnConstraints().addAll(column1);	
 		EditStockBox sb;
 		Separator sep;
 		for(int i=0;i<stocks.size();i++) {
@@ -225,7 +201,6 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 			GridPane.setFillWidth(sb, true);
 			GridPane.setConstraints(sb, 0, i);
 		}
-		
 		br.setBottom(bottom);
 		content.setId("GridPane-content");
 		scroll.setContent(content);
@@ -235,9 +210,6 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		scene.getStylesheets().clear();
 		scene.getStylesheets().add(MainFrame.class.getResource("MainFrameStyle.css").toExternalForm());
 		stage.setScene(scene);
-
-		
-		
 	}
 
 	public MainFrame getParent() {

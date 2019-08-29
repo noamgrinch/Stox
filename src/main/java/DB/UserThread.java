@@ -8,12 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import CentralLogger.SendLogThread;
 import User.User;
 
-import javafx.scene.control.Dialog;
 
 
 
@@ -24,7 +22,6 @@ public class UserThread extends Thread{
 	private Connection con;
 	private ObjectOutputStream out;
 	private PreparedStatement proc;
-	private final int[] FLOWS =  {0,1,2};
 	
 	
 	public UserThread(Socket s,Connection con) {
@@ -89,14 +86,14 @@ public class UserThread extends Thread{
 		    	}
 		    	else {
 		    		new SendLogThread(Level.SEVERE,new Exception("There was a problem logging " + username + " into the system.")).start();
-		    		out.writeObject(false);
+		    		out.writeObject(null);
 		    	}
 				
 			}
 			
 			else { //failure
 		    	new SendLogThread(Level.WARNING,new Exception("User " + username + " does not exsits.")).start();
-		    	out.writeObject(false);
+		    	out.writeObject(null);
 		    }
 		} 
 		catch (Exception e) {

@@ -1,14 +1,10 @@
 package org.openjfx.hellofx;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import org.openjfx.hellofx.GUI.MoveableScene;
 import org.openjfx.hellofx.GUI.StockBox;
@@ -55,7 +51,6 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	private Button exit,minimize;
 	private HBox top;
 	private Thread thread;
-	private Date current;
 	private User user;
 	private int PORT = 8080;
 	private String SERVER = "Localhost";
@@ -126,8 +121,6 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 
 				//stocks
 				scroll.setContent(content);
-				//general configuration
-				//content.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT))); //debugging
 				br.setCenter(scroll);
 				BorderPane.setMargin(content, new Insets(-3,-3,-3,-3));
 				br.setBottom(bottom);
@@ -142,16 +135,13 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		        this.stage.hide();
 		        
 		        
-		        thread = new Thread(new Runnable() { //Updating the stocks every 8 seconds.
+		        thread = new Thread(new Runnable() { //Updating the stocks every 20 seconds.
 		        	
 		        	boolean active = true;
 		            @Override
 		            public void run() {
 		                Runnable updater = new Runnable() {
-		                	
-		                	
 
-		                   // @SuppressWarnings("deprecation")
 							@Override
 		                    public void run() {
 		                       try {
@@ -163,21 +153,17 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 							}
 		                    }
 		                };
-		                
-		                current = new Date();
+
 
 		                while (active) {
 		                    try {
-		                        Thread.sleep(8000);
+		                        Thread.sleep(20000);
 		                    } catch (InterruptedException ex) {
 		                    	new SendLogThread(Level.SEVERE,ex).start();
 		                    }
-		                    //if(rushHour(current)) {  
+
 		                    	Platform.runLater(updater);
-		                    //}
-		                   // else {
-		                    //	active=false;
-		                   // }
+
 		                }
 		            }
 		            
@@ -197,18 +183,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 
 	
 
-	@SuppressWarnings("deprecation")
-	private boolean rushHour(Date date) {
-		int day = date.getDay();
-		int hour = date.getHours();
-		int minutes = date.getMinutes();
-		if(day==0 || day==7)
-		if((hour==16&&minutes>=47) || ((hour>16)&&(hour<22)) || (hour==22&&minutes<=47)) {
-			return true;
-		}
 
-		return false;
-	}
 
 	@SuppressWarnings("exports")
 	@Override
@@ -308,7 +283,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		}
 	}
 	
-	public void setUser(User u) {
+	public void setUser(@SuppressWarnings("exports") User u) {
 		user=u;
 	}
 	
