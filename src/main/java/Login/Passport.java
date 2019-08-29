@@ -6,7 +6,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
+
+import org.openjfx.hellofx.MainFrame;
+
 import CentralLogger.SendLogThread;
+import User.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -36,16 +40,12 @@ public class Passport implements EventHandler<ActionEvent>{ //TODO add functions
 	private Scene LoginScene,RegisScene;
 	private GridPane loginGr,regGr;
 	private HBox hb;
-	private int PORT = 8080;
-	private String SERVER = "Localhost";
+	private MainFrame main;
 	
-	public void setServer(String SER) {
-		SERVER=SER;
+	public Passport(MainFrame main) {
+		this.main=main;
 	}
 	
-	public void setPort(int port) {
-		PORT=port;
-	}
 	
 	public void display() throws Exception {
 		frame = new Stage();
@@ -64,7 +64,7 @@ public class Passport implements EventHandler<ActionEvent>{ //TODO add functions
 	  try {	
 		if(event.getSource()==login) {
 			try {
-				soc = new Socket(SERVER,PORT);
+				soc = new Socket(main.getSERVER(),main.getPORT());
 				out = new ObjectOutputStream(soc.getOutputStream());
 				out.writeObject(LOGINFLOW);
 				out.writeObject(userinput.getText());
@@ -72,9 +72,12 @@ public class Passport implements EventHandler<ActionEvent>{ //TODO add functions
 				userinput.setText("");
 				passinput.setText("");
 				in = new ObjectInputStream(soc.getInputStream());
-				boolean result = (boolean)in.readObject();
-				if(result) { //success
+				User user = (User)in.readObject();
+				if(user != null) { //success
+					main.setUser(user);
+					main.updateList(user.getStocks());
 					frame.close();
+					main.setEnabled(true);
 				}
 			} 
 			catch (Exception e) {
@@ -102,7 +105,7 @@ public class Passport implements EventHandler<ActionEvent>{ //TODO add functions
 			}
 			else {
 				try {
-					soc = new Socket(SERVER,PORT);
+					soc = new Socket(main.getSERVER(),main.getPORT());
 					out = new ObjectOutputStream(soc.getOutputStream());
 					out.writeObject(REGFLOW);
 					out.writeObject(userinput.getText());

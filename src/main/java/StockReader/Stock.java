@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
@@ -15,8 +16,12 @@ import org.openjfx.hellofx.GUI.StockEditFrame;
 import CentralLogger.SendLogThread;
 
 
-public class Stock {
+public class Stock implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	static String statsUrl = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="; //  API link for current statistics.
 	static String symbolUrl = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="; // API link for general knowledge
 	private static final String APIKEY = "&apikey=TJQA3XTGE2BLYKP4";

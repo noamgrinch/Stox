@@ -22,7 +22,6 @@ public class Main extends Application{
 			Thread dbt = new Thread(db);
 			dbt.start();
 			new SendLogThread(Level.INFO,new Exception("Central logger has started running")).start();
-			new Passport().display();
 			new MainFrame(cl).start(primaryStage);
 			new SendLogThread(Level.INFO,new Exception("Stox successfuly booted up")).start();
 		}

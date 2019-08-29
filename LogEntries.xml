@@ -1,146 +1,119 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <logfile>
 <log>
-<ThreadID>25</ThreadID>
+<ThreadID>28</ThreadID>
 <Level>INFO</Level>
 <ClassName>DB.DBHandler</ClassName>
 <MethodName>getConnection</MethodName>
-<Date>2019-08-29 18:47:17.315</Date>
+<Date>2019-08-29 21:17:02.445</Date>
 <Severity>INFO</Severity>
 <Message>DBHandler has connected to the database.</Message>
 </log>
 <log>
-<ThreadID>26</ThreadID>
+<ThreadID>29</ThreadID>
 <Level>INFO</Level>
 <ClassName>org.openjfx.hellofx.Main</ClassName>
 <MethodName>start</MethodName>
-<Date>2019-08-29 18:47:17.559</Date>
+<Date>2019-08-29 21:17:02.624</Date>
 <Severity>INFO</Severity>
 <Message>Central logger has started running</Message>
 </log>
 <log>
-<ThreadID>31</ThreadID>
-<Level>INFO</Level>
-<ClassName>StockReader.Stock</ClassName>
-<MethodName>findStockName</MethodName>
-<Date>2019-08-29 18:47:19.351</Date>
-<Severity>INFO</Severity>
-<Message>Stock Alibaba Group Holding Limited was successfuly created</Message>
-</log>
-<log>
-<ThreadID>34</ThreadID>
+<ThreadID>30</ThreadID>
 <Level>INFO</Level>
 <ClassName>org.openjfx.hellofx.Main</ClassName>
 <MethodName>start</MethodName>
-<Date>2019-08-29 18:47:19.552</Date>
+<Date>2019-08-29 21:17:02.702</Date>
 <Severity>INFO</Severity>
 <Message>Stox successfuly booted up</Message>
 </log>
 <log>
-<ThreadID>38</ThreadID>
-<Level>WARNING</Level>
+<ThreadID>33</ThreadID>
+<Level>INFO</Level>
 <ClassName>DB.UserThread</ClassName>
-<MethodName>registerFlow</MethodName>
-<Date>2019-08-29 18:47:25.197</Date>
-<Severity>WARNING</Severity>
-<Message>Missing input.</Message>
+<MethodName>loginFlow</MethodName>
+<Date>2019-08-29 21:17:03.707</Date>
+<Severity>INFO</Severity>
+<Message>User a has logged in successfuly</Message>
 </log>
 <log>
-<ThreadID>41</ThreadID>
+<ThreadID>38</ThreadID>
+<Level>INFO</Level>
+<ClassName>StockReader.Stock</ClassName>
+<MethodName>findStockName</MethodName>
+<Date>2019-08-29 21:17:06.534</Date>
+<Severity>INFO</Severity>
+<Message>Stock Global Payments Inc. was successfuly created</Message>
+</log>
+<log>
+<ThreadID>40</ThreadID>
+<Level>INFO</Level>
+<ClassName>StockReader.Stock</ClassName>
+<MethodName>findStockName</MethodName>
+<Date>2019-08-29 21:17:08.239</Date>
+<Severity>INFO</Severity>
+<Message>Stock Alibaba Group Holding Limited was successfuly created</Message>
+</log>
+<log>
+<ThreadID>42</ThreadID>
 <Level>INFO</Level>
 <ClassName>StockReader.Stock</ClassName>
 <MethodName>updateStats</MethodName>
-<Date>2019-08-29 18:47:28.64</Date>
+<Date>2019-08-29 21:17:11.692</Date>
 <Severity>INFO</Severity>
-<Message>Stock Alibaba Group Holding Limited was successfuly updated</Message>
+<Message>Stock Global Payments Inc. was successfuly updated</Message>
 </log>
 <log>
 <ThreadID>44</ThreadID>
-<Level>WARNING</Level>
-<ClassName>DB.UserThread</ClassName>
-<MethodName>registerFlow</MethodName>
-<Date>2019-08-29 18:47:32.154</Date>
-<Severity>WARNING</Severity>
-<Message>Missing input.</Message>
-</log>
-<log>
-<ThreadID>48</ThreadID>
-<Level>INFO</Level>
-<ClassName>StockReader.Stock</ClassName>
-<MethodName>updateStats</MethodName>
-<Date>2019-08-29 18:47:36.617</Date>
-<Severity>INFO</Severity>
-<Message>Stock Alibaba Group Holding Limited was successfuly updated</Message>
-</log>
-<log>
-<ThreadID>51</ThreadID>
-<Level>WARNING</Level>
-<ClassName>DB.UserThread</ClassName>
-<MethodName>registerFlow</MethodName>
-<Date>2019-08-29 18:47:41.974</Date>
-<Severity>WARNING</Severity>
-<Message>Email qwd is not valid</Message>
-</log>
-<log>
-<ThreadID>55</ThreadID>
-<Level>INFO</Level>
-<ClassName>StockReader.Stock</ClassName>
-<MethodName>updateStats</MethodName>
-<Date>2019-08-29 18:47:44.644</Date>
-<Severity>INFO</Severity>
-<Message>Stock Alibaba Group Holding Limited was successfuly updated</Message>
-</log>
-<log>
-<ThreadID>58</ThreadID>
 <Level>SEVERE</Level>
 <ClassName>org.json.JSONObject</ClassName>
 <MethodName>get</MethodName>
-<Date>2019-08-29 18:47:52.212</Date>
+<Date>2019-08-29 21:17:11.856</Date>
 <Severity>SEVERE</Severity>
 <Message>JSONObject["Global Quote"] not found.</Message>
 </log>
 <log>
-<ThreadID>61</ThreadID>
-<Level>INFO</Level>
-<ClassName>DB.UserThread</ClassName>
-<MethodName>registerFlow</MethodName>
-<Date>2019-08-29 18:47:57.892</Date>
-<Severity>INFO</Severity>
-<Message>User test registered successfuly</Message>
+<ThreadID>48</ThreadID>
+<Level>SEVERE</Level>
+<ClassName>org.json.JSONObject</ClassName>
+<MethodName>get</MethodName>
+<Date>2019-08-29 21:17:16.545</Date>
+<Severity>SEVERE</Severity>
+<Message>JSONObject["Global Quote"] not found.</Message>
 </log>
 <log>
-<ThreadID>65</ThreadID>
-<Level>INFO</Level>
-<ClassName>StockReader.Stock</ClassName>
-<MethodName>updateStats</MethodName>
-<Date>2019-08-29 18:48:00.682</Date>
-<Severity>INFO</Severity>
-<Message>Stock Alibaba Group Holding Limited was successfuly updated</Message>
+<ThreadID>50</ThreadID>
+<Level>WARNING</Level>
+<ClassName>org.openjfx.hellofx.GUI.StockNotFoundAlert</ClassName>
+<MethodName>display</MethodName>
+<Date>2019-08-29 21:17:16.579</Date>
+<Severity>WARNING</Severity>
+<Message>Stock: BYND was not found.</Message>
 </log>
 <log>
-<ThreadID>68</ThreadID>
-<Level>INFO</Level>
-<ClassName>DB.UserThread</ClassName>
-<MethodName>loginFlow</MethodName>
-<Date>2019-08-29 18:48:03.738</Date>
-<Severity>INFO</Severity>
-<Message>User test has logged in successfuly</Message>
+<ThreadID>52</ThreadID>
+<Level>SEVERE</Level>
+<ClassName>org.json.JSONObject</ClassName>
+<MethodName>get</MethodName>
+<Date>2019-08-29 21:17:18.674</Date>
+<Severity>SEVERE</Severity>
+<Message>JSONObject["Global Quote"] not found.</Message>
 </log>
 <log>
-<ThreadID>72</ThreadID>
-<Level>INFO</Level>
-<ClassName>StockReader.Stock</ClassName>
-<MethodName>updateStats</MethodName>
-<Date>2019-08-29 18:48:08.658</Date>
-<Severity>INFO</Severity>
-<Message>Stock Alibaba Group Holding Limited was successfuly updated</Message>
+<ThreadID>54</ThreadID>
+<Level>SEVERE</Level>
+<ClassName>org.json.JSONObject</ClassName>
+<MethodName>get</MethodName>
+<Date>2019-08-29 21:17:19.035</Date>
+<Severity>SEVERE</Severity>
+<Message>JSONObject["Global Quote"] not found.</Message>
 </log>
 <log>
-<ThreadID>74</ThreadID>
+<ThreadID>58</ThreadID>
 <Level>INFO</Level>
 <ClassName>org.openjfx.hellofx.MainFrame</ClassName>
-<MethodName>handle</MethodName>
-<Date>2019-08-29 18:48:08.692</Date>
+<MethodName>updateStocksDB</MethodName>
+<Date>2019-08-29 21:17:24.736</Date>
 <Severity>INFO</Severity>
-<Message>Application closed successfuly.</Message>
+<Message>Started upadting stocks in DB.</Message>
 </log>

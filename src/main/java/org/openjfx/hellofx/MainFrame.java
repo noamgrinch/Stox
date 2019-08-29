@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -13,7 +15,10 @@ import org.openjfx.hellofx.GUI.StockBox;
 import org.openjfx.hellofx.GUI.StockEditFrame;
 import CentralLogger.CentralLogger;
 import CentralLogger.SendLogThread;
+import DB.Flows;
+import Login.Passport;
 import StockReader.Stock;
+import User.User;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -51,12 +56,19 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	private HBox top;
 	private Thread thread;
 	private Date current;
+	private User user;
+	private int PORT = 8080;
+	private String SERVER = "Localhost";
+	private ObjectOutputStream out;
+	private Socket soc;
+
 
 	
 	@SuppressWarnings("exports")
-	public MainFrame(CentralLogger centralogger) {
+	public MainFrame(CentralLogger centralogger) throws Exception {
 		super();
 		this.centralogger=centralogger;
+		new Passport(this).display();
 	}
 	
 	@SuppressWarnings({ "exports" })
@@ -70,20 +82,6 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		stockboxes = new ArrayList<StockBox>();
 
 		try {
-				//LoginFrame.display(); // display later on
-			
-				//PrintWriter writer = new PrintWriter("myStocks.txt", "UTF-8");
-				File file = new File("myStocks.txt");
-				if(file.canRead()) {
-					BufferedReader br = new BufferedReader(new FileReader(file)); 
-					String sto;
-					while((sto=br.readLine())!=null) {
-						stocks.add(Stock.findStockName(sto));
-					}
-					br.close();
-				}
-
-				//for debugging
 
 			
 				//Edit button
@@ -124,20 +122,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				column1 = new ColumnConstraints();
 				column1.setPercentWidth(100);
 				content.getColumnConstraints().add(column1);
-				StockBox sb;
-				Separator sep;
-				for(int i=0;i<stocks.size();i++) {
-					sb = new StockBox(stocks.get(i));
-					stockboxes.add(sb);
-					sep = new Separator();
-					sep.setId("StockBox-seprator");
-					sb.add(sep, 0, 4, 2, 1);
-					content.getChildren().add(sb);
-					sb.setId("StockBox-mainback-cust");
-					GridPane.setFillWidth(sb, true);
-					GridPane.setConstraints(sb, 0, i);	
-				}
-				
+			
 
 				//stocks
 				scroll.setContent(content);
@@ -154,7 +139,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 		        stage.getIcons().add(image3);
 		        this.stage.setScene(mainscene);
 		        this.stage.initStyle(StageStyle.TRANSPARENT);
-		        this.stage.show();
+		        this.stage.hide();
 		        
 		        
 		        thread = new Thread(new Runnable() { //Updating the stocks every 8 seconds.
@@ -211,8 +196,6 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	}
 
 	
-	
-	
 
 	@SuppressWarnings("deprecation")
 	private boolean rushHour(Date date) {
@@ -232,14 +215,9 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 	public void handle(ActionEvent event) {
 		if(event.getSource()==exit) {
 			try {
-				PrintWriter writer = new PrintWriter("myStocks.txt", "UTF-8");
-				for(int i=0;i<stocks.size();i++) {
-					writer.write(stocks.get(i).getLabel() + "\n");
-				}
-				writer.close();
-				Exception e = new Exception("Application closed successfuly.");
+				updateStocksDB();
 				centralogger.setEnable(false);
-				new SendLogThread(Level.INFO,e).start();
+				new SendLogThread(Level.INFO,new Exception("Application closed successfuly.")).start();
 			} catch (Exception e) {
 				new SendLogThread(Level.SEVERE,e).start();
 			} 
@@ -297,11 +275,66 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
         this.stage.show();
 	}
 	
+	public void updateStocksDB() {
+		try {
+			new SendLogThread(Level.INFO,new Exception("Started upadting stocks in DB.")).start();
+			String st = "";
+			for(int i=0;i<stocks.size();i++) {
+				st += stocks.get(i).getLabel() + " ";
+			}
+			soc = new Socket(SERVER,PORT);
+			out = new ObjectOutputStream(soc.getOutputStream());
+			out.writeObject(Flows.UPDATESTOCKSFLOW);
+			out.writeObject(user.getUsername());
+			out.writeObject(st);
+		}
+		catch(Exception e) {
+			new SendLogThread(Level.SEVERE,e).start();
+		}
+		finally {
+			try {
+				soc.close();
+				out.close();
+			}
+			catch(Exception e) {
+				new SendLogThread(Level.SEVERE,e).start();
+			}
+		}
+	}
+	
 	public void updateStockBoxes() throws IOException {
 		for(int i=0;i<stockboxes.size();i++) {
 			stockboxes.get(i).updateStockBox();
 		}
 	}
 	
+	public void setUser(User u) {
+		user=u;
+	}
+	
+	public void setEnabled(boolean bool) {
+		if(bool) {
+			stage.show();
+		}
+		else {
+			stage.hide();
+		}
+	}
 
+	public int getPORT() {
+		return PORT;
+	}
+
+	public void setPORT(int pORT) {
+		PORT = pORT;
+	}
+
+	public String getSERVER() {
+		return SERVER;
+	}
+
+	public void setSERVER(String sERVER) {
+		SERVER = sERVER;
+	}
+	
 }
