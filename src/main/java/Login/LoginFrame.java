@@ -29,12 +29,12 @@ public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functio
 	
 	private Button login,cancel,register,submit;
 	private Socket soc;
-	private TextField userinput,passinput;
+	private TextField userinput,passinput,emailinput;
 	private ObjectOutputStream out;
 	private final int LOGINFLOW = 0;
 	private Stage frame;
 	private ObjectInputStream in;
-	private Label username,password;
+	private Label username,password,email;
 	private BorderPane LoginBr,regBr;
 	private Scene LoginScene,RegisScene;
 	private GridPane loginGr,regGr;
@@ -154,6 +154,9 @@ public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functio
 		
 		regBr = new BorderPane();
 		
+		email = new Label("Email");
+		emailinput = new TextField();
+		emailinput.setPromptText("Email...");
 
 		GridPane.setConstraints(username, 0, 0);
 		
@@ -166,6 +169,10 @@ public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functio
 
 		GridPane.setConstraints(passinput, 1, 1);
 		
+		GridPane.setConstraints(email, 0, 2);
+		
+		GridPane.setConstraints(emailinput, 1, 2);
+		
 		//buttons
 		submit = new Button("Submit");
 		submit.setOnAction(this);
@@ -174,10 +181,10 @@ public class LoginFrame implements EventHandler<ActionEvent>{ //TODO add functio
 		hb.getChildren().addAll(submit,cancel);
 		hb.setAlignment(Pos.CENTER);
 		
-		regGr.getChildren().addAll(username,userinput,password,passinput);
+		regGr.getChildren().addAll(username,userinput,password,passinput,email,emailinput);
 		regBr.setCenter(regGr);
 		regBr.setBottom(hb);
-		RegisScene = new Scene(regBr,250,110);
+		RegisScene = new Scene(regBr,250,145);
 	}
 	
 
