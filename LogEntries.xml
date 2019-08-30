@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<logfile>
+<log>
+<ThreadID>26</ThreadID>
+<Level>INFO</Level>
+<ClassName>DBHandler</ClassName>
+<MethodName>getConnection</MethodName>
+<Application>Server</Application>
+<Date>2019-08-30 14:02:09.582</Date>
+<Severity>INFO</Severity>
+<Message>DBHandler has connected to the database.</Message>
+</log>
+<log>
+<ThreadID>27</ThreadID>
+<Level>WARNING</Level>
+<ClassName>Alert</ClassName>
+<MethodName>display</MethodName>
+<Application>Client</Application>
+<Date>2019-08-30 14:02:09.93</Date>
+<Severity>WARNING</Severity>
+<Message>Central Logger and main Server are running!
+Press on "Got it" to continure to the client program.</Message>
+</log>
+<log>
+<ThreadID>30</ThreadID>
+<Level>INFO</Level>
+<ClassName>Main</ClassName>
+<MethodName>start</MethodName>
+<Application>Main</Application>
+<Date>2019-08-30 14:02:12.825</Date>
+<Severity>INFO</Severity>
+<Message>Stox successfuly booted up</Message>
+</log>
+<log>
+<ThreadID>33</ThreadID>
+<Level>INFO</Level>
+<ClassName>UserThread</ClassName>
+<MethodName>loginFlow</MethodName>
+<Application>Server</Application>
+<Date>2019-08-30 14:02:14.209</Date>
+<Severity>INFO</Severity>
+<Message>User a has logged in successfuly</Message>
+</log>
+<log>
+<ThreadID>38</ThreadID>
+<Level>INFO</Level>
+<ClassName>Stock</ClassName>
+<MethodName>findStockName</MethodName>
+<Application>StockReader</Application>
+<Date>2019-08-30 14:02:15.778</Date>
+<Severity>INFO</Severity>
+<Message>Stock Alibaba Group Holding Limited was successfuly created</Message>
+</log>
+<log>
+<ThreadID>40</ThreadID>
+<Level>INFO</Level>
+<ClassName>Stock</ClassName>
+<MethodName>findStockName</MethodName>
+<Application>StockReader</Application>
+<Date>2019-08-30 14:02:16.339</Date>
+<Severity>INFO</Severity>
+<Message>Stock Northrop Grumman Corporation was successfuly created</Message>
+</log>
+<log>
+<ThreadID>45</ThreadID>
+<Level>INFO</Level>
+<ClassName>Stock</ClassName>
+<MethodName>findStockName</MethodName>
+<Application>StockReader</Application>
+<Date>2019-08-30 14:02:27.903</Date>
+<Severity>INFO</Severity>
+<Message>Stock Global Payments Inc. was successfuly created</Message>
+</log>
+<log>
+<ThreadID>50</ThreadID>
+<Level>INFO</Level>
+<ClassName>MainFrame</ClassName>
+<MethodName>handle</MethodName>
+<Application>Client</Application>
+<Date>2019-08-30 14:02:30.957</Date>
+<Severity>INFO</Severity>
+<Message>Application closed successfuly.</Message>
+</log>
+<log>
+<ThreadID>52</ThreadID>
+<Level>INFO</Level>
+<ClassName>UserThread</ClassName>
+<MethodName>updateStocksFlow</MethodName>
+<Application>Server</Application>
+<Date>2019-08-30 14:02:30.974</Date>
+<Severity>INFO</Severity>
+<Message>User a updated stocks in DB successfuly</Message>
+</log>
+<log>
+<ThreadID>48</ThreadID>
+<Level>INFO</Level>
+<ClassName>MainFrame</ClassName>
+<MethodName>updateStocksDB</MethodName>
+<Application>Client</Application>
+<Date>2019-08-30 14:02:30.984</Date>
+<Severity>INFO</Severity>
+<Message>Started upadting stocks in DB.</Message>
+</log>
