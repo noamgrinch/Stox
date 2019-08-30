@@ -1,0 +1,76 @@
+
+
+#StockBox-percentgreen-cust{
+    -fx-background-color: linear-gradient(to bottom, #1ab713, #17af15, #14a716, #119f17, #0f9718, #0e9117, #0c8c15, #0b8614, #0a8110, #087c0d, #077809, #057305);
+    -fx-text-fill: white;
+    -fx-border-radius: 5 5 5 5; 
+    -fx-background-radius: 5 5 5 5; 
+    -fx-font-weight: bold;
+    -fx-effect: innershadow( gaussian , grey , 2 , 0.1, 0.4, 0.4 );
+    -fx-padding: 2 5 2 7;
+}
+
+#toolbar{
+	-fx-background-color: #ff1a1a;
+}
+
+#StockBox-percentred-cust{
+	-fx-text-fill: white;
+    -fx-background-color:linear-gradient(to bottom, #f01010, #e20c16, #d50a1a, #c70a1d, #b90b1f, #b30b22, #ac0b24, #a60c26, #a50b29, #a50b2d, #a40b30, #a30c33);
+    -fx-border-radius: 5 5 5 5; 
+    -fx-background-radius: 5 5 5 5; 
+    -fx-font-weight: bold;
+    -fx-effect: innershadow( gaussian , grey , 2 , 0.1, 0.4, 0.4 );
+    -fx-padding: 2 5 2 7;
+}
+
+#StockBox-price{
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-effect: innershadow( gaussian , grey , 2 , 0.1, 0.4, 0.4 );
+	-fx-padding: 2 1 2 15;
+}
+
+#StockBox-label{
+	-fx-text-fill: white;
+	-fx-font-size:12pt;
+	-fx-font-weight: bold;
+	-fx-effect: innershadow( gaussian , grey , 2 , 0.1, 0.4, 0.4 );
+	-fx-padding: 2 0 2 3;
+}
+
+#StockBox-name{
+	-fx-text-fill: #f0f0f5;
+	-fx-padding: 2 0 2 3;
+}
+
+#EditStockBox-cust{
+	-fx-background-color: linear-gradient(to bottom, #000000, #0a0a0a, #121212, #181818, #1e1e1e, #242424, #292929, #2f2f2f, #363636, #3e3e3e, #454545, #4d4d4d);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+}
+
+#Delete-button{
+	-fx-background-radius: 5em;  
+	-fx-background-color: radial-gradient( center 50% 50% , radius 95% , #E51919, #1F0505);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+	-fx-text-fill: white;
+    -fx-min-width: 20px;  
+    -fx-min-height: 20px;  
+    -fx-max-width: 20px;  
+    -fx-max-height: 20px;
+    -fx-padding: 0 0 0 0;	
+}
+
+#Add-button{
+	-fx-background-radius: 5em;  
+	-fx-background-color: radial-gradient( center 50% 50% , radius 95% , #048024, #053610);
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+	-fx-font-size:15;
+	-fx-text-fill: white;
+    -fx-min-width: 20px;  
+    -fx-min-height: 20px;  
+    -fx-max-width: 20px;  
+    -fx-max-height: 20px;
+    -fx-padding: 0 0 0 0;	
+}
+
