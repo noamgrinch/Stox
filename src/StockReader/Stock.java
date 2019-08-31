@@ -22,9 +22,9 @@ public class Stock implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	static String statsUrl = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="; //  API link for current statistics.
-	static String symbolUrl = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="; // API link for general knowledge
-	private static final String APIKEY = "&apikey=TJQA3XTGE2BLYKP4";
+	static String statsUrl = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&amp;symbol="; //  API link for current statistics.
+	static String symbolUrl = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&amp;keywords="; // API link for general knowledge
+	private static final String APIKEY = "&amp;apikey=TJQA3XTGE2BLYKP4";
 	private String name,label;
 	private double price;
 	private double changedollar,changepercent,opengate,yesterdaygate;
@@ -98,7 +98,7 @@ public class Stock implements Serializable{
 	    	  GlobalQuote = (JSONObject)jsonst.get("Global Quote"); // fails here
 	      }
 	      catch(Exception e) {
-	    	  throw new Exception ("Failed to get statistics from API call: " + statsUrl);
+	    	  throw new Exception ("Failed to get statistics from API call: " + (statsUrl + label + APIKEY));
 	      }
 	      String priceString = (String)GlobalQuote.get("05. price");
 	      Double price = Double.parseDouble(priceString);
@@ -133,7 +133,13 @@ public class Stock implements Serializable{
 	      BufferedReader stats = new BufferedReader(new InputStreamReader(istats, Charset.forName("UTF-8")));
 	      String jsonTextStats = readAll(stats);
 	      JSONObject jsonst = new JSONObject(jsonTextStats);
-	      JSONObject GlobalQuote = (JSONObject)jsonst.get("Global Quote");
+	      JSONObject GlobalQuote = null;
+	      try {
+	    	  GlobalQuote = (JSONObject)jsonst.get("Global Quote"); // fails here
+	      }
+	      catch(Exception e) {
+	    	  throw new Exception ("Failed to get statistics from API call: " + (statsUrl + label + APIKEY));
+	      }
 	      String priceString = (String)GlobalQuote.get("05. price");
 	      Double price = Double.parseDouble(priceString);
 	      String change = (String)GlobalQuote.get("09. change");

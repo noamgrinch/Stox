@@ -151,7 +151,7 @@ public class CentralLogger implements Runnable{
 			Exception _e = e; 
 			Level _l = l;
 		
-			LOGGER.logrb(_l,_e.getStackTrace()[0].getClassName(),_e.getStackTrace()[0].getMethodName(),_e.getStackTrace()[0].getClassName(),_e.getMessage());
+			LOGGER.logrb(_l,_e.getStackTrace()[0].getClassName(),_e.getStackTrace()[0].getMethodName(),_e.getStackTrace()[0].getClassName(),this.getExString(_e));
 			
 			/*
 			 * Parsing the XML file attributes

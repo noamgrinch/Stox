@@ -246,6 +246,7 @@ public class StockEditFrame implements EventHandler<ActionEvent> {
 		}
 		else {
 			parent.updateList(stocks);
+			parent.updateStocksDB();
 		}
 	}
 	
