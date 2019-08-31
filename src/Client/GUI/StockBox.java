@@ -23,7 +23,7 @@ public class StockBox extends GridPane{
 		super();
 		try {
 			if(stock==null) {
-				throw new Exception("Failed to initilize StockBox because of null value");
+				throw new Exception("Failed to initilize StockBox because of null value.");
 			}
 			this.stock=stock;
 			this.getStylesheets().clear();

@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+
 public class Passport implements EventHandler<ActionEvent>{ 
 	
 	private Button login,cancel,register,submit;
@@ -174,6 +175,7 @@ public class Passport implements EventHandler<ActionEvent>{
 		passinput = new TextField();
 		passinput.setPromptText("Password");
 		GridPane.setConstraints(passinput, 1, 1);
+
 		
 		//buttons
 		login = new Button("Login");

@@ -100,7 +100,7 @@ public class MainFrame extends Application implements EventHandler<ActionEvent>{
 				scroll = new ScrollPane();
 				scroll.setId("Scroll-main");
 				scroll.getStyleClass().add ("edge-to-edge");
-				scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+				scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 				scroll.setFitToHeight(true);
 				scroll.setFitToWidth(true);
 				content = new GridPane();

@@ -76,48 +76,55 @@ public class Stock implements Serializable{
 	public static Stock findStockName(String label) throws IOException,NumberFormatException,StringIndexOutOfBoundsException {
 		 InputStream istats = null;
 		 InputStream isymbol = null;
-	    try {
+		 if(label != null && !(label.equals(""))) {
+			 try {
+				 istats = new URL(statsUrl + label + APIKEY).openStream();
+				 isymbol = new URL(symbolUrl + label + APIKEY).openStream();
 	    	
-		  istats = new URL(statsUrl + label + APIKEY).openStream();
-		  isymbol = new URL(symbolUrl + label + APIKEY).openStream();
-	    	
-	      //Search for Stock
-	      BufferedReader symbolsearch = new BufferedReader(new InputStreamReader(isymbol, Charset.forName("UTF-8")));
-	      String jsonTextSymbol = readAll(symbolsearch);
-	      JSONObject jsonsy = new JSONObject(jsonTextSymbol);
-	      JSONArray bestMatches = (JSONArray)jsonsy.get("bestMatches");
-	      JSONObject jsonobject = bestMatches.getJSONObject(0);
-	      String name = jsonobject.getString("2. name"); //Gets name.
+				 //Search for Stock
+				 BufferedReader symbolsearch = new BufferedReader(new InputStreamReader(isymbol, Charset.forName("UTF-8")));
+				 String jsonTextSymbol = readAll(symbolsearch);
+				 JSONObject jsonsy = new JSONObject(jsonTextSymbol);
+				 JSONArray bestMatches = null;
+				 try {
+					 bestMatches = (JSONArray)jsonsy.get("bestMatches");
+				 }
+				 catch(Exception e) {
+					 throw new Exception ("Failed to get name from API call: " + (statsUrl + label + APIKEY));
+				 }
+				 JSONObject jsonobject = bestMatches.getJSONObject(0);
+				 String name = jsonobject.getString("2. name"); //Gets name.
 	      
-	      //STATS Gathering
-	      BufferedReader stats = new BufferedReader(new InputStreamReader(istats, Charset.forName("UTF-8")));
-	      String jsonTextStats = readAll(stats);
-	      JSONObject jsonst = new JSONObject(jsonTextStats);
-	      JSONObject GlobalQuote = null;
-	      try {
-	    	  GlobalQuote = (JSONObject)jsonst.get("Global Quote"); // fails here
-	      }
-	      catch(Exception e) {
-	    	  throw new Exception ("Failed to get statistics from API call: " + (statsUrl + label + APIKEY));
-	      }
-	      String priceString = (String)GlobalQuote.get("05. price");
-	      Double price = Double.parseDouble(priceString);
-	      String change = (String)GlobalQuote.get("09. change");
-	      String changeP = (String)GlobalQuote.get("10. change percent");
-	      changeP = changeP.substring(0, changeP.length()-3);
-	      Stock tmp = new Stock(name,label,price);
-	      tmp.setChangedollar(Double.parseDouble(change));
-	      tmp.setChangepercent(Double.parseDouble(changeP));
-	      new SendLogThread(Level.INFO,new Exception("Stock " + name + " was successfuly created")).start();
-	      return tmp;
-	    } 
-	    catch(Exception e) {
-	    	new SendLogThread(Level.SEVERE,e).start();
-	    }
-	    finally {
-	    	istats.close();
-	    	isymbol.close();
-	    }
+				 //STATS Gathering
+				 BufferedReader stats = new BufferedReader(new InputStreamReader(istats, Charset.forName("UTF-8")));
+				 String jsonTextStats = readAll(stats);
+				 JSONObject jsonst = new JSONObject(jsonTextStats);
+				 JSONObject GlobalQuote = null;
+				 try {
+					 GlobalQuote = (JSONObject)jsonst.get("Global Quote"); 
+				 }
+				 catch(Exception e) {
+					 throw new Exception ("Failed to get statistics from API call: " + (statsUrl + label + APIKEY));
+				 }
+				 String priceString = (String)GlobalQuote.get("05. price");
+				 Double price = Double.parseDouble(priceString);
+				 String change = (String)GlobalQuote.get("09. change");
+				 String changeP = (String)GlobalQuote.get("10. change percent");
+				 changeP = changeP.substring(0, changeP.length()-3);
+				 Stock tmp = new Stock(name,label,price);
+				 tmp.setChangedollar(Double.parseDouble(change));
+				 tmp.setChangepercent(Double.parseDouble(changeP));
+				 new SendLogThread(Level.INFO,new Exception("Stock " + name + " was successfuly created")).start();
+				 return tmp;
+			 } 
+			 catch(Exception e) {
+				 new SendLogThread(Level.SEVERE,e).start();
+			 }
+			 finally {
+				 istats.close();
+				 isymbol.close();
+			 }
+		 }
 	    return null;
 	}
 	
@@ -135,7 +142,7 @@ public class Stock implements Serializable{
 	      JSONObject jsonst = new JSONObject(jsonTextStats);
 	      JSONObject GlobalQuote = null;
 	      try {
-	    	  GlobalQuote = (JSONObject)jsonst.get("Global Quote"); // fails here
+	    	  GlobalQuote = (JSONObject)jsonst.get("Global Quote"); 
 	      }
 	      catch(Exception e) {
 	    	  throw new Exception ("Failed to get statistics from API call: " + (statsUrl + label + APIKEY));
