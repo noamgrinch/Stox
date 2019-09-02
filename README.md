@@ -1,6 +1,4 @@
 # Stox
-## Please download the README folder and open the README.html file for further information regarding the app's GUI.
-
 
 ### General
 This application keeps track of your chosen stocks. Inspired by Apple's application(The one you get with the phone straight away).
