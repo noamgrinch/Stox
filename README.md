@@ -41,4 +41,11 @@ The stock reader is a sub-app which gets a stock's ticker as an input and return
 It gets back a JSON file from the API and parses it with the exetrnal libaray: https://github.com/stleary/JSON-java.
 
 
+### GUI
+Main window: You can see your tracked stocks and their live statistics. The blue square shows the stocks live statistics. The pink square shows its name and ticker and the yellow circle
+navigates to the edit window.
+
+![alt text](https://github.com/noamgrinch/Stox/blob/master/README/Stats.jpg)
+
+
 
